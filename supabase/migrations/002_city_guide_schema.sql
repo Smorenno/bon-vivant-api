@@ -1,45 +1,88 @@
 -- ============================================================
 -- 002_city_guide_schema.sql
--- i18n-ready guide model (Variante C).
--- Replaces the initial domain tables with the LocalizedText schema.
--- The backend resolves access (is_unlocked) in services/ — not via RLS.
--- ============================================================
-
--- Drop old domain tables. CASCADE removes FK-dependent objects:
--- spots, itineraries, itinerary_steps, manuel_tips, city_warnings, pack_cities.
-DROP TABLE IF EXISTS cities CASCADE;
-DROP TABLE IF EXISTS tips CASCADE;  -- Idempotent: recreated below.
-
--- ============================================================
--- Postgres enum types (idempotent)
--- ============================================================
-
-DO $$ BEGIN CREATE TYPE spot_kind AS ENUM ('attraction', 'food');
-EXCEPTION WHEN duplicate_object THEN NULL; END $$;
-
-DO $$ BEGIN CREATE TYPE spot_category AS ENUM ('restaurant', 'cafe', 'bar');
-EXCEPTION WHEN duplicate_object THEN NULL; END $$;
-
-DO $$ BEGIN CREATE TYPE time_of_day AS ENUM ('day', 'night');
-EXCEPTION WHEN duplicate_object THEN NULL; END $$;
-
-DO $$ BEGIN CREATE TYPE travel_mode AS ENUM ('walk', 'transit', 'taxi');
-EXCEPTION WHEN duplicate_object THEN NULL; END $$;
-
-DO $$ BEGIN CREATE TYPE city_status AS ENUM ('draft', 'published');
-EXCEPTION WHEN duplicate_object THEN NULL; END $$;
-
-DO $$ BEGIN CREATE TYPE transport_method AS ENUM ('walk', 'metro', 'tram', 'taxi', 'train', 'ferry');
-EXCEPTION WHEN duplicate_object THEN NULL; END $$;
-
--- ============================================================
--- Convention: LocalizedText (L) jsonb columns
--- Shape: {"es": text, "en": text|null, "fr": text|null}
--- Constraint: 'es' key is required and non-empty (canonical language).
+-- i18n city guide schema — Variante C (backend serialises
+-- LocalizedText as-is; client resolves language).
+--
+-- Runs on top of 001_initial_schema.sql.
+-- Drops desaligned content tables; keeps profiles, packs,
+-- user_purchases and the auth trigger intact.
 -- ============================================================
 
 -- ============================================================
--- cities
+-- 1. Drop old content tables (explicit list + CASCADE for any
+--    remaining FK-dependent objects).
+-- ============================================================
+
+DROP TABLE IF EXISTS pack_cities        CASCADE;
+DROP TABLE IF EXISTS city_warnings      CASCADE;
+DROP TABLE IF EXISTS manuel_tips        CASCADE;
+DROP TABLE IF EXISTS itinerary_steps    CASCADE;
+DROP TABLE IF EXISTS itineraries        CASCADE;
+DROP TABLE IF EXISTS spots              CASCADE;
+DROP TABLE IF EXISTS images             CASCADE;
+DROP TABLE IF EXISTS tips               CASCADE;
+DROP TABLE IF EXISTS cities             CASCADE;
+
+-- ============================================================
+-- 2. Enums (idempotent — EXCEPTION duplicate_object swallows
+--    the error if the enum already exists from a partial run)
+-- ============================================================
+
+DO $$ BEGIN
+  CREATE TYPE spot_kind AS ENUM ('attraction', 'food');
+EXCEPTION WHEN duplicate_object THEN NULL;
+END $$;
+
+DO $$ BEGIN
+  CREATE TYPE spot_category AS ENUM ('restaurant', 'cafe', 'bar');
+EXCEPTION WHEN duplicate_object THEN NULL;
+END $$;
+
+DO $$ BEGIN
+  CREATE TYPE transport_method AS ENUM ('walk', 'metro', 'tram', 'taxi', 'train', 'ferry');
+EXCEPTION WHEN duplicate_object THEN NULL;
+END $$;
+
+DO $$ BEGIN
+  CREATE TYPE travel_mode AS ENUM ('walk', 'transit', 'taxi');
+EXCEPTION WHEN duplicate_object THEN NULL;
+END $$;
+
+DO $$ BEGIN
+  CREATE TYPE time_of_day AS ENUM ('day', 'night');
+EXCEPTION WHEN duplicate_object THEN NULL;
+END $$;
+
+DO $$ BEGIN
+  CREATE TYPE city_status AS ENUM ('draft', 'published');
+EXCEPTION WHEN duplicate_object THEN NULL;
+END $$;
+
+-- image_slot is intentionally minimal; extend via ALTER TYPE … ADD VALUE in future migrations.
+DO $$ BEGIN
+  CREATE TYPE image_slot AS ENUM ('cover', 'overview_1', 'overview_2', 'spot');
+EXCEPTION WHEN duplicate_object THEN NULL;
+END $$;
+
+-- ============================================================
+-- 3. updated_at trigger helper
+-- ============================================================
+
+CREATE OR REPLACE FUNCTION set_updated_at()
+RETURNS trigger
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  NEW.updated_at = now();
+  RETURN NEW;
+END;
+$$;
+
+-- ============================================================
+-- 4. cities
+-- Convention: (L) = jsonb with CHECK that 'es' is present and
+-- non-empty. The backend never resolves language — it serialises
+-- LocalizedText as-is and the client picks the right key.
 -- ============================================================
 
 CREATE TABLE cities (
@@ -56,6 +99,9 @@ CREATE TABLE cities (
   historical_context  jsonb        NOT NULL
     CHECK ((historical_context->>'es') IS NOT NULL AND historical_context->>'es' <> ''),
 
+  -- Structured jsonb array: [{label: (L), description: (L)}]
+  highlights          jsonb        NOT NULL DEFAULT '[]',
+
   -- (L) Port section
   port_description    jsonb        NOT NULL
     CHECK ((port_description->>'es') IS NOT NULL AND port_description->>'es' <> ''),
@@ -66,16 +112,15 @@ CREATE TABLE cities (
   port_recommendation jsonb        NOT NULL
     CHECK ((port_recommendation->>'es') IS NOT NULL AND port_recommendation->>'es' <> ''),
 
-  port_lat            double precision NOT NULL,
-  port_lng            double precision NOT NULL,
-
-  -- Structured jsonb arrays; sub-objects validated at the application layer.
-  -- highlights:         [{label: (L), description: (L)}]
-  -- transport_options:  [{method: transport_method, time_label: text, tips: (L)}]
-  -- what_to_know:       [{heading: (L), text: (L)}]
-  highlights          jsonb        NOT NULL DEFAULT '[]',
+  -- Structured jsonb arrays
+  -- transport_options: [{method: transport_method, time_label: text, tips: (L)}]
+  -- what_to_know:      [{heading: (L), text: (L)}]
   transport_options   jsonb        NOT NULL DEFAULT '[]',
   what_to_know        jsonb        NOT NULL DEFAULT '[]',
+
+  -- Port coordinates (nullable until verified by content team)
+  port_lat            double precision,
+  port_lng            double precision,
 
   status              city_status  NOT NULL DEFAULT 'draft',
   last_verified       date,
@@ -83,44 +128,38 @@ CREATE TABLE cities (
   updated_at          timestamptz  NOT NULL DEFAULT now()
 );
 
--- Auto-update updated_at on any row modification.
-CREATE OR REPLACE FUNCTION set_updated_at()
-RETURNS trigger LANGUAGE plpgsql AS $$
-BEGIN
-  NEW.updated_at = now();
-  RETURN NEW;
-END;
-$$;
-
-CREATE TRIGGER cities_updated_at
+-- Auto-stamp updated_at on every modification.
+CREATE TRIGGER cities_set_updated_at
   BEFORE UPDATE ON cities
   FOR EACH ROW EXECUTE FUNCTION set_updated_at();
 
 -- ============================================================
--- spots
+-- 5. spots
 -- ============================================================
 
 CREATE TABLE spots (
   id                    uuid           PRIMARY KEY DEFAULT gen_random_uuid(),
   city_id               uuid           NOT NULL REFERENCES cities(id) ON DELETE CASCADE,
   kind                  spot_kind      NOT NULL,
-  category              spot_category,              -- Only for kind='food'
+  category              spot_category,               -- food spots only; NULL for attractions
   name                  text           NOT NULL,
   address               text           NOT NULL,
   latitude              double precision NOT NULL,
   longitude             double precision NOT NULL,
-  distance_from_port_km numeric        NOT NULL,
+  distance_from_port_km numeric,                     -- nullable: unknown until verified
   rank_order            int            NOT NULL,
   website               text,
 
-  -- (L) Common fields
+  -- (L) required
   manuel_quote          jsonb          NOT NULL
     CHECK ((manuel_quote->>'es') IS NOT NULL AND manuel_quote->>'es' <> ''),
+
+  -- (L) nullable
   reservation           jsonb
     CHECK (reservation IS NULL
       OR ((reservation->>'es') IS NOT NULL AND reservation->>'es' <> '')),
 
-  -- (L) kind='attraction' only (nullable; kind validated at app layer)
+  -- (L) attraction-only nullable fields
   what_it_is            jsonb
     CHECK (what_it_is IS NULL
       OR ((what_it_is->>'es') IS NOT NULL AND what_it_is->>'es' <> '')),
@@ -131,7 +170,7 @@ CREATE TABLE spots (
     CHECK (good_to_know IS NULL
       OR ((good_to_know->>'es') IS NOT NULL AND good_to_know->>'es' <> '')),
 
-  -- (L) kind='food' only (nullable; kind validated at app layer)
+  -- (L) food-only nullable fields
   cuisine_type          jsonb
     CHECK (cuisine_type IS NULL
       OR ((cuisine_type->>'es') IS NOT NULL AND cuisine_type->>'es' <> '')),
@@ -146,11 +185,11 @@ CREATE TABLE spots (
       OR ((best_time->>'es') IS NOT NULL AND best_time->>'es' <> ''))
 );
 
--- Composite index to support city feed sorted by kind+rank.
-CREATE INDEX idx_spots_city_kind_rank ON spots(city_id, kind, rank_order);
+-- Composite index for city feed sorted by kind then rank.
+CREATE INDEX idx_spots_city_kind_rank ON spots (city_id, kind, rank_order);
 
 -- ============================================================
--- itineraries
+-- 6. itineraries
 -- ============================================================
 
 CREATE TABLE itineraries (
@@ -159,7 +198,7 @@ CREATE TABLE itineraries (
   theme            text        NOT NULL,
   time_of_day      time_of_day NOT NULL,
 
-  -- (L) Editorial fields
+  -- (L) required editorial fields
   title            jsonb       NOT NULL
     CHECK ((title->>'es') IS NOT NULL AND title->>'es' <> ''),
   catchy_phrase    jsonb       NOT NULL
@@ -172,7 +211,7 @@ CREATE TABLE itineraries (
   total_walk_km    numeric     NOT NULL,
   total_transit_km numeric,
 
-  -- (L) Flexibility note shown to the user
+  -- (L) required — flexibility note shown to the user
   flex_note        jsonb       NOT NULL
     CHECK ((flex_note->>'es') IS NOT NULL AND flex_note->>'es' <> ''),
 
@@ -182,10 +221,10 @@ CREATE TABLE itineraries (
   rank_order       int         NOT NULL
 );
 
-CREATE INDEX idx_itineraries_city_rank ON itineraries(city_id, rank_order);
+CREATE INDEX idx_itineraries_city_rank ON itineraries (city_id, rank_order);
 
 -- ============================================================
--- itinerary_steps
+-- 7. itinerary_steps
 -- ============================================================
 
 CREATE TABLE itinerary_steps (
@@ -194,35 +233,45 @@ CREATE TABLE itinerary_steps (
   rank_order            int         NOT NULL,
   spot_id               uuid        REFERENCES spots(id) ON DELETE SET NULL,
 
-  -- (L) title only populated when the step has no spot
+  -- (L) title populated only when the step has no linked spot
   title                 jsonb
     CHECK (title IS NULL
       OR ((title->>'es') IS NOT NULL AND title->>'es' <> '')),
 
+  address               text,
+
+  -- (L) required
   description           jsonb       NOT NULL
     CHECK ((description->>'es') IS NOT NULL AND description->>'es' <> ''),
   bon_vivant_notes      jsonb       NOT NULL
     CHECK ((bon_vivant_notes->>'es') IS NOT NULL AND bon_vivant_notes->>'es' <> ''),
 
-  -- rank_order=1 means distance from port; NULL = no movement
+  -- (L) nullable
+  must_try              jsonb
+    CHECK (must_try IS NULL
+      OR ((must_try->>'es') IS NOT NULL AND must_try->>'es' <> '')),
+  reservation           jsonb
+    CHECK (reservation IS NULL
+      OR ((reservation->>'es') IS NOT NULL AND reservation->>'es' <> '')),
+
+  website               text,
   distance_from_prev_km numeric,
   travel_mode           travel_mode,
-
-  time_on_site_min      int         NOT NULL,
-  time_on_site_max      int         NOT NULL
+  time_on_site_min      smallint    NOT NULL,
+  time_on_site_max      smallint    NOT NULL
 );
 
-CREATE INDEX idx_itinerary_steps_itinerary_rank ON itinerary_steps(itinerary_id, rank_order);
+CREATE INDEX idx_itinerary_steps_itin_rank ON itinerary_steps (itinerary_id, rank_order);
 
 -- ============================================================
--- tips (replaces manuel_tips + city_warnings from migration 001)
--- city_id NULL  → home carousel (general tips)
--- city_id set   → city-specific tip
+-- 8. tips  (replaces manuel_tips + city_warnings from 001)
+-- city_id NULL = home carousel (always visible)
+-- city_id set  = city-specific tip (visible when city is published)
 -- ============================================================
 
 CREATE TABLE tips (
   id          uuid  PRIMARY KEY DEFAULT gen_random_uuid(),
-  city_id     uuid  REFERENCES cities(id) ON DELETE CASCADE,
+  city_id     uuid  REFERENCES cities(id) ON DELETE CASCADE,  -- nullable
   title       jsonb NOT NULL
     CHECK ((title->>'es') IS NOT NULL AND title->>'es' <> ''),
   body        jsonb NOT NULL
@@ -230,26 +279,53 @@ CREATE TABLE tips (
   rank_order  int   NOT NULL
 );
 
-CREATE INDEX idx_tips_city_rank ON tips(city_id, rank_order);
+CREATE INDEX idx_tips_city_rank ON tips (city_id, rank_order);
 
 -- ============================================================
--- pack_cities (recreated with FK to new cities table)
+-- 9. images
+-- ============================================================
+
+CREATE TABLE images (
+  id           uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  city_id      uuid        NOT NULL REFERENCES cities(id) ON DELETE CASCADE,
+  spot_id      uuid        REFERENCES spots(id) ON DELETE CASCADE,  -- nullable
+  slot         image_slot  NOT NULL,
+  storage_path text        NOT NULL,
+
+  -- (L) nullable
+  alt_text     jsonb
+    CHECK (alt_text IS NULL
+      OR ((alt_text->>'es') IS NOT NULL AND alt_text->>'es' <> ''))
+);
+
+-- One image per slot per city (city-level images, no spot)
+CREATE UNIQUE INDEX uq_images_city_slot
+  ON images (city_id, slot)
+  WHERE spot_id IS NULL;
+
+-- One image per spot
+CREATE UNIQUE INDEX uq_images_spot
+  ON images (spot_id)
+  WHERE spot_id IS NOT NULL;
+
+-- ============================================================
+-- 10. pack_cities  (FK to packs from 001 is preserved)
 -- ============================================================
 
 CREATE TABLE pack_cities (
-  pack_id uuid NOT NULL REFERENCES packs(id) ON DELETE CASCADE,
+  pack_id uuid NOT NULL REFERENCES packs(id)  ON DELETE CASCADE,
   city_id uuid NOT NULL REFERENCES cities(id) ON DELETE CASCADE,
   PRIMARY KEY (pack_id, city_id)
 );
 
-CREATE INDEX idx_pack_cities_pack_id ON pack_cities(pack_id);
-CREATE INDEX idx_pack_cities_city_id ON pack_cities(city_id);
+CREATE INDEX idx_pack_cities_pack_id ON pack_cities (pack_id);
+CREATE INDEX idx_pack_cities_city_id ON pack_cities (city_id);
 
 -- ============================================================
--- Row Level Security
--- The backend uses service_role (bypasses RLS) for all queries.
--- These policies are a defence-in-depth layer for direct DB access.
--- Access control (is_unlocked) is computed in app/services/access_service.py.
+-- 11. Row Level Security
+-- The backend uses service_role which bypasses RLS.
+-- These policies are defence-in-depth for direct DB access.
+-- Access control (is_unlocked) is computed in access_service.py.
 -- ============================================================
 
 ALTER TABLE cities          ENABLE ROW LEVEL SECURITY;
@@ -257,17 +333,16 @@ ALTER TABLE spots           ENABLE ROW LEVEL SECURITY;
 ALTER TABLE itineraries     ENABLE ROW LEVEL SECURITY;
 ALTER TABLE itinerary_steps ENABLE ROW LEVEL SECURITY;
 ALTER TABLE tips            ENABLE ROW LEVEL SECURITY;
+ALTER TABLE images          ENABLE ROW LEVEL SECURITY;
 ALTER TABLE pack_cities     ENABLE ROW LEVEL SECURITY;
 
--- Authenticated users see only published cities.
+-- Authenticated users may only read published cities.
 CREATE POLICY "cities: authenticated read published"
   ON cities FOR SELECT TO authenticated
   USING (status = 'published');
-COMMENT ON POLICY "cities: authenticated read published" ON cities IS
-  'Draft cities are invisible to authenticated users. The backend uses service_role.';
 
--- Spots belong to a city; only visible when the city is published.
-CREATE POLICY "spots: authenticated read published city"
+-- Spots are readable only when their parent city is published.
+CREATE POLICY "spots: authenticated read via published city"
   ON spots FOR SELECT TO authenticated
   USING (
     EXISTS (
@@ -275,11 +350,9 @@ CREATE POLICY "spots: authenticated read published city"
       WHERE c.id = city_id AND c.status = 'published'
     )
   );
-COMMENT ON POLICY "spots: authenticated read published city" ON spots IS
-  'Spots are accessible only when their parent city is published.';
 
--- Itineraries follow the same rule as spots.
-CREATE POLICY "itineraries: authenticated read published city"
+-- Itineraries follow the same published-city gate as spots.
+CREATE POLICY "itineraries: authenticated read via published city"
   ON itineraries FOR SELECT TO authenticated
   USING (
     EXISTS (
@@ -287,11 +360,9 @@ CREATE POLICY "itineraries: authenticated read published city"
       WHERE c.id = city_id AND c.status = 'published'
     )
   );
-COMMENT ON POLICY "itineraries: authenticated read published city" ON itineraries IS
-  'Itineraries are accessible only when their parent city is published.';
 
--- Steps require the parent itinerary city to be published.
-CREATE POLICY "itinerary_steps: authenticated read published city"
+-- Steps require the grandparent city to be published.
+CREATE POLICY "itinerary_steps: authenticated read via published city"
   ON itinerary_steps FOR SELECT TO authenticated
   USING (
     EXISTS (
@@ -300,12 +371,10 @@ CREATE POLICY "itinerary_steps: authenticated read published city"
       WHERE i.id = itinerary_id AND c.status = 'published'
     )
   );
-COMMENT ON POLICY "itinerary_steps: authenticated read published city" ON itinerary_steps IS
-  'Steps are accessible only when their grandparent city is published.';
 
--- Home carousel tips (city_id IS NULL) are always visible.
+-- Home-carousel tips (city_id IS NULL) are always visible.
 -- City-specific tips require the city to be published.
-CREATE POLICY "tips: authenticated read"
+CREATE POLICY "tips: authenticated read home or published city"
   ON tips FOR SELECT TO authenticated
   USING (
     city_id IS NULL
@@ -314,12 +383,18 @@ CREATE POLICY "tips: authenticated read"
       WHERE c.id = city_id AND c.status = 'published'
     )
   );
-COMMENT ON POLICY "tips: authenticated read" ON tips IS
-  'General tips (city_id NULL) are always visible; city tips require published status.';
 
--- Pack-city mappings are public — clients need them to display pack contents.
+-- Images are readable only when the parent city is published.
+CREATE POLICY "images: authenticated read via published city"
+  ON images FOR SELECT TO authenticated
+  USING (
+    EXISTS (
+      SELECT 1 FROM cities c
+      WHERE c.id = city_id AND c.status = 'published'
+    )
+  );
+
+-- Pack-city mappings are public so clients can display pack contents before purchase.
 CREATE POLICY "pack_cities: public read"
   ON pack_cities FOR SELECT
   USING (true);
-COMMENT ON POLICY "pack_cities: public read" ON pack_cities IS
-  'Pack contents are public; actual access is controlled via user_purchases.';
