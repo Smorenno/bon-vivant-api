@@ -47,6 +47,13 @@ class TransportMethod(str, Enum):
     ferry = "ferry"
 
 
+class ImageSlot(str, Enum):
+    cover = "cover"
+    overview_1 = "overview_1"
+    overview_2 = "overview_2"
+    spot = "spot"
+
+
 # ============================================================
 # LocalizedText — the i18n container.
 # The backend serialises it as-is; the client resolves the language.
@@ -80,6 +87,15 @@ class Note(BaseModel):
     text: LocalizedText
 
 
+class Image(BaseModel):
+    id: UUID
+    city_id: UUID
+    spot_id: UUID | None = None
+    slot: ImageSlot
+    storage_path: str
+    alt_text: LocalizedText | None = None
+
+
 # ============================================================
 # Spot
 # ============================================================
@@ -94,7 +110,7 @@ class Spot(BaseModel):
     address: str
     latitude: float
     longitude: float
-    distance_from_port_km: float
+    distance_from_port_km: float | None = None
     rank_order: int
     website: str | None = None
     manuel_quote: LocalizedText
@@ -120,9 +136,13 @@ class ItineraryStep(BaseModel):
     itinerary_id: UUID
     rank_order: int
     spot_id: UUID | None = None
-    title: LocalizedText | None = None  # Only when step has no spot
+    title: LocalizedText | None = None  # Only when step has no linked spot
+    address: str | None = None
     description: LocalizedText
     bon_vivant_notes: LocalizedText
+    must_try: LocalizedText | None = None
+    reservation: LocalizedText | None = None
+    website: str | None = None
     distance_from_prev_km: float | None = None
     travel_mode: TravelMode | None = None
     time_on_site_min: int
