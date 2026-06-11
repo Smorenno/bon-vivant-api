@@ -319,3 +319,42 @@ async def test_patch_spot_not_found_raises(fake_db: FakeSupabaseClient) -> None:
     patch = SpotUpdate(address="X")
     with pytest.raises(SpotNotFoundError):
         await city_service.update_spot(str(uuid.uuid4()), patch, fake_db)
+
+
+# ============================================================
+# Regression: postgrest-py >=2.10 limit(1) instead of maybe_single
+# ============================================================
+
+
+@pytest.mark.asyncio
+async def test_check_slug_missing_returns_none(
+    fake_db: FakeSupabaseClient,
+    minimal_guide: CityGuideImport,
+    null_geocoder: object,
+) -> None:
+    # An empty DB must not raise AttributeError — import should proceed normally.
+    result = await import_city_guide(minimal_guide, null_geocoder, fake_db)
+    assert result.slug == minimal_guide.meta.slug
+    assert len(fake_db.get_table("cities")) == 1
+
+
+@pytest.mark.asyncio
+async def test_check_slug_existing_no_replace_raises(
+    fake_db: FakeSupabaseClient,
+    minimal_guide: CityGuideImport,
+    null_geocoder: object,
+) -> None:
+    await import_city_guide(minimal_guide, null_geocoder, fake_db)
+    with pytest.raises(CitySlugExistsError):
+        await import_city_guide(minimal_guide, null_geocoder, fake_db, replace=False)
+
+
+@pytest.mark.asyncio
+async def test_update_city_not_found_raises_city_not_found(
+    fake_db: FakeSupabaseClient,
+) -> None:
+    from app.exceptions import CityNotFoundError
+
+    patch = CityUpdate(last_verified="2026-01")
+    with pytest.raises(CityNotFoundError):
+        await city_service.update_city(str(uuid.uuid4()), patch, fake_db)

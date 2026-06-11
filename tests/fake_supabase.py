@@ -27,6 +27,7 @@ class FakeQueryBuilder:
         self._filters: dict[str, Any] = {}
         self._in_filters: dict[str, list] = {}
         self._single = False
+        self._limit: int | None = None
 
     # ---- operation builders ------------------------------------------------
 
@@ -65,6 +66,10 @@ class FakeQueryBuilder:
     def order(self, _col: str, **_kwargs: Any) -> FakeQueryBuilder:
         return self
 
+    def limit(self, n: int) -> FakeQueryBuilder:
+        self._limit = n
+        return self
+
     # ---- execution ---------------------------------------------------------
 
     def _matches(self, row: dict) -> bool:
@@ -81,6 +86,8 @@ class FakeQueryBuilder:
 
         if self._op == "select":
             matched = [r for r in rows if self._matches(r)]
+            if self._limit is not None:
+                matched = matched[: self._limit]
             if self._single:
                 return SimpleNamespace(data=matched[0] if matched else None)
             return SimpleNamespace(data=matched)

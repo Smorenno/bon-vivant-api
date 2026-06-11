@@ -15,7 +15,7 @@ from app.services.exceptions import (
     SpotRefNotFoundError,
 )
 from app.services.geocoding_service import Geocoder
-from supabase import AsyncClient
+from supabase._async.client import AsyncClient
 
 # ============================================================
 # Internal data structures
@@ -47,10 +47,10 @@ async def _check_slug(
         await db.table("cities")
         .select("id, status")
         .eq("slug", slug)
-        .maybe_single()
+        .limit(1)
         .execute()
     )
-    existing = response.data
+    existing: dict | None = response.data[0] if response.data else None
     if existing is None:
         return None, False
 

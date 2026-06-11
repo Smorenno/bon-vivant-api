@@ -16,7 +16,7 @@ from app.models.city import (
     TransportOption,
 )
 from app.services.access_service import is_city_unlocked, is_itinerary_locked
-from supabase import AsyncClient
+from supabase._async.client import AsyncClient
 
 # ============================================================
 # Low-level fetch helpers (one responsibility each)
@@ -30,12 +30,12 @@ async def _fetch_city_row(client: AsyncClient, slug: str) -> dict:
         .select("*")
         .eq("slug", slug)
         .eq("status", "published")
-        .maybe_single()
+        .limit(1)
         .execute()
     )
-    if response.data is None:
+    if not response.data:
         raise CityNotFoundError(slug)
-    return response.data
+    return response.data[0]
 
 
 async def _fetch_all_published_cities(client: AsyncClient) -> list[dict]:
