@@ -139,14 +139,14 @@ class ItineraryStep(BaseModel):
     title: LocalizedText | None = None  # Only when step has no linked spot
     address: str | None = None
     description: LocalizedText
-    bon_vivant_notes: LocalizedText
+    bon_vivant_notes: LocalizedText | None = None
     must_try: LocalizedText | None = None
     reservation: LocalizedText | None = None
     website: str | None = None
     distance_from_prev_km: float | None = None
     travel_mode: TravelMode | None = None
-    time_on_site_min: int
-    time_on_site_max: int
+    time_on_site_min: int | None = None
+    time_on_site_max: int | None = None
 
 
 class Itinerary(BaseModel):
