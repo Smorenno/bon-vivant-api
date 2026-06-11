@@ -1,0 +1,1346 @@
+{
+  "meta": {
+    "slug": "yokohama",
+    "name": "Yokohama",
+    "country_code": "JP",
+    "tagline": {
+      "es": "La puerta de entrada de Japón al mundo — y a 15 minutos a pie de tu barco.",
+      "en": "Japan's front door to the world — and a 15-minute walk from your ship.",
+      "fr": "La porte d'entrée du Japon vers le monde — à 15 minutes à pied de votre navire."
+    },
+    "last_verified": "2026-05",
+    "port_lat": null,
+    "port_lng": null,
+    "status": "draft"
+  },
+  "overview": {
+    "intro": {
+      "es": "Una vez un tranquilo pueblo de pescadores, Yokohama abrió su puerto al mundo en 1859 y ya no miró atrás. Construyó el primer ferrocarril de Japón, encendió las primeras farolas de gas del país y desarrolló el Chinatown más antiguo y grande de Japón, todo mientras Tokio aún estaba encontrando su lugar. Hoy es la segunda ciudad más grande del país (unos 3,7 millones de habitantes) en la bahía de Tokio, a solo 30 minutos de la capital pero con un carácter completamente propio.\n\nLo que te va a encantar como crucerista: es preciosa y ridículamente fácil. Torres de cristal futuristas en el paseo marítimo, barrios centenarios a pocas calles, y gastronomía de primer nivel en todas las direcciones — casi todo a pie desde donde atraca tu barco. Sin trasbordos frenéticos, sin horas perdidas. Bajas, y ya estás allí.",
+      "en": "Once a quiet fishing village, Yokohama threw open its harbour to the world in 1859 and never looked back. It built Japan's first railway, lit Japan's first gas street lamps, and grew Japan's oldest and largest Chinatown — all while Tokyo was still finding its feet. Today it's the country's second-largest city (around 3.7 million people) on Tokyo Bay, just 30 minutes from the capital but with a character entirely its own.\n\nWhat you'll love as a cruiser: it's gorgeous and ridiculously easy. Futuristic glass towers on the waterfront, century-old districts a few streets back, and world-class food in every direction — almost all of it walkable from where your ship ties up. No frantic transfers, no wasted hours. You step off, and you're already there.",
+      "fr": "Ancien village de pêcheurs tranquille, Yokohama a ouvert ses portes au monde en 1859 et n'a jamais regardé en arrière. Elle a construit le premier chemin de fer du Japon, allumé les premiers réverbères à gaz du pays et développé le plus ancien et le plus grand Chinatown du Japon — pendant que Tokyo cherchait encore sa place. Aujourd'hui, c'est la deuxième plus grande ville du pays (environ 3,7 millions d'habitants) sur la baie de Tokyo, à seulement 30 minutes de la capitale, mais avec un caractère bien à elle.\n\nCe que vous allez adorer en tant que croisiériste : c'est magnifique et ridiculement facile. Des tours de verre futuristes sur le front de mer, des quartiers centenaires à quelques rues de là, et une gastronomie de premier plan dans toutes les directions — presque tout à pied depuis là où votre navire accoste. Pas de correspondances frénétiques, pas d'heures perdues. Vous descendez, et vous êtes déjà là."
+    },
+    "historical_context": {
+      "es": "Yokohama fue uno de los primeros puertos que Japón abrió al comercio exterior en 1859, tras siglos de aislamiento casi total. De la noche a la mañana se convirtió en la puerta de entrada del país: el lugar donde el ferrocarril, la arquitectura occidental, la cerveza, el helado y el teléfono llegaron por primera vez a Japón. Comerciantes chinos, británicos, estadounidenses y europeos se instalaron aquí, y por eso todavía encontrarás un gran Chinatown, una colina de mansiones occidentales en Yamate y un puerto que parece un punto de encuentro entre Japón y el resto del mundo.",
+      "en": "Yokohama was one of the first ports Japan opened to foreign trade in 1859, after centuries of near-total isolation. Overnight it became the country's gateway — the place where the railway, Western architecture, beer, ice cream and the telephone all first reached Japan. Chinese, British, American and European merchants settled here, which is why you'll still find a grand Chinatown, a hillside of Western mansions at Yamate, and a port that feels like a meeting point between Japan and everywhere else.",
+      "fr": "Yokohama fut l'un des premiers ports ouverts par le Japon au commerce extérieur en 1859, après des siècles d'isolement quasi total. Du jour au lendemain, elle devint la porte d'entrée du pays : l'endroit où le chemin de fer, l'architecture occidentale, la bière, la crème glacée et le téléphone arrivèrent pour la première fois au Japon. Des marchands chinois, britanniques, américains et européens s'y installèrent, c'est pourquoi vous y trouverez encore un grand Chinatown, une colline de manoirs occidentaux à Yamate et un port qui ressemble à un point de rencontre entre le Japon et le reste du monde."
+    },
+    "highlights": [
+      {
+        "label": {
+          "es": "Minato Mirai 21",
+          "en": "Minato Mirai 21",
+          "fr": "Minato Mirai 21"
+        },
+        "description": {
+          "es": "el paseo marítimo futurista: torres, centros comerciales, museos y una enorme noria, todo a pasos del barco.",
+          "en": "the futuristic waterfront: towers, malls, museums and a giant Ferris wheel, all steps from the ship.",
+          "fr": "le front de mer futuriste : tours, centres commerciaux, musées et une grande roue géante, à quelques pas du navire."
+        }
+      },
+      {
+        "label": {
+          "es": "Yokohama Chinatown",
+          "en": "Yokohama Chinatown",
+          "fr": "Yokohama Chinatown"
+        },
+        "description": {
+          "es": "el más grande de Japón, con más de 250 restaurantes y diez ornamentadas puertas comprimidas en unas pocas manzanas de colores.",
+          "en": "the largest in Japan, with 250+ restaurants and ten ornate gates packed into a few colourful blocks.",
+          "fr": "le plus grand du Japon, avec plus de 250 restaurants et dix portes ornées serrées dans quelques pâtés de maisons colorés."
+        }
+      },
+      {
+        "label": {
+          "es": "Yamashita Park",
+          "en": "Yamashita Park",
+          "fr": "Yamashita Park"
+        },
+        "description": {
+          "es": "el ventilado paseo marítimo donde está amarrado el transatlántico Hikawa Maru de 1930.",
+          "en": "the breezy bayside promenade where the 1930 ocean liner Hikawa Maru is moored.",
+          "fr": "la promenade ventée au bord de la baie où le paquebot Hikawa Maru de 1930 est amarré."
+        }
+      }
+    ]
+  },
+  "port": {
+    "port_description": {
+      "es": "Tu barco atraca en el Osanbashi Yokohama International Passenger Terminal, un muelle que lleva recibiendo barcos desde 1894. La terminal actual — reabierta en 2002 — es una obra de arquitectura por derecho propio: un edificio bajo con forma de ola coronado por una cubierta de madera y hierba con pasarelas. Puede acoger hasta cuatro grandes cruceros a la vez, y su azotea (los locales la llaman la «joroba de la ballena») es una terraza mirador pública y gratuita con vistas panorámicas de la bahía y el skyline de Minato Mirai. No salgas corriendo: sube primero a la azotea.",
+      "en": "Your ship docks at the Osanbashi Yokohama International Passenger Terminal, on a pier that's welcomed ships since 1894. The current terminal — reopened in 2002 — is a piece of architecture in its own right: a low, wave-like building topped by a rolling wooden deck of grass and gangways. It can handle up to four large cruise ships at once, and its rooftop (locals call it the \"whale's back\") is a free public observation deck with sweeping views across the bay and the Minato Mirai skyline. Don't rush off — walk the roof first.",
+      "fr": "Votre navire accoste à l'Osanbashi Yokohama International Passenger Terminal, sur un quai qui accueille des navires depuis 1894. Le terminal actuel — rouvert en 2002 — est une œuvre d'architecture à part entière : un bâtiment bas en forme de vague surmonté d'un pont de bois ondulant avec herbe et passerelles. Il peut accueillir jusqu'à quatre grands paquebots à la fois, et son toit (les habitants l'appellent « le dos de la baleine ») est une terrasse panoramique publique et gratuite avec de superbes vues sur la baie et le skyline de Minato Mirai. Ne vous précipitez pas — montez d'abord sur le toit."
+    },
+    "distance_to_center": {
+      "es": "Aproximadamente 1-1,5 km hasta el corazón de Minato Mirai — un paseo llano y agradable de 15-20 minutos junto al agua.",
+      "en": "About 1–1.5 km to the heart of Minato Mirai — a flat, scenic 15–20 minute walk along the water.",
+      "fr": "Environ 1–1,5 km jusqu'au cœur de Minato Mirai — une promenade plate et agréable de 15–20 minutes le long de l'eau."
+    },
+    "port_facilities": {
+      "es": "La terminal cuenta con aduana e inmigración, aparcamiento, tiendas, cafeterías y un pabellón de eventos, y es accesible sin escalones, con la terraza mirador accesible en ascensor. Estás a un corto paseo de Yamashita Park, Chinatown y el Red Brick Warehouse, con autobuses — incluido el retro Akai Kutsu («zapatos rojos») — para todo lo demás.",
+      "en": "The terminal has customs and immigration, parking, shops, cafés and an event hall, and it's step-free, with the rooftop deck reachable by lift. You're within an easy walk of Yamashita Park, Chinatown and the Red Brick Warehouse, with buses — including the retro Akai Kutsu (\"red shoes\") loop bus — to everything else.",
+      "fr": "Le terminal dispose de la douane et de l'immigration, d'un parking, de boutiques, de cafés et d'une salle événementielle. Il est accessible sans marches, la terrasse étant accessible par ascenseur. Vous êtes à quelques pas de Yamashita Park, Chinatown et du Red Brick Warehouse, avec des bus — dont le rétro Akai Kutsu (« chaussures rouges ») — pour tout le reste."
+    },
+    "port_recommendation": {
+      "es": "Ve andando. En serio — la terminal está tan cerca de Minato Mirai que coger un taxi es casi un absurdo. El paseo de 15 minutos junto al agua es la mitad del placer: pasas por Yamashita Park y el Red Brick Warehouse sin ni siquiera proponértelo. Guarda el taxi para la vuelta, cuando tus piernas se lo hayan ganado.",
+      "en": "Walk. Seriously — the terminal is so close to Minato Mirai that a taxi is almost silly. The 15-minute stroll along the water is half the pleasure: you pass Yamashita Park and the Red Brick Warehouse without even trying. Save the taxi for the way back, when your legs have earned it.",
+      "fr": "Marchez. Vraiment — le terminal est si proche de Minato Mirai qu'un taxi serait presque absurde. La promenade de 15 minutes le long de l'eau est la moitié du plaisir : vous passez devant Yamashita Park et le Red Brick Warehouse sans même le chercher. Gardez le taxi pour le retour, quand vos jambes l'auront mérité."
+    },
+    "transport_options": [
+      {
+        "method": "walk",
+        "time_label": "15–20 min",
+        "tips": {
+          "es": "La opción panorámica, y la que yo elegiría. Sigues el paseo marítimo directamente hasta Minato Mirai — tiendas, restaurantes, museos y estaciones a pie — pasando por Yamashita Park y el Red Brick Warehouse.",
+          "en": "The scenic option, and the one I'd pick. You follow the waterfront straight into Minato Mirai — shops, restaurants, museums and stations all on foot — passing Yamashita Park and the Red Brick Warehouse on the way.",
+          "fr": "L'option panoramique, celle que je choisirais. Vous suivez le front de mer directement jusqu'à Minato Mirai — boutiques, restaurants, musées et stations à pied — en passant par Yamashita Park et le Red Brick Warehouse."
+        }
+      },
+      {
+        "method": "metro",
+        "time_label": "7-min walk + ride",
+        "tips": {
+          "es": "La estación Nihon-odori o Motomachi-Chukagai (línea Minatomirai) está a unos 7 minutos a pie de la terminal y conecta con toda la ciudad.",
+          "en": "Nihon-odori or Motomachi-Chukagai Station (Minatomirai Line) is about 7 minutes from the terminal and connects the whole city.",
+          "fr": "La station Nihon-odori ou Motomachi-Chukagai (ligne Minatomirai) est à environ 7 minutes à pied du terminal et dessert toute la ville."
+        }
+      },
+      {
+        "method": "taxi",
+        "time_label": "5–10 min",
+        "tips": {
+          "es": "Disponibles a la salida de la terminal. Consejo: lleva la dirección del puerto escrita en japonés para mostrársela al conductor.",
+          "en": "Available at the terminal exit. Tip: carry the port address written in Japanese to show the driver.",
+          "fr": "Disponibles à la sortie du terminal. Conseil : emportez l'adresse du port écrite en japonais pour la montrer au chauffeur."
+        }
+      },
+      {
+        "method": "train",
+        "time_label": "~30–45 min",
+        "tips": {
+          "es": "Línea JR Tokaido / Yokosuka desde la estación de Yokohama hasta la de Tokio, o la línea Tokyu Toyoko desde Minatomirai hasta Shibuya. Es posible, pero te pasarás el día en tránsito, y Yokohama se merece tu tiempo.",
+          "en": "JR Tokaido / Yokosuka Line from Yokohama Station to Tokyo Station, or the Tokyu Toyoko Line from Minatomirai to Shibuya. Doable — but you'll spend the day commuting, and Yokohama deserves your time.",
+          "fr": "Ligne JR Tokaido / Yokosuka de la gare de Yokohama à Tokyo, ou la ligne Tokyu Toyoko de Minatomirai à Shibuya. Faisable — mais vous passerez la journée en transit, et Yokohama mérite mieux que ça."
+        }
+      }
+    ]
+  },
+  "attractions": [
+    {
+      "rank_order": 1,
+      "name": "Minato Mirai 21 (MM21)",
+      "address": "Nishi-ku & Naka-ku, Yokohama (distrito del paseo marítimo)",
+      "latitude": null,
+      "longitude": null,
+      "distance_from_port_km": null,
+      "website": "minatomirai21.com",
+      "manuel_quote": {
+        "es": "Pasa de los centros comerciales obvios un momento y ve directamente al World Porters: dentro está Maguro Tonya Megumi, donde los dueños son mayoristas de atún que lo cortan ellos mismos — uno de los mejores toro que vas a comer en tu vida, escondido en un centro comercial (ver Gastronomía).",
+        "en": "Skip the obvious malls for a minute and head straight into World Porters: tucked inside is Maguro Tonya Megumi, where the owners are tuna wholesalers who cut the fish themselves — some of the best toro you'll eat anywhere, hiding in a shopping centre (see Gourmet).",
+        "fr": "Ignorez les centres commerciaux évidents un instant et dirigez-vous directement vers le World Porters : à l'intérieur se cache Maguro Tonya Megumi, où les propriétaires sont des grossistes en thon qui coupent le poisson eux-mêmes — parmi les meilleurs toro que vous mangerez jamais, cachés dans un centre commercial (voir Gastronomie)."
+      },
+      "reservation": null,
+      "what_it_is": {
+        "es": "El paseo marítimo futurista de Yokohama, construido desde los años 80 sobre los viejos astilleros y muelles de la ciudad — torres, centros comerciales, museos y un parque de atracciones junto al puerto, todo unido por pasarelas.",
+        "en": "Yokohama's futuristic waterfront, built from the 1980s onward over the city's old shipyards and docks — towers, malls, museums and a harbourside amusement park, all stitched together by walkways.",
+        "fr": "Le front de mer futuriste de Yokohama, construit à partir des années 1980 sur les anciens chantiers navals et quais de la ville — tours, centres commerciaux, musées et un parc d'attractions en bord de port, le tout relié par des passerelles."
+      },
+      "why_it_matters": {
+        "es": "Es tu puerta de entrada desde el barco a casi todo: compras y restauración, el buque-escuela Nippon Maru, el Museo Cup Noodles, el parque de atracciones Cosmo World con su enorme noria y el Red Brick Warehouse — todo conectado y a pie.",
+        "en": "It's your gateway from the ship to almost everything: shopping and dining, the tall ship Nippon Maru, the Cup Noodles Museum, Cosmo World amusement park and its giant Ferris wheel, and the Red Brick Warehouse — all connected and walkable.",
+        "fr": "C'est votre porte d'entrée depuis le navire vers presque tout : shopping et restaurants, le grand voilier Nippon Maru, le Musée Cup Noodles, le parc d'attractions Cosmo World et sa grande roue géante, et le Red Brick Warehouse — tout relié et accessible à pied."
+      },
+      "good_to_know": {
+        "es": "Aviso importante: el mirador «Sky Garden» de la planta 69 del Landmark Tower está cerrado por reforma hasta al menos 2028, así que no planees tu día en torno a las vistas desde arriba.",
+        "en": "One heads-up: the Landmark Tower's 69th-floor \"Sky Garden\" observation deck is closed for major renovation until at least 2028, so don't build your day around the view from the top.",
+        "fr": "Un avertissement : l'observatoire « Sky Garden » au 69e étage du Landmark Tower est fermé pour rénovation majeure jusqu'en 2028 au moins, ne planifiez donc pas votre journée autour de la vue depuis le sommet."
+      }
+    },
+    {
+      "rank_order": 2,
+      "name": "Yokohama Chinatown (Chukagai)",
+      "address": "Yamashitacho, Naka-ku (estación Motomachi-Chukagai)",
+      "latitude": null,
+      "longitude": null,
+      "distance_from_port_km": null,
+      "website": "chinatown.or.jp",
+      "manuel_quote": {
+        "es": "Busca el Templo Kanteibyo, dedicado a Guan Yu — el dios chino de los negocios y la prosperidad — donde los locales vienen a rezar por el éxito. Los dragones tallados fueron fabricados en China y Taiwán y enviados aquí; haz una pequeña ofrenda antes de fotografiarlo, ese es el protocolo local.",
+        "en": "Seek out the Kanteibyo Temple, dedicated to Guan Yu — the Chinese god of business and prosperity — where locals come to pray for success. The dragon carvings were crafted in China and Taiwan and shipped over; make a small offering before you photograph it, that's the local etiquette.",
+        "fr": "Cherchez le temple Kanteibyo, dédié à Guan Yu — le dieu chinois des affaires et de la prospérité — où les habitants viennent prier pour le succès. Les sculptures de dragons ont été fabriquées en Chine et à Taïwan puis expédiées ici ; faites une petite offrande avant de le photographier, c'est l'étiquette locale."
+      },
+      "reservation": null,
+      "what_it_is": {
+        "es": "El Chinatown más antiguo y grande de Japón, fundado por comerciantes chinos justo después de que el puerto abriera en 1859. Unas cuantas manzanas densas, con farolillos, de más de 250 restaurantes, puestos de comida, tiendas y templos, enmarcados por diez ornamentadas puertas construidas siguiendo principios de feng shui.",
+        "en": "Japan's oldest and largest Chinatown, founded by Chinese merchants right after the port opened in 1859. A few dense, lantern-strung blocks of 250+ restaurants, food stalls, shops and temples, framed by ten ornate gates built on feng-shui principles.",
+        "fr": "Le plus ancien et le plus grand Chinatown du Japon, fondé par des marchands chinois juste après l'ouverture du port en 1859. Quelques pâtés de maisons denses, ornés de lanternes, avec plus de 250 restaurants, stands de nourriture, boutiques et temples, encadrés par dix portes ornées construites selon les principes du feng shui."
+      },
+      "why_it_matters": {
+        "es": "Es uno de los grandes Chinatowns del mundo y el corazón culinario de Yokohama — y, a diferencia de muchos, es una comunidad viva y no una recreación. Ven con hambre; el domingo al mediodía es la hora punta del dim sum.",
+        "en": "It's one of the great Chinatowns of the world and the culinary heart of Yokohama — and, unlike many, a living community rather than a recreation. Come hungry; weekend lunch is dim-sum prime time.",
+        "fr": "C'est l'un des grands Chinatowns du monde et le cœur culinaire de Yokohama — et, contrairement à beaucoup d'autres, une communauté vivante plutôt qu'une reconstitution. Venez affamé ; le déjeuner du week-end est l'heure de pointe du dim sum."
+      },
+      "good_to_know": {
+        "es": "Mientras estés aquí, prueba YGF Malatang (218-4 Yamashitacho, Naka-ku): un bol estilo Sichuan que compones tú mismo con pimienta entumecedora, guindilla seca y tu elección de carnes, verduras y fideos. No es tu plato habitual de Chinatown.",
+        "en": "While you're here, try YGF Malatang (218-4 Yamashitacho, Naka-ku): Sichuan-style build-your-own bowl with numbing pepper, dried chilli, and your pick of meats, veg and noodles. Not your usual Chinatown plate.",
+        "fr": "Pendant que vous êtes là, essayez YGF Malatang (218-4 Yamashitacho, Naka-ku) : un bol à composer soi-même style Sichuan avec du poivre engourdissant, du piment séché et votre choix de viandes, légumes et nouilles. Pas votre plat habituel de Chinatown."
+      }
+    },
+    {
+      "rank_order": 3,
+      "name": "Yamashita Park",
+      "address": "279 Yamashitacho, Naka-ku",
+      "latitude": null,
+      "longitude": null,
+      "distance_from_port_km": null,
+      "website": "hikawamaru.nyk.com",
+      "manuel_quote": {
+        "es": "Dos cosas que casi todo el mundo pasa por alto. La estatua de bronce de la «Niña de los zapatos rojos» mira al mar — inspirada en una canción de 1922 sobre una huérfana real llamada Kimi, y parte suavemente el corazón japonés. Y amarrado junto al paseo está el Hikawa Maru, el transatlántico de 1930 que navegó a Seattle y Vancouver durante décadas y una vez llevó a Charlie Chaplin. Puedes subir a bordo.",
+        "en": "Two things most people stroll right past. The bronze \"Little Girl with Red Shoes\" sits gazing out to sea — from a beloved 1922 song about a real orphan named Kimi, and it quietly breaks Japanese hearts. And moored alongside is the Hikawa Maru, the 1930 ocean liner that sailed to Seattle and Vancouver for decades and once carried Charlie Chaplin. You can go aboard.",
+        "fr": "Deux choses que la plupart des gens passent sans s'arrêter. La « Petite fille aux chaussures rouges » en bronze regarde vers la mer — d'une chanson bien-aimée de 1922 sur une vraie orpheline nommée Kimi, et brise doucement les cœurs japonais. Et amarré à côté se trouve le Hikawa Maru, le paquebot de 1930 qui a navigué vers Seattle et Vancouver pendant des décennies et qui a autrefois transporté Charlie Chaplin. Vous pouvez monter à bord."
+      },
+      "reservation": {
+        "es": "El parque es gratuito; subir al Hikawa Maru cuesta unos ¥300 (sin reserva).",
+        "en": "Park is free; boarding the Hikawa Maru costs around ¥300 (walk-in).",
+        "fr": "Le parc est gratuit ; monter à bord du Hikawa Maru coûte environ ¥300 (sans réservation)."
+      },
+      "what_it_is": {
+        "es": "El primer parque marítimo de Japón: un largo paseo verde junto al puerto, salpicado de monumentos donados por las ciudades hermanas de Yokohama y un jardín de rosas que alcanza su esplendor en mayo y octubre.",
+        "en": "Japan's first seaside park: a long green promenade along the harbour, dotted with monuments gifted by Yokohama's sister cities and a rose garden that peaks in May and October.",
+        "fr": "Le premier parc maritime du Japon : une longue promenade verte le long du port, parsemée de monuments offerts par les villes sœurs de Yokohama et un jardin de roses qui atteint son apogée en mai et octobre."
+      },
+      "why_it_matters": {
+        "es": "Es el tramo más bonito y tranquilo del paseo marítimo — perfecto para caminar despacio entre el barco y Chinatown, con el puerto, el Puente de la Bahía y el skyline desplegados ante ti. Calcúlalo para última hora de la tarde, cuando la luz se vuelve dorada.",
+        "en": "It's the loveliest, easiest stretch of the waterfront — perfect for a slow walk between the ship and Chinatown, with the harbour, the Bay Bridge and the skyline laid out in front of you. Time it for late afternoon, when the light turns golden.",
+        "fr": "C'est le plus beau et le plus facile tronçon du front de mer — parfait pour une promenade tranquille entre le navire et Chinatown, avec le port, le Bay Bridge et le skyline devant vous. Prévoyez-le en fin d'après-midi, quand la lumière devient dorée."
+      },
+      "good_to_know": null
+    },
+    {
+      "rank_order": 4,
+      "name": "Yamate (\"The Bluff\") & Motomachi",
+      "address": "Yamate-cho & Motomachi, Naka-ku (cuesta arriba desde Chinatown; ~3 min desde la estación Motomachi-Chukagai)",
+      "latitude": null,
+      "longitude": null,
+      "distance_from_port_km": null,
+      "website": "yokohama-kanko.or.jp",
+      "manuel_quote": {
+        "es": "Esta es la parte de Yokohama que los cruceristas casi siempre se pierden — se quedan en el brillante paseo marítimo y nunca suben la colina detrás de Chinatown. Aquí es donde los comerciantes extranjeros vivieron de verdad después de 1859: una cresta de mansiones occidentales conservadas — la Residencia Ehrismann, el Berrick Hall, la British House — que puedes entrar gratis, amuebladas al estilo de la época, varias con pequeñas cafeterías dentro.",
+        "en": "This is the part of Yokohama cruisers almost always miss — they stay on the flashy waterfront and never climb the hill behind Chinatown. Up here is where the foreign merchants actually lived after 1859: a ridge of preserved Western mansions — the Ehrismann Residence, Berrick Hall, the British House — that are free to enter, furnished in period style, several with little cafés tucked inside.",
+        "fr": "C'est la partie de Yokohama que les croisiéristes manquent presque toujours — ils restent sur le front de mer animé et ne grimpent jamais la colline derrière Chinatown. C'est ici que les marchands étrangers vivaient vraiment après 1859 : une crête de manoirs occidentaux préservés — la Résidence Ehrismann, Berrick Hall, la British House — à entrée gratuite, meublés dans le style de l'époque, plusieurs avec de petits cafés à l'intérieur."
+      },
+      "reservation": null,
+      "what_it_is": {
+        "es": "Un histórico barrio arbolado en lo alto de la colina — «The Bluff» — de casas y templos de estilo europeo y el antiguo Cementerio General Extranjero, con la elegante calle comercial Motomachi discurriendo a sus pies.",
+        "en": "A leafy hilltop historic district — \"The Bluff\" — of European-style houses, churches and the old Foreign General Cemetery, with the chic Motomachi shopping street running along its foot.",
+        "fr": "Un quartier historique arboré au sommet de la colline — « The Bluff » — avec des maisons et des temples de style européen et l'ancien cimetière général étranger, avec la chic rue commerçante Motomachi qui longe sa base."
+      },
+      "why_it_matters": {
+        "es": "Es el rincón más atmosférico y menos concurrido de la ciudad, y la ventana más clara al papel de Yokohama como puerta de Japón al Occidente. No te pierdas Harbor View Park en lo alto — el mejor panorama del puerto de la ciudad, más un jardín de rosas inglés — y luego baja serpenteando por las boutiques y cafés de Motomachi.",
+        "en": "It's the most atmospheric, least crowded corner of the city and the clearest window into Yokohama's role as Japan's door to the West. Don't miss Harbor View Park at the top — the best harbour panorama in the city, plus an English rose garden — then wander down through Motomachi's boutiques and cafés.",
+        "fr": "C'est le coin le plus atmosphérique et le moins fréquenté de la ville, et la fenêtre la plus claire sur le rôle de Yokohama comme porte du Japon vers l'Occident. Ne manquez pas Harbor View Park au sommet — le meilleur panorama du port de la ville, plus un jardin de roses anglais — puis descendez en flânant à travers les boutiques et cafés de Motomachi."
+      },
+      "good_to_know": {
+        "es": "Las mansiones occidentales son de entrada gratuita. El Cementerio General Extranjero abre a los visitantes los fines de semana y festivos con un donativo simbólico. Lleva calzado cómodo — hay pendiente — y planifica una bajada final hacia Motomachi.",
+        "en": "The Western houses are free to enter. The Foreign General Cemetery opens to visitors on weekends and holidays for a small donation. Wear comfortable shoes — it's hilly — and plan a downhill finish toward Motomachi.",
+        "fr": "Les maisons occidentales sont à entrée gratuite. Le cimetière général étranger est ouvert aux visiteurs les week-ends et jours fériés pour un petit don. Portez des chaussures confortables — c'est vallonné — et prévoyez une descente finale vers Motomachi."
+      }
+    },
+    {
+      "rank_order": 5,
+      "name": "Manyo Club — Minato Mirai Onsen",
+      "address": "Shinko 2-7-1, 4F, Naka-ku",
+      "latitude": null,
+      "longitude": null,
+      "distance_from_port_km": null,
+      "website": "manyo.co.jp/yokohama",
+      "manuel_quote": {
+        "es": "El movimiento realmente especial es el baño de pies al aire libre en la azotea de la 9ª planta: te sientas en tu yukata con los pies en agua termal y la noria de Cosmo World iluminándose justo delante de ti. Todo el local es sin efectivo — tocas una pulsera y pagas al salir — y el agua termal se trae fresca cada día de los famosos manantiales de Yugawara y Atami, costa abajo.",
+        "en": "The genuinely special move is the open-air rooftop foot bath on the 9th floor: you sit in your yukata with your feet in hot-spring water and the Cosmo World Ferris wheel glowing right in front of you. The whole place is cashless inside — you tap a wristband and settle up on the way out — and the spring water itself is trucked in fresh every day from the famous Yugawara and Atami hot springs down the coast.",
+        "fr": "Le vrai moment spécial, c'est le bain de pieds en plein air sur le toit du 9e étage : vous vous asseyez en yukata avec les pieds dans l'eau thermale et la grande roue de Cosmo World qui s'illumine juste devant vous. Tout l'établissement est sans espèces — vous tapez un bracelet et réglez en sortant — et l'eau de source est transportée fraîche chaque jour des célèbres sources thermales de Yugawara et Atami, sur la côte."
+      },
+      "reservation": {
+        "es": "Entrada sin reserva; los baños privados (para personas con tatuajes grandes) se pueden reservar por adelantado en la web.",
+        "en": "Walk-in entry; private baths (for tattoo-friendly access) can be booked in advance via the website.",
+        "fr": "Entrée sans réservation ; les bains privés (pour les personnes tatouées) peuvent être réservés à l'avance sur le site web."
+      },
+      "what_it_is": {
+        "es": "Un «onsen urbano» de varios pisos en el corazón de Minato Mirai: baños termales interiores y al aire libre, saunas, baños de roca, baño de pies en la azotea, masajes y restaurantes — abierto prácticamente las 24 horas.",
+        "en": "A multi-storey \"urban onsen\" right in Minato Mirai: indoor and open-air hot-spring baths, saunas, bedrock baths, a rooftop foot bath, massage and restaurants — open essentially around the clock.",
+        "fr": "Un « onsen urbain » de plusieurs étages au cœur de Minato Mirai : bains thermaux intérieurs et en plein air, saunas, bains de roche, bain de pieds sur le toit, massages et restaurants — ouvert pratiquement 24h/24."
+      },
+      "why_it_matters": {
+        "es": "Es la experiencia de onsen auténtico más fácil que encontrarás sin salir de la ciudad, y un reset perfecto después de un día a pie — o antes de volver al barco.",
+        "en": "It's the easiest authentic onsen experience you'll find without leaving the city, and a perfect reset after a day on your feet — or before heading back to the ship.",
+        "fr": "C'est l'expérience onsen authentique la plus facile que vous trouverez sans quitter la ville, et une remise à zéro parfaite après une journée à pied — ou avant de rentrer au navire."
+      },
+      "good_to_know": {
+        "es": "La entrada para adultos ronda los ¥3.500 (más ¥100 de tasa de baño); hay un autobús lanzadera gratuito desde la salida oeste de la estación de Yokohama, y está a 5 minutos a pie de la estación Minatomirai. Si tienes tatuajes: los pequeños pueden cubrirse con un adhesivo (a la venta en recepción, unos ¥110); los más grandes obligan a reservar un baño privado. Recuerda la norma de oro: lávate bien en las duchas antes de entrar en el baño, y nada de bañador en el agua.",
+        "en": "Adult admission is around ¥3,500 (plus a ¥100 bath tax); there's a free shuttle bus from Yokohama Station's west exit, and it's a 5-minute walk from Minatomirai Station. If you have tattoos: small ones can be covered with a sticker (sold at the front desk for around ¥110); larger ones mean booking a private bath. Remember the golden rule — wash and rinse thoroughly at the showers before you get into the bath, and no swimwear in the water.",
+        "fr": "L'entrée adulte est d'environ ¥3 500 (plus ¥100 de taxe de bain) ; il y a une navette gratuite depuis la sortie ouest de la gare de Yokohama, et c'est à 5 minutes à pied de la station Minatomirai. Si vous avez des tatouages : les petits peuvent être couverts avec un autocollant (vendu à la réception pour environ ¥110) ; les plus grands nécessitent la réservation d'un bain privé. N'oubliez pas la règle d'or — lavez-vous soigneusement sous la douche avant d'entrer dans le bain, et pas de maillot de bain dans l'eau."
+      }
+    }
+  ],
+  "gourmet": [
+    {
+      "rank_order": 1,
+      "name": "Maguro Tonya Megumi",
+      "category": "restaurant",
+      "address": "1F, Yokohama World Porters, 2-2-1 Shinko, Naka-ku (Minato Mirai)",
+      "latitude": null,
+      "longitude": null,
+      "distance_from_port_km": null,
+      "website": "tabelog.com/en/kanagawa/A1401/A140104/14000687/",
+      "manuel_quote": {
+        "es": "No te dejes engañar por el entorno de centro comercial ni por la barra de carrusel. Los dueños son mayoristas que cortan el atún ellos mismos — este es uno de los mejores atunes que probarás en tu vida. Imprescindible.",
+        "en": "Don't let the mall setting or the carousel-style counter put you off. The owners are wholesalers who cut the tuna themselves — this is some of the best tuna you'll have in your life. A must.",
+        "fr": "Ne vous laissez pas décourager par l'environnement du centre commercial ni par le comptoir style carrousel. Les propriétaires sont des grossistes qui coupent le thon eux-mêmes — c'est parmi les meilleurs thons que vous aurez jamais. Incontournable."
+      },
+      "category_label": {
+        "es": "Típico local · Sushi",
+        "en": "Local favourite · Sushi",
+        "fr": "Favori local · Sushi"
+      },
+      "cuisine_type": {
+        "es": "Sushi — especialistas en atún de aleta azul",
+        "en": "Sushi — bluefin tuna specialists",
+        "fr": "Sushi — spécialistes du thon rouge"
+      },
+      "must_try": {
+        "es": "Toro y o-toro recién cortados (los cortes premium rondan los ¥650 por pieza). Algunos días — a menudo fines de semana — hacen un espectáculo en directo de corte de atún de aleta azul con un cuchillo largo; los cortes que se venden justo después son inolvidables, así que consulta antes si quieres no perdértelo.",
+        "en": "Fresh-cut toro and o-toro (the premium cuts run around ¥650 a piece). They hold a live bluefin tuna-cutting show on select days — often weekends — with a katana-like blade; the cuts sold straight after are unforgettable, so check ahead if you want to catch it.",
+        "fr": "Toro et o-toro fraîchement coupés (les coupes premium coûtent environ ¥650 pièce). Certains jours — souvent le week-end — ils organisent un spectacle de découpe de thon rouge en direct avec une lame façon katana ; les morceaux vendus juste après sont inoubliables, vérifiez à l'avance si vous voulez y assister."
+      },
+      "best_time": {
+        "es": "11:00–23:00 (último pedido 22:00; barra de pie hasta las 21:00).",
+        "en": "11:00–23:00 (last order 22:00; standing dining to 21:00).",
+        "fr": "11h00–23h00 (dernière commande 22h00 ; bar debout jusqu'à 21h00)."
+      },
+      "reservation": {
+        "es": "Sin reserva para particulares; grupos de 5 o más pueden reservar por teléfono (045-211-6720, 11:00–21:00). Cargo de ¥1.000 por mesa por hora.",
+        "en": "Walk-in for individuals; groups of 5+ can reserve by phone (045-211-6720, 11:00–21:00). ¥1,000 per table per hour seat charge.",
+        "fr": "Sans réservation pour les particuliers ; groupes de 5+ peuvent réserver par téléphone (045-211-6720, 11h00–21h00). Frais de ¥1 000 par table par heure."
+      }
+    },
+    {
+      "rank_order": 2,
+      "name": "Café Cocktail-do",
+      "category": "cafe",
+      "address": "3F, centro comercial MARK IS Minatomirai, Nishi-ku",
+      "latitude": null,
+      "longitude": null,
+      "distance_from_port_km": null,
+      "website": null,
+      "manuel_quote": {
+        "es": "Un sitio estupendo para sentarse un rato a mitad del paseo: buen café, dulces deliciosos, un lugar cómodo justo en el centro de Minato Mirai.",
+        "en": "A great spot to put your feet up mid-walk: good coffee, lovely sweets, an easy perch right in the middle of Minato Mirai.",
+        "fr": "Un endroit idéal pour se reposer à mi-chemin : bon café, délicieuses douceurs, un perchoir confortable au cœur de Minato Mirai."
+      },
+      "category_label": {
+        "es": "Café / Café",
+        "en": "Café / Coffee",
+        "fr": "Café / Café"
+      },
+      "cuisine_type": {
+        "es": "Café, tartas y pasteles",
+        "en": "Coffee, cakes and pastries",
+        "fr": "Café, gâteaux et viennoiseries"
+      },
+      "must_try": {
+        "es": "La selección de tartas — elige dos, sin sentirte culpable.",
+        "en": "The assorted cakes — pick two, and don't feel guilty about it.",
+        "fr": "La sélection de gâteaux — choisissez-en deux, sans vous sentir coupable."
+      },
+      "best_time": {
+        "es": "A cualquier hora.",
+        "en": "Anytime.",
+        "fr": "À toute heure."
+      },
+      "reservation": {
+        "es": "Sin reserva necesaria.",
+        "en": "Not needed.",
+        "fr": "Pas nécessaire."
+      }
+    },
+    {
+      "rank_order": 3,
+      "name": "Yoshimuraya",
+      "category": "restaurant",
+      "address": "1-6-4 Okano, Nishi-ku (cerca de la salida oeste de la estación de Yokohama)",
+      "latitude": null,
+      "longitude": null,
+      "distance_from_port_km": null,
+      "website": null,
+      "manuel_quote": {
+        "es": "Aquí es donde nació. El ramen iekei — ahora en toda Japón — se inventó aquí mismo en 1974, y la gente sigue haciendo cola calle abajo para comerlo. Si solo vas a comer un bol de ramen en Yokohama, cómelo donde comenzó todo.",
+        "en": "This is the birthplace. Iekei ramen — now all over Japan — was invented right here in 1974, and people still queue down the street for it. If you eat one bowl of ramen in Yokohama, eat it where the whole style began.",
+        "fr": "C'est ici que tout a commencé. Le ramen iekei — maintenant partout au Japon — a été inventé ici même en 1974, et les gens font encore la queue dans la rue pour en manger. Si vous ne mangez qu'un seul bol de ramen à Yokohama, mangez-le là où tout a commencé."
+      },
+      "category_label": {
+        "es": "Típico local · Ramen",
+        "en": "Local favourite · Ramen",
+        "fr": "Favori local · Ramen"
+      },
+      "cuisine_type": {
+        "es": "Ramen iekei — el original",
+        "en": "Iekei ramen — the original",
+        "fr": "Ramen iekei — l'original"
+      },
+      "must_try": {
+        "es": "El bol iekei clásico (~¥900) — caldo rico de cerdo y soja, fideos gruesos y rectos, chashu, espinacas y nori. Te preguntarán cómo quieres los fideos, el caldo y el aceite; ve a medio la primera vez.",
+        "en": "The classic Iekei bowl (~¥900) — rich pork-and-soy broth, thick straight noodles, chashu, spinach and nori. They'll ask how you want the noodles, broth and oil; go medium your first time.",
+        "fr": "Le bol iekei classique (~¥900) — bouillon riche de porc et soja, nouilles épaisses et droites, chashu, épinards et nori. On vous demandera comment vous voulez les nouilles, le bouillon et l'huile ; optez pour le médium la première fois."
+      },
+      "best_time": {
+        "es": "Abierto de 11:00 a 20:00, cerrado los lunes. Espera cola en cualquier momento — pide en la máquina de dentro y lleva efectivo y billetes pequeños.",
+        "en": "Open 11:00–20:00, closed Mondays. Expect a queue whenever you go — order at the ticket machine inside, and bring cash and small bills.",
+        "fr": "Ouvert de 11h00 à 20h00, fermé le lundi. Attendez-vous à une file d'attente quelle que soit l'heure — commandez à la machine à billets à l'intérieur, et apportez des espèces et de petites coupures."
+      },
+      "reservation": {
+        "es": "No es posible — solo cola sin reserva.",
+        "en": "Not possible — walk-in queue only.",
+        "fr": "Impossible — file d'attente sans réservation uniquement."
+      }
+    },
+    {
+      "rank_order": 4,
+      "name": "Pier AK (Akatsuki no Kura)",
+      "category": "bar",
+      "address": "Cerca de la estación de Yokohama, Nishi-ku",
+      "latitude": null,
+      "longitude": null,
+      "distance_from_port_km": null,
+      "website": "tabelog.com",
+      "manuel_quote": {
+        "es": "Busca el «Kabe no Sake» — el sake de barra de flujo libre, unos 90 minutos por ~¥2.500. Una manera gloriosa de probar Japón de un extremo al otro en una sola sentada.",
+        "en": "Look for \"Kabe no Sake\" — the \"sake on the wall\" free-flow, around 90 minutes for ~¥2,500. A glorious way to taste your way across Japan in one sitting.",
+        "fr": "Cherchez le « Kabe no Sake » — le sake en libre-service « sur le mur », environ 90 minutes pour ~¥2 500. Une manière glorieuse de déguster le Japon d'un bout à l'autre en une seule séance."
+      },
+      "category_label": {
+        "es": "Sake y ostras · Izakaya",
+        "en": "Sake & Oysters · Izakaya",
+        "fr": "Saké et huîtres · Izakaya"
+      },
+      "cuisine_type": {
+        "es": "Izakaya — un paraíso del sake, más de 70 sakes de las 47 prefecturas",
+        "en": "Izakaya — a sake paradise, 70+ sakes from all 47 prefectures",
+        "fr": "Izakaya — un paradis du saké, plus de 70 sakés des 47 préfectures"
+      },
+      "must_try": {
+        "es": "Ostras con una cata de sake — incluyendo cervezas raras y de temporada.",
+        "en": "Oysters with a sake flight — including rare and seasonal pours.",
+        "fr": "Huîtres avec une dégustation de saké — incluant des cuvées rares et de saison."
+      },
+      "best_time": {
+        "es": "Consulta el horario primero — la apertura varía entre primera hora de la tarde y primera hora de la tarde-noche.",
+        "en": "Check the hours first — opening shifts between early afternoon and early evening.",
+        "fr": "Vérifiez les horaires d'abord — l'ouverture varie entre le début d'après-midi et le début de soirée."
+      },
+      "reservation": {
+        "es": "Recomendable; reserva en Tabelog (busca «Pier AK Yokohama»).",
+        "en": "Recommended; reserve via Tabelog (search \"Pier AK Yokohama\").",
+        "fr": "Recommandée ; réservez via Tabelog (cherchez « Pier AK Yokohama »)."
+      }
+    },
+    {
+      "rank_order": 5,
+      "name": "Kiyoken",
+      "category": "restaurant",
+      "address": "Varias sucursales, incluida la estación de Yokohama (Nishi-ku); tienda principal cerca de Sakuragicho",
+      "latitude": null,
+      "longitude": null,
+      "distance_from_port_km": null,
+      "website": "kiyoken.com",
+      "manuel_quote": {
+        "es": "La mascota comestible de Yokohama. Kiyoken lleva aquí desde 1908, y sus shiumai de cerdo y vieira en bocado (lanzados en 1928) son EL souvenir local — unos 800.000 al día. Busca a «Hyou-chan», la botellita de salsa de soja sonriente en la caja, y el guisante verde encima. Yokohama puro.",
+        "en": "Yokohama's edible mascot. Kiyoken has been here since 1908, and its bite-size pork-and-scallop shiumai (launched 1928) is THE local souvenir — around 800,000 made every single day. Look for \"Hyou-chan\", the smiling little soy-sauce bottle in the box, and the single green pea on top. Pure Yokohama.",
+        "fr": "La mascotte comestible de Yokohama. Kiyoken est là depuis 1908, et ses shiumai de porc et de coquille Saint-Jacques en bouchée (lancés en 1928) sont LE souvenir local — environ 800 000 produits chaque jour. Cherchez « Hyou-chan », la petite bouteille de sauce soja souriante dans la boîte, et le pois vert sur le dessus. Yokohama pur jus."
+      },
+      "category_label": {
+        "es": "Comida callejera · Especialidad local",
+        "en": "Street food · Local delicacy",
+        "fr": "Street food · Spécialité locale"
+      },
+      "cuisine_type": {
+        "es": "Shiumai — las empanadillas típicas de Yokohama (para llevar y bento)",
+        "en": "Shiumai — Yokohama's signature dumplings (takeaway & bento)",
+        "fr": "Shiumai — les raviolis emblématiques de Yokohama (à emporter et bento)"
+      },
+      "must_try": {
+        "es": "El Shiumai Bento clásico, o una caja caliente de shiumai para llevar.",
+        "en": "The classic Shiumai Bento, or a hot box of shiumai to go.",
+        "fr": "Le Shiumai Bento classique, ou une boîte chaude de shiumai à emporter."
+      },
+      "best_time": {
+        "es": "A cualquier hora — perfecto para llevar al barco o comer en un banco junto a la bahía.",
+        "en": "Anytime — perfect to take aboard or eat on a bench by the bay.",
+        "fr": "À toute heure — parfait à emporter à bord ou à manger sur un banc au bord de la baie."
+      },
+      "reservation": {
+        "es": "Sin reserva necesaria (para llevar).",
+        "en": "Not needed (takeaway).",
+        "fr": "Pas nécessaire (à emporter)."
+      }
+    },
+    {
+      "rank_order": 6,
+      "name": "Toraji (焼肉トラジ)",
+      "category": "restaurant",
+      "address": "Yokohama Mores, Nishi-ku (1 min desde la estación de Yokohama)",
+      "latitude": null,
+      "longitude": null,
+      "distance_from_port_km": null,
+      "website": "ebisu-toraji.com",
+      "manuel_quote": {
+        "es": "Cuando estás en Japón, la carne a la brasa es un rito de iniciación, y Toraji hace un auténtico yakiniku de Wagyu. Bonus: hay un salón de pachinko justo al lado — ruidoso, luminoso y gloriosamente japonés, vale la pena asomarse al menos una vez (cierra ~22:45).",
+        "en": "When you're in Japan, grilled meat is a rite of passage, and Toraji does proper Wagyu yakiniku. Bonus: there's a pachinko parlour right next door — loud, bright and gloriously Japanese, worth a look at least once (closes ~22:45).",
+        "fr": "Au Japon, la viande grillée est un rite de passage, et Toraji fait un vrai yakiniku de Wagyu. Bonus : il y a un salon de pachinko juste à côté — bruyant, lumineux et glorieusement japonais, ça vaut le coup d'y jeter un œil au moins une fois (ferme ~22h45)."
+      },
+      "category_label": {
+        "es": "De primera · Yakiniku",
+        "en": "Top of the line · Yakiniku",
+        "fr": "Haut de gamme · Yakiniku"
+      },
+      "cuisine_type": {
+        "es": "Yakiniku — Wagyu japonés a la brasa",
+        "en": "Yakiniku — grilled Japanese Wagyu",
+        "fr": "Yakiniku — Wagyu japonais grillé"
+      },
+      "must_try": {
+        "es": "Wagyu a la brasa — pide un corte mixto y ásalo tú mismo en la mesa.",
+        "en": "Grilled Wagyu — order a mixed cut and grill it yourself at the table.",
+        "fr": "Wagyu grillé — commandez un assortiment de coupes et faites-le griller vous-même à table."
+      },
+      "best_time": {
+        "es": "Todos los días de 11:00 a 23:00 (último servicio 22:00).",
+        "en": "Daily 11:00–23:00 (last seating 22:00).",
+        "fr": "Tous les jours de 11h00 à 23h00 (dernier service 22h00)."
+      },
+      "reservation": {
+        "es": "Recomendable; reserva en la web oficial o por teléfono.",
+        "en": "Recommended; book via the official site or by phone.",
+        "fr": "Recommandée ; réservez sur le site officiel ou par téléphone."
+      }
+    }
+  ],
+  "tips": [
+    {
+      "rank_order": 1,
+      "title": {
+        "es": "Lleva una nota con la dirección en japonés",
+        "en": "Carry a Japanese address note",
+        "fr": "Emportez une note avec l'adresse en japonais"
+      },
+      "body": {
+        "es": "Ten siempre la dirección del puerto y el nombre de tu barco escritos en japonés. Mostrárselo a un taxista o a un transeúnte es mucho más eficaz que intentar explicarlo en inglés — pide al personal de la terminal o a tu hotel que te lo anoten.",
+        "en": "Always keep the port address and your ship's name written in Japanese. Showing it to a taxi driver or a passer-by beats trying to explain in English every time — ask the terminal staff or your hotel to jot it down.",
+        "fr": "Gardez toujours l'adresse du port et le nom de votre navire écrits en japonais. Le montrer à un chauffeur de taxi ou à un passant est bien plus efficace que d'essayer d'expliquer en anglais — demandez au personnel du terminal ou à votre hôtel de le noter."
+      }
+    },
+    {
+      "rank_order": 2,
+      "title": {
+        "es": "Hazte con un pocket Wi-Fi",
+        "en": "Get a pocket Wi-Fi",
+        "fr": "Procurez-vous un pocket Wi-Fi"
+      },
+      "body": {
+        "es": "Alquila un pocket Wi-Fi (Sakura Mobile y otros) — un pequeño router portátil que conecta todos tus dispositivos en cualquier lugar. A menudo hay un mostrador en la propia terminal del crucero, o recógelo en el aeropuerto; mejor aún, pídelo con antelación para que te espere en casa antes de volar. Mapas, traducción, horarios de trenes — todo en el bolsillo, barato y fiable.",
+        "en": "Rent a pocket Wi-Fi (Sakura Mobile and others) — a little portable router that connects all your devices everywhere. There's often a counter right in the cruise terminal, or pick one up at the airport; best of all, order ahead and have it waiting at home before you fly. Maps, translation, train times — all in your pocket, cheap and reliable.",
+        "fr": "Louez un pocket Wi-Fi (Sakura Mobile et autres) — un petit routeur portable qui connecte tous vos appareils partout. Il y a souvent un comptoir dans le terminal du croisière, ou récupérez-en un à l'aéroport ; mieux encore, commandez-le à l'avance pour qu'il vous attende à la maison avant de voler. Cartes, traduction, horaires de trains — tout dans votre poche, bon marché et fiable."
+      }
+    },
+    {
+      "rank_order": 3,
+      "title": {
+        "es": "El konbini es tu mejor amigo",
+        "en": "The konbini is your best friend",
+        "fr": "Le konbini est votre meilleur ami"
+      },
+      "body": {
+        "es": "Los supermercados de conveniencia japoneses no se parecen en nada a los de casa. Los 7-Eleven, Lawson y FamilyMart tienen cajeros que aceptan tarjetas extranjeras, comida rápida realmente buena (onigiri, sándwiches, bento), baños impecables y artículos básicos de farmacia. En caso de duda, busca un konbini.",
+        "en": "Japanese convenience stores are nothing like back home. 7-Eleven, Lawson and FamilyMart have ATMs that take foreign cards, genuinely good quick food (onigiri, sandwiches, bento), spotless toilets and basic pharmacy bits. When in doubt, find a konbini.",
+        "fr": "Les supérettes japonaises ne ressemblent en rien à celles de chez vous. 7-Eleven, Lawson et FamilyMart ont des distributeurs qui acceptent les cartes étrangères, une vraie bonne nourriture rapide (onigiri, sandwichs, bento), des toilettes impeccables et des produits de pharmacie basiques. En cas de doute, trouvez un konbini."
+      }
+    },
+    {
+      "rank_order": 4,
+      "title": {
+        "es": "Paga con tarjeta IC — hazte con una",
+        "en": "Tap to pay — get an IC card",
+        "fr": "Payez sans contact — procurez-vous une carte IC"
+      },
+      "body": {
+        "es": "Hazte con una tarjeta IC Suica o Pasmo (o carga Mobile Suica en un iPhone) y toca para trenes, autobuses y la mayoría de tiendas y konbini — sin rebuscar monedas. Los visitantes también pueden comprar una «Welcome Suica» sin depósito o el nuevo «Tourist Pasmo» en el aeropuerto. Ten al menos ¥1.000 cargados para no quedarte bloqueado en el torniquete.",
+        "en": "Pick up a Suica or Pasmo IC card (or load Mobile Suica onto an iPhone) and just tap for trains, buses and most shops and konbini — no fumbling for coins. Visitors can also grab a deposit-free \"Welcome Suica\" or the new \"Tourist Pasmo\" at the airport. Keep at least ¥1,000 on it so you're never stopped at the gate.",
+        "fr": "Procurez-vous une carte IC Suica ou Pasmo (ou chargez Mobile Suica sur un iPhone) et tapez simplement pour les trains, bus et la plupart des boutiques et konbini — sans chercher de monnaie. Les visiteurs peuvent également se procurer une « Welcome Suica » sans dépôt ou le nouveau « Tourist Pasmo » à l'aéroport. Gardez au moins ¥1 000 dessus pour ne jamais être bloqué au portique."
+      }
+    },
+    {
+      "rank_order": 5,
+      "title": {
+        "es": "Quédate en el InterContinental",
+        "en": "Stay at the InterContinental",
+        "fr": "Séjournez à l'InterContinental"
+      },
+      "body": {
+        "es": "Si añades una noche antes o después del crucero, el InterContinental Yokohama Grand es una base excelente — junto al agua en Minato Mirai, y a solo unos 5 minutos en coche de la terminal Osanbashi donde atraca tu barco.",
+        "en": "If you're adding a night before or after the cruise, the InterContinental Yokohama Grand is a great base — right on the water in Minato Mirai, and only about 5 minutes by car from the Osanbashi terminal where your ship docks.",
+        "fr": "Si vous ajoutez une nuit avant ou après la croisière, l'InterContinental Yokohama Grand est une excellente base — au bord de l'eau à Minato Mirai, à seulement 5 minutes en voiture du terminal Osanbashi où votre navire accoste."
+      }
+    },
+    {
+      "rank_order": 6,
+      "title": {
+        "es": "El sake espumoso es el movimiento",
+        "en": "Sparkling sake is the move",
+        "fr": "Le saké pétillant, c'est le bon plan"
+      },
+      "body": {
+        "es": "Un consejo para tu comida de sushi: con sashimi no hay nada mejor que una Kirin, Asahi o Sapporo bien fría y un sake de Kanagawa (yo me inclino por el nigori — el tipo turbio sin filtrar). Y si nunca has probado el sake espumoso, ahora es el momento: ligero, refrescante y hecho para el sushi, en estilos secos y más dulces. El original es MIO de Shirakabegura. Aviso justo — te vas a enganchar.",
+        "en": "A tip for your sushi meal: with sashimi you can't beat a cold Kirin, Asahi or Sapporo and a sake from Kanagawa (I lean to nigori — the cloudy, unfiltered kind). And if you've never had sparkling sake, now's the time: light, refreshing and made for sushi, in dry and sweeter styles. The original is MIO by Shirakabegura. Fair warning — you'll be hooked.",
+        "fr": "Un conseil pour votre repas de sushi : avec du sashimi, rien ne vaut une Kirin, Asahi ou Sapporo bien fraîche et un saké de Kanagawa (je penche pour le nigori — le type trouble non filtré). Et si vous n'avez jamais goûté le saké pétillant, c'est le moment : léger, rafraîchissant et fait pour les sushis, en styles secs et plus sucrés. L'original est MIO de Shirakabegura. Juste avertissement — vous allez accrocher."
+      }
+    }
+  ],
+  "what_to_know": [
+    {
+      "heading": {
+        "es": "No des propina — en ningún sitio",
+        "en": "Don't tip — anywhere",
+        "fr": "Ne laissez pas de pourboire — nulle part"
+      },
+      "text": {
+        "es": "Ni en restaurantes, ni en taxis ni en hoteles. El servicio excelente es simplemente el estándar, y dejar dinero puede causar verdadera confusión. Un sincero «arigatō gozaimasu» es la moneda correcta.",
+        "en": "Not in restaurants, taxis or hotels. Excellent service is simply the standard, and leaving money can cause genuine confusion. A sincere \"arigatō gozaimasu\" is the right currency.",
+        "fr": "Ni dans les restaurants, ni dans les taxis, ni dans les hôtels. Un excellent service est simplement le standard, et laisser de l'argent peut causer une vraie confusion. Un sincère « arigatō gozaimasu » est la bonne monnaie."
+      }
+    },
+    {
+      "heading": {
+        "es": "El efectivo sigue importando",
+        "en": "Cash still matters",
+        "fr": "L'argent liquide compte toujours"
+      },
+      "text": {
+        "es": "Japón es mucho más sin efectivo en 2026 — tu tarjeta IC o de contacto funciona casi en todos lados — pero lleva algo de yenes para tiendas pequeñas, templos, mercadillos y algunos sitios que solo aceptan efectivo (Sankeien y Yoshimuraya, entre otros). Los cajeros de konbini (7-Eleven) aceptan tarjetas extranjeras de forma fiable.",
+        "en": "Japan is far more cashless in 2026 — your IC card or contactless card works almost everywhere — but carry some yen for small shops, shrines, market stalls and a few cash-only spots (Sankeien and Yoshimuraya among them). Konbini ATMs (7-Eleven) reliably take foreign cards.",
+        "fr": "Le Japon est beaucoup plus dématérialisé en 2026 — votre carte IC ou sans contact fonctionne presque partout — mais portez des yens pour les petites boutiques, les sanctuaires, les marchés et quelques endroits uniquement en espèces (Sankeien et Yoshimuraya parmi eux). Les DAB des konbini (7-Eleven) acceptent de manière fiable les cartes étrangères."
+      }
+    },
+    {
+      "heading": {
+        "es": "Zapatos fuera",
+        "en": "Shoes off",
+        "fr": "Chaussures à l'entrée"
+      },
+      "text": {
+        "es": "Te pedirán que te quites los zapatos en algunos restaurantes, templos, posadas tradicionales y casas. Fíjate en el escalón y la fila de zapatillas — y lleva calcetines sin agujeros.",
+        "en": "You'll be asked to remove your shoes in some restaurants, temples, traditional inns and homes. Watch for a step up and a row of slippers — and wear socks without holes.",
+        "fr": "On vous demandera d'enlever vos chaussures dans certains restaurants, temples, auberges traditionnelles et maisons. Repérez le petit escalier et la rangée de chaussons — et portez des chaussettes sans trous."
+      }
+    },
+    {
+      "heading": {
+        "es": "Los trenes son silenciosos",
+        "en": "Trains are quiet",
+        "fr": "Les trains sont silencieux"
+      },
+      "text": {
+        "es": "Nada de llamadas al móvil y habla bajo, lleva la mochila delante en un espacio concurrido, haz cola en las marcas del andén y deja salir antes de entrar.",
+        "en": "Keep phone calls off and conversation low, wear a backpack on your front in a crowd, queue on the platform markings, and let people off before you board.",
+        "fr": "Pas d'appels téléphoniques et parlez doucement, portez votre sac à dos devant dans la foule, faites la queue sur les marquages du quai et laissez sortir les passagers avant de monter."
+      }
+    },
+    {
+      "heading": {
+        "es": "Etiqueta en el onsen",
+        "en": "Onsen etiquette",
+        "fr": "Étiquette à l'onsen"
+      },
+      "text": {
+        "es": "En cualquier aguas termales o baño público, lávate bien en las duchas antes de entrar, y nunca lleves bañador en el agua. Los tatuajes pueden ser un problema — cubre los pequeños o reserva un baño privado.",
+        "en": "In any hot spring or public bath, wash and rinse thoroughly at the showers before getting in, and never wear swimwear in the water. Tattoos can be an issue — cover small ones or book a private bath.",
+        "fr": "Dans toute source chaude ou bain public, lavez-vous soigneusement sous la douche avant d'entrer, et ne portez jamais de maillot de bain dans l'eau. Les tatouages peuvent poser problème — couvrez les petits ou réservez un bain privé."
+      }
+    },
+    {
+      "heading": {
+        "es": "En la mesa",
+        "en": "At the table",
+        "fr": "À table"
+      },
+      "text": {
+        "es": "Sorber los fideos está bien — es incluso un pequeño cumplido. Pero no claves los palillos verticales en el arroz ni pases comida de palillos a palillos (ambos evocan ritos funerarios), y es normal comer donde compras en lugar de ir caminando.",
+        "en": "Slurping noodles is fine — even a small compliment. But don't stand chopsticks upright in rice or pass food chopstick-to-chopstick (both echo funeral customs), and it's normal to eat where you buy rather than walking and eating.",
+        "fr": "Slurper les nouilles est acceptable — c'est même un petit compliment. Mais ne plantez pas les baguettes verticalement dans le riz et ne passez pas la nourriture de baguettes en baguettes (tous deux rappellent les rites funéraires), et il est normal de manger là où vous achetez plutôt que de marcher en mangeant."
+      }
+    },
+    {
+      "heading": {
+        "es": "Unas pocas palabras llegan lejos",
+        "en": "A few words go far",
+        "fr": "Quelques mots font beaucoup"
+      },
+      "text": {
+        "es": "Hola — Konnichiwa · Gracias — Arigatō gozaimasu · Perdona / lo siento — Sumimasen · Delicioso — Oishii · Salud — Kanpai.",
+        "en": "Hello — Konnichiwa · Thank you — Arigatō gozaimasu · Excuse me / sorry — Sumimasen · Delicious — Oishii · Cheers — Kanpai.",
+        "fr": "Bonjour — Konnichiwa · Merci — Arigatō gozaimasu · Excusez-moi / désolé — Sumimasen · Délicieux — Oishii · Santé — Kanpai."
+      }
+    }
+  ],
+  "itineraries": [
+    {
+      "rank_order": 1,
+      "theme": "easy_iconic",
+      "time_of_day": "day",
+      "is_recommended": true,
+      "is_premium": false,
+      "title": {
+        "es": "Fácil e Icónica",
+        "en": "Easy & Iconic",
+        "fr": "Facile et iconique"
+      },
+      "catchy_phrase": {
+        "es": "El puerto, los imprescindibles, el corazón de Yokohama.",
+        "en": "The harbour, the highlights, the heart of Yokohama.",
+        "fr": "Le port, les incontournables, le cœur de Yokohama."
+      },
+      "best_for": {
+        "es": "Viajeros tranquilos · caminata mayormente llana",
+        "en": "Relaxed travellers · mostly flat walking",
+        "fr": "Voyageurs décontractés · marche principalement plate"
+      },
+      "duration_min_hrs": 4,
+      "duration_max_hrs": 6,
+      "total_walk_km": 3,
+      "total_transit_km": null,
+      "flex_note": {
+        "es": "¿Poco tiempo? Haz las paradas 1 → 2 → 3 y vuelve. ¿Más tiempo? Termina con un baño en el Manyo Club.",
+        "en": "Short on time? Do stops 1 → 2 → 3 and head back. More time? Finish with a soak at Manyo Club.",
+        "fr": "Peu de temps ? Faites les arrêts 1 → 2 → 3 et rentrez. Plus de temps ? Terminez avec un bain au Manyo Club."
+      },
+      "steps": [
+        {
+          "rank_order": 1,
+          "spot_ref": null,
+          "title": {
+            "es": "Terraza del Osanbashi",
+            "en": "Osanbashi Rooftop Deck",
+            "fr": "Terrasse de l'Osanbashi"
+          },
+          "address": "Osanbashi Yokohama International Passenger Terminal, 1-1-4 Kaigandori, Naka-ku",
+          "website": "osanbashi.jp",
+          "description": {
+            "es": "La azotea con forma de ola de la terminal del crucero — una terraza pública gratuita de madera y hierba con vistas panorámicas de la bahía y el skyline de Minato Mirai. El nombre que le dan los locales: la «joroba de la ballena».",
+            "en": "The cruise terminal's wave-shaped roof — a free public deck of wood and grass with sweeping views over the bay and the Minato Mirai skyline. The locals' name for it: the \"whale's back\".",
+            "fr": "Le toit en forme de vague du terminal de croisière — une terrasse publique gratuite de bois et de gazon avec de superbes vues sur la baie et le skyline de Minato Mirai. Le nom que lui donnent les habitants : « le dos de la baleine »."
+          },
+          "bon_vivant_notes": {
+            "es": "Sube a la cubierta de madera para tu primera vista del skyline antes de adentrarte en la ciudad. Es el momento más tranquilo del día.",
+            "en": "Walk the wooden roof for your first skyline view before you head into the city. It's the calmest moment of the day.",
+            "fr": "Parcourez le toit en bois pour votre première vue sur le skyline avant de vous aventurer dans la ville. C'est le moment le plus calme de la journée."
+          },
+          "must_try": null,
+          "reservation": {
+            "es": "Sin reserva necesaria (acceso libre y gratuito).",
+            "en": "Not required (free, open access).",
+            "fr": "Pas nécessaire (accès libre et gratuit)."
+          },
+          "distance_from_prev_km": 0,
+          "travel_mode": "walk",
+          "time_on_site_min": 15,
+          "time_on_site_max": 20
+        },
+        {
+          "rank_order": 2,
+          "spot_ref": "Yamashita Park",
+          "title": null,
+          "address": null,
+          "website": "hikawamaru.nyk.com",
+          "description": {
+            "es": "El primer parque marítimo de Japón, con el transatlántico Hikawa Maru de 1930 amarrado junto al paseo. Un tramo de agua tranquilo y precioso con monumentos de las ciudades hermanas de Yokohama y un jardín de rosas que alcanza su esplendor en mayo y octubre.",
+            "en": "Japan's first seaside park, with the 1930 ocean liner Hikawa Maru moored alongside. A quiet, beautiful waterfront stretch with monuments from Yokohama's sister cities and a rose garden that peaks in May and October.",
+            "fr": "Le premier parc maritime du Japon, avec le paquebot Hikawa Maru de 1930 amarré à côté. Un tronçon de front de mer tranquille et magnifique avec des monuments offerts par les villes sœurs de Yokohama et un jardin de roses qui atteint son apogée en mai et octobre."
+          },
+          "bon_vivant_notes": {
+            "es": "Pasea por el paseo, busca a la niña de los zapatos rojos de bronce, sube al viejo transatlántico si te apetece.",
+            "en": "Stroll the promenade, find the bronze Red Shoes girl, board the old liner if you fancy it.",
+            "fr": "Flânez sur la promenade, trouvez la statue en bronze de la Petite fille aux chaussures rouges, montez à bord du vieux paquebot si l'envie vous prend."
+          },
+          "must_try": null,
+          "reservation": {
+            "es": "Parque gratuito; Hikawa Maru ~¥300 sin reserva.",
+            "en": "Park free; Hikawa Maru ~¥300 walk-in entry.",
+            "fr": "Parc gratuit ; Hikawa Maru ~¥300 sans réservation."
+          },
+          "distance_from_prev_km": 0.5,
+          "travel_mode": "walk",
+          "time_on_site_min": 45,
+          "time_on_site_max": 60
+        },
+        {
+          "rank_order": 3,
+          "spot_ref": "Yokohama Chinatown (Chukagai)",
+          "title": null,
+          "address": null,
+          "website": "chinatown.or.jp",
+          "description": {
+            "es": "El Chinatown más grande de Japón — más de 250 restaurantes, diez ornamentadas puertas de feng shui, el dim sum en su mejor momento a la hora de comer. Rinde homenaje en el Templo Kanteibyo y luego ve picoteando.",
+            "en": "Japan's largest Chinatown — 250+ restaurants, ten ornate feng-shui gates, dim sum at its best around lunchtime. Pay your respects at Kanteibyo Temple, then graze.",
+            "fr": "Le plus grand Chinatown du Japon — plus de 250 restaurants, dix portes feng shui ornées, le dim sum à son meilleur à l'heure du déjeuner. Rendez hommage au temple Kanteibyo, puis grignotez."
+          },
+          "bon_vivant_notes": {
+            "es": "Pasa de las colas delante de los restaurantes más espectaculares — la magia de verdad está en callejear por las calles laterales y comer en una docena de sitios.",
+            "en": "Skip the queues outside the showpiece restaurants — the real magic is wandering the side lanes and eating from a dozen places.",
+            "fr": "Évitez les files d'attente devant les restaurants vedettes — la vraie magie est de flâner dans les ruelles et de manger dans une douzaine d'endroits."
+          },
+          "must_try": {
+            "es": "Dim sum, nikuman (bollos de cerdo al vapor) en cualquier puesto callejero, o un bol Sichuan a tu gusto en YGF Malatang.",
+            "en": "Dim sum, nikuman (steamed pork buns) at any street stall, or a Sichuan build-your-own bowl at YGF Malatang.",
+            "fr": "Dim sum, nikuman (brioches de porc à la vapeur) dans n'importe quel stand de rue, ou un bol Sichuan à composer vous-même chez YGF Malatang."
+          },
+          "reservation": {
+            "es": "Sin reserva para la mayoría de puestos y restaurantes informales. Heichinro (el restaurante chino más antiguo de Japón, desde 1884) merece reservar con antelación.",
+            "en": "Walk-in for most stalls and casual restaurants. Heichinro (Japan's oldest Chinese restaurant, since 1884) is worth booking ahead.",
+            "fr": "Sans réservation pour la plupart des stands et restaurants informels. Heichinro (le plus vieux restaurant chinois du Japon, depuis 1884) mérite d'être réservé à l'avance."
+          },
+          "distance_from_prev_km": 0.4,
+          "travel_mode": "walk",
+          "time_on_site_min": 60,
+          "time_on_site_max": 90
+        },
+        {
+          "rank_order": 4,
+          "spot_ref": null,
+          "title": {
+            "es": "Red Brick Warehouse",
+            "en": "Red Brick Warehouse",
+            "fr": "Red Brick Warehouse"
+          },
+          "address": "1-1-1 Shinko, Naka-ku",
+          "website": "yokohama-akarenga.jp",
+          "description": {
+            "es": "Almacenes restaurados de principios del siglo XX junto al paseo marítimo, ahora llenos de tiendas, restaurantes y eventos, con uno de los mejores telones de fondo del skyline de la ciudad.",
+            "en": "Restored early-1900s warehouses on the waterfront, now full of shops, restaurants and events, with one of the best skyline backdrops in the city.",
+            "fr": "Entrepôts restaurés du début du XXe siècle sur le front de mer, maintenant remplis de boutiques, restaurants et événements, avec l'un des meilleurs arrière-plans du skyline de la ville."
+          },
+          "bon_vivant_notes": {
+            "es": "Pasea por la terraza del puerto entre los dos edificios para la foto que todo el mundo hace — y la mejor vista del skyline al atardecer.",
+            "en": "Walk the harbour terrace between the two warehouse buildings for the photo everyone takes — and the best skyline view in the city at sunset.",
+            "fr": "Parcourez la terrasse du port entre les deux bâtiments d'entrepôts pour la photo que tout le monde prend — et la meilleure vue sur le skyline au coucher du soleil."
+          },
+          "must_try": null,
+          "reservation": {
+            "es": "Sin reserva necesaria (complejo comercial y de restauración; algunos restaurantes pueden requerir reserva).",
+            "en": "Not required (shopping/dining complex; individual restaurants may require booking).",
+            "fr": "Pas nécessaire (complexe commercial et de restauration ; certains restaurants peuvent nécessiter une réservation)."
+          },
+          "distance_from_prev_km": 1.5,
+          "travel_mode": "walk",
+          "time_on_site_min": 30,
+          "time_on_site_max": 45
+        },
+        {
+          "rank_order": 5,
+          "spot_ref": "Minato Mirai 21 (MM21)",
+          "title": null,
+          "address": null,
+          "website": "tabelog.com/en/kanagawa/A1401/A140104/14000687/",
+          "description": {
+            "es": "El corazón comercial y gastronómico del paseo marítimo futurista, y el escondite de Maguro Tonya Megumi — uno de los mejores toros del país.",
+            "en": "The futuristic waterfront's shopping and dining heart, and the hiding place of Maguro Tonya Megumi — some of the best toro in the country.",
+            "fr": "Le cœur commercial et gastronomique du front de mer futuriste, et la cachette de Maguro Tonya Megumi — parmi les meilleurs toro du pays."
+          },
+          "bon_vivant_notes": {
+            "es": "Echa un vistazo a los escaparates, tómate un café, o desvíate a comer sushi. La noria Cosmo Clock 21 está justo al lado si quieres una última vista.",
+            "en": "Window-shop, grab a coffee, or detour to the sushi. The Cosmo Clock 21 Ferris wheel is right next door if you want one last view.",
+            "fr": "Faites du lèche-vitrine, prenez un café, ou faites un détour pour les sushis. La grande roue Cosmo Clock 21 est juste à côté si vous voulez une dernière vue."
+          },
+          "must_try": {
+            "es": "Toro en Maguro Tonya Megumi (1F) — ver sección Gastronomía.",
+            "en": "Toro at Maguro Tonya Megumi (1F) — see Gourmet section.",
+            "fr": "Toro chez Maguro Tonya Megumi (1F) — voir la section Gastronomie."
+          },
+          "reservation": {
+            "es": "Sin reserva para particulares; reservas para grupos 045-211-6720.",
+            "en": "Walk-in; group reservations 045-211-6720.",
+            "fr": "Sans réservation pour les particuliers ; réservations de groupe 045-211-6720."
+          },
+          "distance_from_prev_km": 0.5,
+          "travel_mode": "walk",
+          "time_on_site_min": 45,
+          "time_on_site_max": 60
+        }
+      ]
+    },
+    {
+      "rank_order": 2,
+      "theme": "active_explorer",
+      "time_of_day": "day",
+      "is_recommended": false,
+      "is_premium": false,
+      "title": {
+        "es": "Explorador Activo",
+        "en": "Active Explorer",
+        "fr": "Explorateur actif"
+      },
+      "catchy_phrase": {
+        "es": "De la bahía al Bluff, a pie.",
+        "en": "From the bay to the Bluff, on your own two feet.",
+        "fr": "De la baie au Bluff, à pied."
+      },
+      "best_for": {
+        "es": "Viajeros dispuestos a caminar, con una cuesta incluida",
+        "en": "Travellers happy walking, with a hill in the mix",
+        "fr": "Voyageurs prêts à marcher, avec une côte au programme"
+      },
+      "duration_min_hrs": 5,
+      "duration_max_hrs": 7,
+      "total_walk_km": 4.5,
+      "total_transit_km": null,
+      "flex_note": {
+        "es": "¿Poco tiempo? Salta MM21 y empieza en Chinatown → Yamate. ¿Más tiempo? Añade el Jardín Sankeien (ver Ruta C).",
+        "en": "Short on time? Skip MM21 and start at Chinatown → Yamate. More time? Add Sankeien Garden (see Route C).",
+        "fr": "Peu de temps ? Sautez MM21 et commencez à Chinatown → Yamate. Plus de temps ? Ajoutez le jardin Sankeien (voir Route C)."
+      },
+      "steps": [
+        {
+          "rank_order": 1,
+          "spot_ref": "Minato Mirai 21 (MM21)",
+          "title": null,
+          "address": null,
+          "website": "cupnoodles-museum.jp/en/yokohama",
+          "description": {
+            "es": "Empieza con una de las paradas emblemáticas de MM21 — el Museo Cup Noodles (fabrica el tuyo para llevártelo al barco) o una vuelta en la enorme noria de Cosmo World.",
+            "en": "Start with one of MM21's signature stops — the Cup Noodles Museum (make your own to take aboard) or a spin on Cosmo World's giant Ferris wheel.",
+            "fr": "Commencez par l'un des arrêts emblématiques de MM21 — le Musée Cup Noodles (fabriquez le vôtre pour l'emporter à bord) ou un tour sur la grande roue de Cosmo World."
+          },
+          "bon_vivant_notes": {
+            "es": "El Museo Cup Noodles es más divertido de lo que parece — el diseño y el homenaje lúdico al inventor del ramen instantáneo Momofuku Ando es genuinamente encantador.",
+            "en": "Cup Noodles Museum is more fun than it sounds — the design and the playful homage to instant-noodle inventor Momofuku Ando is genuinely charming.",
+            "fr": "Le Musée Cup Noodles est plus amusant qu'il n'y paraît — le design et l'hommage ludique à l'inventeur des nouilles instantanées Momofuku Ando est vraiment charmant."
+          },
+          "must_try": null,
+          "reservation": {
+            "es": "Entrada al Museo Cup Noodles ~¥500 (gratis menores de 15); los talleres se reservan por separado online. Abre 10:00–18:00 (última entrada 17:00), cerrado martes. Cosmo World: precio por atracción.",
+            "en": "Cup Noodles Museum entry ~¥500 (free for under-15s); the make-your-own workshops are booked separately and ahead online. Open 10:00–18:00 (last entry 17:00), closed Tuesdays. Cosmo World rides priced per ride.",
+            "fr": "Entrée au Musée Cup Noodles ~¥500 (gratuit pour les moins de 15 ans) ; les ateliers sont réservés séparément et à l'avance en ligne. Ouvert 10h00–18h00 (dernière entrée 17h00), fermé le mardi. Cosmo World : prix par attraction."
+          },
+          "distance_from_prev_km": null,
+          "travel_mode": "walk",
+          "time_on_site_min": 60,
+          "time_on_site_max": 90
+        },
+        {
+          "rank_order": 2,
+          "spot_ref": "Yokohama Chinatown (Chukagai)",
+          "title": null,
+          "address": null,
+          "website": "chinatown.or.jp",
+          "description": {
+            "es": "Un paseo por el paseo marítimo hasta el Chinatown más grande de Japón, con un enfoque de parar y picar — nikuman, empanadillas o un bol de malatang en movimiento.",
+            "en": "A waterfront stroll into Japan's biggest Chinatown, with a stop-and-graze approach — nikuman, dumplings, or a bowl of malatang on the move.",
+            "fr": "Une promenade sur le front de mer jusqu'au plus grand Chinatown du Japon, avec une approche stop-and-graze — nikuman, raviolis ou un bol de malatang en marchant."
+          },
+          "bon_vivant_notes": {
+            "es": "Ve ligero aquí — la subida a Yamate es la siguiente.",
+            "en": "Stay light here — the climb to Yamate is next.",
+            "fr": "Restez léger ici — la montée vers Yamate est la prochaine étape."
+          },
+          "must_try": {
+            "es": "Nikuman (bollos de cerdo al vapor) en cualquier puesto; YGF Malatang para un bol Sichuan a tu gusto.",
+            "en": "Nikuman (steamed pork buns) from any street stall; YGF Malatang for a Sichuan-style build-your-own bowl.",
+            "fr": "Nikuman (brioches de porc à la vapeur) dans n'importe quel stand ; YGF Malatang pour un bol Sichuan à composer vous-même."
+          },
+          "reservation": {
+            "es": "Sin reserva necesaria para comida callejera.",
+            "en": "Not needed for street food.",
+            "fr": "Pas nécessaire pour la nourriture de rue."
+          },
+          "distance_from_prev_km": 1.5,
+          "travel_mode": "walk",
+          "time_on_site_min": 45,
+          "time_on_site_max": 45
+        },
+        {
+          "rank_order": 3,
+          "spot_ref": "Yamate (\"The Bluff\") & Motomachi",
+          "title": null,
+          "address": null,
+          "website": "yokohama-kanko.or.jp",
+          "description": {
+            "es": "El barrio histórico arbolado en lo alto de la colina donde vivían los comerciantes extranjeros de Yokohama después de 1859: mansiones occidentales conservadas, el antiguo Cementerio General Extranjero y Harbor View Park con el mejor panorama del puerto de la ciudad y un jardín de rosas inglés.",
+            "en": "The leafy hilltop where Yokohama's foreign merchants lived after 1859: preserved Western mansions, the old Foreign General Cemetery, and Harbor View Park with the best harbour panorama in the city plus an English rose garden.",
+            "fr": "Le sommet de colline arboré où vivaient les marchands étrangers de Yokohama après 1859 : manoirs occidentaux préservés, l'ancien cimetière général étranger et Harbor View Park avec le meilleur panorama du port de la ville plus un jardin de roses anglais."
+          },
+          "bon_vivant_notes": {
+            "es": "Visita dos o tres de las mansiones occidentales de entrada gratuita (la Residencia Ehrismann y el Berrick Hall son la pareja más fácil), luego sigue por la cresta hasta Harbor View Park.",
+            "en": "Tour two or three of the free Western mansions (Ehrismann Residence and Berrick Hall are the easiest pair), then walk along the ridge to Harbor View Park.",
+            "fr": "Visitez deux ou trois des manoirs occidentaux à entrée gratuite (la Résidence Ehrismann et Berrick Hall sont la paire la plus facile), puis marchez le long de la crête jusqu'à Harbor View Park."
+          },
+          "must_try": null,
+          "reservation": {
+            "es": "Mansiones de entrada gratuita; cementerio solo fines de semana y festivos, donativo simbólico.",
+            "en": "Houses free to enter; cemetery weekends/holidays only, small donation.",
+            "fr": "Maisons à entrée gratuite ; cimetière les week-ends/jours fériés uniquement, petit don."
+          },
+          "distance_from_prev_km": 1,
+          "travel_mode": "walk",
+          "time_on_site_min": 90,
+          "time_on_site_max": 120
+        },
+        {
+          "rank_order": 4,
+          "spot_ref": null,
+          "title": {
+            "es": "Bajada por Motomachi",
+            "en": "Down through Motomachi",
+            "fr": "Descente par Motomachi"
+          },
+          "address": "Motomachi, Naka-ku",
+          "website": null,
+          "description": {
+            "es": "La elegante calle comercial a los pies del Bluff — donde los comerciantes extranjeros de los años 1860 hacían sus compras. Ahora boutiques, panaderías y cafés con ambiente europeo.",
+            "en": "The chic shopping street at the foot of the Bluff — where the foreign merchants of the 1860s did their shopping. Now boutiques, bakeries and cafés with a European feel.",
+            "fr": "La chic rue commerçante au pied du Bluff — où les marchands étrangers des années 1860 faisaient leurs achats. Maintenant boutiques, boulangeries et cafés avec une ambiance européenne."
+          },
+          "bon_vivant_notes": {
+            "es": "Para a tomar un café o un helado temprano — te lo has ganado. La calle es una sola manzana, fácil de recorrer de punta a punta.",
+            "en": "Stop for coffee or an early gelato — you've earned it. The street is one block, easy to walk end to end.",
+            "fr": "Arrêtez-vous pour un café ou un gelato en avance — vous l'avez mérité. La rue fait un seul pâté de maisons, facile à parcourir d'un bout à l'autre."
+          },
+          "must_try": null,
+          "reservation": {
+            "es": "Sin reserva necesaria.",
+            "en": "Not needed.",
+            "fr": "Pas nécessaire."
+          },
+          "distance_from_prev_km": 0.5,
+          "travel_mode": "walk",
+          "time_on_site_min": 45,
+          "time_on_site_max": 60
+        },
+        {
+          "rank_order": 5,
+          "spot_ref": null,
+          "title": {
+            "es": "Vuelta al barco",
+            "en": "Back to the Ship",
+            "fr": "Retour au navire"
+          },
+          "address": "Osanbashi Yokohama International Passenger Terminal",
+          "website": null,
+          "description": {
+            "es": "Paseo fácil por el paseo marítimo de vuelta a Osanbashi, o un taxi de 5 minutos si las piernas ya no dan más.",
+            "en": "Easy waterfront walk back to Osanbashi, or a 5-minute taxi if your legs are done.",
+            "fr": "Promenade facile sur le front de mer de retour à Osanbashi, ou un taxi de 5 minutes si vos jambes n'en peuvent plus."
+          },
+          "bon_vivant_notes": null,
+          "must_try": null,
+          "reservation": null,
+          "distance_from_prev_km": 1.5,
+          "travel_mode": "walk",
+          "time_on_site_min": null,
+          "time_on_site_max": null
+        }
+      ]
+    },
+    {
+      "rank_order": 3,
+      "theme": "food_culture",
+      "time_of_day": "day",
+      "is_recommended": false,
+      "is_premium": false,
+      "title": {
+        "es": "Comida y Cultura",
+        "en": "Food & Culture",
+        "fr": "Gastronomie et culture"
+      },
+      "catchy_phrase": {
+        "es": "Yokohama, contada un plato a la vez.",
+        "en": "Yokohama, told one plate at a time.",
+        "fr": "Yokohama, racontée une assiette à la fois."
+      },
+      "best_for": {
+        "es": "Gourmets y viajeros que quieren espacios tranquilos y preciosos",
+        "en": "Foodies and travellers who want calm, beautiful spaces",
+        "fr": "Gastronomes et voyageurs qui veulent des espaces calmes et beaux"
+      },
+      "duration_min_hrs": 5,
+      "duration_max_hrs": 6,
+      "total_walk_km": 1.5,
+      "total_transit_km": 20,
+      "flex_note": {
+        "es": "Sankeien está a ~30 min y merece una media mañana tranquila; sáltalo si el tiempo en puerto es justo.",
+        "en": "Sankeien sits ~30 min out and rewards an unhurried half-day; skip it if your port time is tight.",
+        "fr": "Sankeien est à ~30 min et mérite une demi-journée tranquille ; sautez-le si votre temps à quai est limité."
+      },
+      "steps": [
+        {
+          "rank_order": 1,
+          "spot_ref": "Maguro Tonya Megumi",
+          "title": null,
+          "address": null,
+          "website": "tabelog.com/en/kanagawa/A1401/A140104/14000687/",
+          "description": {
+            "es": "Mayoristas de atún con una barra de sushi dentro del World Porters — uno de los mejores toros de Japón, servido en una barra de carrusel que esconde su calidad tras un entorno de centro comercial.",
+            "en": "Tuna wholesalers running a sushi counter inside World Porters — some of the best toro in Japan, served at a carousel-style counter that hides its quality behind a mall setting.",
+            "fr": "Des grossistes en thon qui tiennent un comptoir à sushi dans le World Porters — parmi les meilleurs toro du Japon, servi à un comptoir style carrousel qui cache sa qualité derrière un décor de centre commercial."
+          },
+          "bon_vivant_notes": {
+            "es": "Si puedes asistir al corte del atún, hazlo — es todo un espectáculo. Si no, la barra de pie es rápida y excepcional.",
+            "en": "If you can catch the tuna-cutting, do — it's a real event. Otherwise the standing counter is quick and superb.",
+            "fr": "Si vous pouvez assister à la découpe du thon, faites-le — c'est un vrai événement. Sinon, le comptoir debout est rapide et exceptionnel."
+          },
+          "must_try": {
+            "es": "Toro y o-toro recién cortados (~¥650 la pieza). Algunos días — a menudo fines de semana — hay un espectáculo de corte de atún en directo.",
+            "en": "Fresh-cut toro and o-toro (~¥650 a piece). On select days — often weekends — there's a live tuna-cutting show worth timing your visit around.",
+            "fr": "Toro et o-toro fraîchement coupés (~¥650 la pièce). Certains jours — souvent le week-end — il y a un spectacle de découpe de thon en direct qui vaut le déplacement."
+          },
+          "reservation": {
+            "es": "Sin reserva para particulares; grupos de 5+ por teléfono (045-211-6720). ¥1.000/mesa/hora.",
+            "en": "Walk-in for individuals; groups of 5+ book by phone (045-211-6720). ¥1,000/table/hour seat charge.",
+            "fr": "Sans réservation pour les particuliers ; groupes de 5+ par téléphone (045-211-6720). ¥1 000/table/heure."
+          },
+          "distance_from_prev_km": null,
+          "travel_mode": "walk",
+          "time_on_site_min": 60,
+          "time_on_site_max": 60
+        },
+        {
+          "rank_order": 2,
+          "spot_ref": "Yokohama Chinatown (Chukagai)",
+          "title": null,
+          "address": null,
+          "website": "chinatown.or.jp",
+          "description": {
+            "es": "Un paseo tranquilo por el Chinatown más grande de Japón, comiendo en pequeñas dosis: nikuman, empanadillas, malatang. Sin sentarse en restaurante, solo tastings rodantes.",
+            "en": "A slow walk through Japan's largest Chinatown, eating in small bites: nikuman, dumplings, malatang. No sit-down meal, just rolling tastings.",
+            "fr": "Une promenade tranquille dans le plus grand Chinatown du Japon, en mangeant par petites doses : nikuman, raviolis, malatang. Pas de repas assis, juste des dégustations en marchant."
+          },
+          "bon_vivant_notes": {
+            "es": "Sigue moviéndote — come dos o tres cosas pequeñas en lugar de comprometerte con un solo sitio.",
+            "en": "Keep moving — eat two or three small things rather than committing to one place.",
+            "fr": "Continuez à bouger — mangez deux ou trois petites choses plutôt que de vous engager dans un seul endroit."
+          },
+          "must_try": {
+            "es": "Nikuman en cualquier puesto callejero; malatang a tu gusto en YGF Malatang.",
+            "en": "Nikuman from any street stall; build-your-own malatang at YGF Malatang.",
+            "fr": "Nikuman dans n'importe quel stand de rue ; malatang à composer soi-même chez YGF Malatang."
+          },
+          "reservation": {
+            "es": "Sin reserva para comida callejera.",
+            "en": "Not needed for street food.",
+            "fr": "Pas nécessaire pour la nourriture de rue."
+          },
+          "distance_from_prev_km": 0.5,
+          "travel_mode": "walk",
+          "time_on_site_min": 60,
+          "time_on_site_max": 60
+        },
+        {
+          "rank_order": 3,
+          "spot_ref": null,
+          "title": {
+            "es": "Jardín Sankeien",
+            "en": "Sankeien Garden",
+            "fr": "Jardin Sankeien"
+          },
+          "address": "58-1 Honmokusannotani, Naka-ku",
+          "website": "sankeien.or.jp",
+          "description": {
+            "es": "Un jardín japonés tradicional de 17,5 hectáreas abierto en 1906 por el magnate de la seda Hara Sankei. Compró templos históricos, villas y una pagoda de tres pisos de 1457 de Kioto, Kamakura y otros lugares, los desmontó y los reconstruyó en su jardín. El secreto más sereno de Yokohama — y el tipo de lugar al que la mayoría de cruceristas nunca llega.",
+            "en": "A 17.5-hectare traditional Japanese garden opened in 1906 by silk magnate Hara Sankei. He bought historic temples, villas and a 1457 three-storey pagoda from Kyoto, Kamakura and elsewhere, dismantled them, and rebuilt them in his garden. Yokohama's most serene secret — and the kind of place most cruisers never make it to.",
+            "fr": "Un jardin japonais traditionnel de 17,5 hectares ouvert en 1906 par le magnat de la soie Hara Sankei. Il a acheté des temples historiques, des villas et une pagode de trois étages de 1457 à Kyoto, Kamakura et ailleurs, les a démontés et reconstruits dans son jardin. Le secret le plus serein de Yokohama — et le genre d'endroit que la plupart des croisiéristes ne visitent jamais."
+          },
+          "bon_vivant_notes": {
+            "es": "Reserva al menos dos horas — el jardín recompensa el paseo tranquilo, y los cerezos en flor (finales de marzo / principios de abril) o las hojas de arce (noviembre) son espectaculares. Alternativa si el tiempo en puerto es justo: sáltate Sankeien y quédate en el centro con las mansiones de Yamate y un café en una de las antiguas residencias.",
+            "en": "Allow at least two hours — the garden rewards a slow walk, and the cherry blossoms (late March / early April) or maple leaves (November) are spectacular. Alternative if your port time is tight: skip Sankeien and stay central with Yamate's Western houses and a café in one of the old mansions.",
+            "fr": "Prévoyez au moins deux heures — le jardin récompense une promenade tranquille, et les cerisiers en fleurs (fin mars / début avril) ou les feuilles d'érable (novembre) sont spectaculaires. Alternative si votre temps à quai est limité : sautez Sankeien et restez au centre avec les maisons occidentales de Yamate et un café dans l'une des anciennes résidences."
+          },
+          "must_try": {
+            "es": "Soba, udon o dulces de temporada en la casa de té del jardín.",
+            "en": "Soba, udon or seasonal sweets at the garden teahouse.",
+            "fr": "Soba, udon ou douceurs de saison à la maison de thé du jardin."
+          },
+          "reservation": {
+            "es": "Sin reserva; adultos ¥900, abierto 9:00–17:00 (última entrada 16:30), cerrado del 26 al 31 de diciembre. Solo efectivo en la entrada.",
+            "en": "Walk-in; adults ¥900, open 9:00–17:00 (last entry 16:30), closed 26–31 December. Cash only at the gate.",
+            "fr": "Sans réservation ; adultes ¥900, ouvert 9h00–17h00 (dernière entrée 16h30), fermé du 26 au 31 décembre. Espèces uniquement à l'entrée."
+          },
+          "distance_from_prev_km": 8,
+          "travel_mode": "transit",
+          "time_on_site_min": 120,
+          "time_on_site_max": 150
+        },
+        {
+          "rank_order": 4,
+          "spot_ref": "Kiyoken",
+          "title": null,
+          "address": null,
+          "website": "kiyoken.com",
+          "description": {
+            "es": "La mascota comestible de Yokohama desde 1908 — empanadillas shiumai en bocado que son el souvenir típico de la ciudad. Coge un Shiumai Bento para el paseo de vuelta al barco.",
+            "en": "Yokohama's edible mascot since 1908 — bite-size shiumai dumplings that are the city's signature souvenir. Pick up a Shiumai Bento for the walk back to the ship.",
+            "fr": "La mascotte comestible de Yokohama depuis 1908 — des shiumai en bouchée qui sont le souvenir emblématique de la ville. Prenez un Shiumai Bento pour la promenade de retour au navire."
+          },
+          "bon_vivant_notes": {
+            "es": "Un souvenir y cena perfectos para el crucero de vuelta. Yokohama puro.",
+            "en": "A perfect souvenir-and-supper on the cruise back. Pure Yokohama.",
+            "fr": "Un souvenir et un dîner parfaits pour la croisière de retour. Yokohama pur."
+          },
+          "must_try": {
+            "es": "El Shiumai Bento clásico — busca a «Hyou-chan», la botellita de soja sonriente, y el guisante verde encima.",
+            "en": "The classic Shiumai Bento — look for \"Hyou-chan\", the smiling soy-sauce bottle, and the green pea on top.",
+            "fr": "Le Shiumai Bento classique — cherchez « Hyou-chan », la petite bouteille de sauce soja souriante, et le pois vert sur le dessus."
+          },
+          "reservation": {
+            "es": "Sin reserva (para llevar).",
+            "en": "Not needed (takeaway).",
+            "fr": "Pas nécessaire (à emporter)."
+          },
+          "distance_from_prev_km": 8,
+          "travel_mode": "taxi",
+          "time_on_site_min": 15,
+          "time_on_site_max": 15
+        }
+      ]
+    },
+    {
+      "rank_order": 4,
+      "theme": "sunset_supper",
+      "time_of_day": "night",
+      "is_recommended": false,
+      "is_premium": true,
+      "title": {
+        "es": "Atardecer y Cena",
+        "en": "Sunset & Supper",
+        "fr": "Coucher de soleil et dîner"
+      },
+      "catchy_phrase": {
+        "es": "Cuando se encienden los farolillos, la ciudad cambia.",
+        "en": "When the lanterns light, the city changes.",
+        "fr": "Quand les lanternes s'allument, la ville change."
+      },
+      "best_for": {
+        "es": "Cruceristas con escala nocturna o salida tardía — una Yokohama más tranquila y atmosférica",
+        "en": "Cruisers with an overnight or late-departure call — a slower, more atmospheric Yokohama",
+        "fr": "Croisiéristes avec une escale de nuit ou un départ tardif — une Yokohama plus lente et plus atmosphérique"
+      },
+      "duration_min_hrs": 3,
+      "duration_max_hrs": 4,
+      "total_walk_km": 1.5,
+      "total_transit_km": 6,
+      "flex_note": {
+        "es": "¿Poco tiempo? Haz solo el baño de pies del Manyo Club, luego ve directamente a cenar cerca del puerto y sáltate el viaje a la estación de Yokohama. ¿Más tiempo? Añade una copa en el bar de un hotel de Minato Mirai con vistas al skyline.",
+        "en": "Short on time? Just do the Manyo Club foot bath, then walk straight to dinner near the port and skip the trip to Yokohama Station. More time? Add a drink at a Minato Mirai hotel bar with a skyline view.",
+        "fr": "Peu de temps ? Faites juste le bain de pieds du Manyo Club, puis allez directement dîner près du port et sautez le voyage à la gare de Yokohama. Plus de temps ? Ajoutez un verre dans un bar d'hôtel de Minato Mirai avec vue sur le skyline."
+      },
+      "steps": [
+        {
+          "rank_order": 1,
+          "spot_ref": "Manyo Club — Minato Mirai Onsen",
+          "title": null,
+          "address": null,
+          "website": "manyo.co.jp/yokohama",
+          "description": {
+            "es": "Un onsen urbano de varios pisos en el corazón de Minato Mirai, con un baño de pies al aire libre en la azotea que mira directamente a la noria de Cosmo World cuando se ilumina al anochecer. Pulsera sin efectivo dentro; agua termal traída fresca cada día de Yugawara y Atami.",
+            "en": "A multi-storey urban onsen in the heart of Minato Mirai, with an open-air rooftop foot bath that looks straight at the Cosmo World Ferris wheel as it lights up at dusk. Cashless wristband inside; spring water trucked in fresh daily from Yugawara and Atami.",
+            "fr": "Un onsen urbain de plusieurs étages au cœur de Minato Mirai, avec un bain de pieds en plein air sur le toit qui regarde directement la grande roue de Cosmo World quand elle s'illumine au crépuscule. Bracelet sans espèces à l'intérieur ; eau de source transportée fraîche chaque jour de Yugawara et Atami."
+          },
+          "bon_vivant_notes": {
+            "es": "Llega unos 30 minutos antes del atardecer y calcula el baño de pies para el momento en que la noria comienza su espectáculo de luces. El momento más fotogénico del día en Yokohama.",
+            "en": "Arrive about 30 minutes before sunset and time the foot bath for the moment the Ferris wheel begins its light show. The single most photogenic moment of the day in Yokohama.",
+            "fr": "Arrivez environ 30 minutes avant le coucher du soleil et calculez le bain de pieds pour le moment où la grande roue commence son spectacle lumineux. Le moment le plus photographique de la journée à Yokohama."
+          },
+          "must_try": null,
+          "reservation": {
+            "es": "Sin reserva; entrada para adultos ~¥3.500 (+¥100 tasa de baño). Baños privados reservables online para acceso amigable con tatuajes.",
+            "en": "Walk-in; adult admission around ¥3,500 (+¥100 bath tax). Private baths bookable online for tattoo-friendly access.",
+            "fr": "Sans réservation ; entrée adulte environ ¥3 500 (+¥100 taxe de bain). Bains privés réservables en ligne pour un accès amical aux tatouages."
+          },
+          "distance_from_prev_km": null,
+          "travel_mode": "walk",
+          "time_on_site_min": 45,
+          "time_on_site_max": 60
+        },
+        {
+          "rank_order": 2,
+          "spot_ref": null,
+          "title": {
+            "es": "Cena (Wagyu o Sake)",
+            "en": "Dinner (Wagyu or Sake)",
+            "fr": "Dîner (Wagyu ou Saké)"
+          },
+          "address": "Toraji: Yokohama Mores, Nishi-ku · Pier AK: cerca de la estación de Yokohama, Nishi-ku",
+          "website": "ebisu-toraji.com",
+          "description": {
+            "es": "Dos grandes opciones cerca de la estación de Yokohama — Toraji para auténtico yakiniku de Wagyu, o Pier AK para una noche de izakaya con más de 70 sakes de toda Japón.",
+            "en": "Two great options near Yokohama Station — Toraji for proper Wagyu yakiniku, or Pier AK for an izakaya night with 70+ sakes from across Japan.",
+            "fr": "Deux excellentes options près de la gare de Yokohama — Toraji pour un vrai yakiniku de Wagyu, ou Pier AK pour une soirée izakaya avec plus de 70 sakés du Japon entier."
+          },
+          "bon_vivant_notes": {
+            "es": "Elige uno. Toraji es la noche de carne indulgente; Pier AK es la curiosidad culinaria más profunda.",
+            "en": "Pick one. Toraji is the indulgent meat night; Pier AK is the deeper culinary curiosity.",
+            "fr": "Choisissez l'un ou l'autre. Toraji, c'est la soirée viande indulgente ; Pier AK, c'est la curiosité culinaire plus profonde."
+          },
+          "must_try": {
+            "es": "Toraji — un corte mixto de Wagyu a la brasa en la mesa · Pier AK — ostras con el sake de barra libre «Kabe no Sake» (~¥2.500 por 90 min).",
+            "en": "Toraji — a mixed Wagyu cut grilled at the table · Pier AK — oysters with \"Kabe no Sake\" sake free-flow (~¥2,500 for 90 min).",
+            "fr": "Toraji — un assortiment de Wagyu grillé à table · Pier AK — huîtres avec le sake en libre-service « Kabe no Sake » (~¥2 500 pour 90 min)."
+          },
+          "reservation": {
+            "es": "Toraji: en la web oficial (ebisu-toraji.com) o por teléfono · Pier AK: en Tabelog.",
+            "en": "Toraji via the official site (ebisu-toraji.com) or phone · Pier AK via Tabelog.",
+            "fr": "Toraji sur le site officiel (ebisu-toraji.com) ou par téléphone · Pier AK via Tabelog."
+          },
+          "distance_from_prev_km": 3,
+          "travel_mode": "taxi",
+          "time_on_site_min": 60,
+          "time_on_site_max": 90
+        },
+        {
+          "rank_order": 3,
+          "spot_ref": null,
+          "title": {
+            "es": "Nightcap en el paseo marítimo",
+            "en": "Waterfront Nightcap",
+            "fr": "Dernier verre sur le front de mer"
+          },
+          "address": "Paseo marítimo de Minato Mirai, entre el Red Brick Warehouse y Osanbashi",
+          "website": null,
+          "description": {
+            "es": "Un paseo tranquilo por el puerto iluminado de Minato Mirai — las torres, la noria y el Puente de la Bahía encendidos. El momento más tranquilo y romántico de la ciudad.",
+            "en": "A slow walk along the illuminated Minato Mirai harbour — the towers, the wheel, the Bay Bridge all lit up. The city's quietest, most romantic moment.",
+            "fr": "Une promenade tranquille le long du port illuminé de Minato Mirai — les tours, la roue, le Bay Bridge tous allumés. Le moment le plus calme et le plus romantique de la ville."
+          },
+          "bon_vivant_notes": {
+            "es": "Vuelve al barco andando en lugar de coger el taxi hasta el final — la luz en el agua es todo el punto.",
+            "en": "Walk it back to your ship rather than taking the taxi all the way — the light on the water is the whole point.",
+            "fr": "Rentrez à pied à votre navire plutôt que de prendre le taxi jusqu'au bout — la lumière sur l'eau est tout l'intérêt."
+          },
+          "must_try": null,
+          "reservation": null,
+          "distance_from_prev_km": 3,
+          "travel_mode": "taxi",
+          "time_on_site_min": 30,
+          "time_on_site_max": 45
+        }
+      ]
+    }
+  ],
+  "_review": {
+    "last_verified": "2026-05",
+    "unverified": [
+      "Coordenadas de todos los spots (latitude/longitude): no vienen en la guía — geocodificar desde address al importar.",
+      "distance_from_port_km de todos los spots: no viene en formato numérico de km — calcular desde coordenadas al importar.",
+      "port_lat y port_lng: no vienen en la guía — geocodificar desde dirección del terminal (Osanbashi Yokohama International Passenger Terminal).",
+      "Café Cocktail-do: la guía marca el nombre y la planta como sin verificar (no se pudo confirmar nombre exacto ni planta en MARK IS Minatomirai).",
+      "Pier AK: horario exacto y URL de reserva directa no confirmados; solo existe listado en Tabelog.",
+      "Maguro Tonya Megumi: frecuencia del espectáculo de corte de atún no confirmada (fuentes discrepan entre fines de semana y mensual).",
+      "Hikawa Maru: precio de entrada ~¥300 citado ampliamente pero pendiente de confirmación final.",
+      "Cosmo World: precios de atracciones citados como 'precio por atracción' — sin cifra específica.",
+      "distance_from_prev_km de la Ruta B Stop 1 (Minato Mirai Highlights): la guía indica '~15 min walk from port' pero no da distancia en km.",
+      "Ruta D Step 2 (Cena): la guía ofrece dos opciones (Toraji o Pier AK); se han incluido ambas en la descripción — el revisor debe decidir si se mantienen las dos o se elige una como recomendación principal."
+    ]
+  }
+}

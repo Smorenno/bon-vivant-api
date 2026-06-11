@@ -1,4 +1,4 @@
-from supabase import AsyncClient
+from supabase._async.client import AsyncClient
 
 
 async def is_city_unlocked(client: AsyncClient, user_id: str, city_id: str) -> bool:

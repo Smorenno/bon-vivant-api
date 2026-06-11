@@ -20,7 +20,7 @@ from app.services.exceptions import (
     SpotRefNotFoundError,
 )
 from app.services.geocoding_service import get_geocoder
-from supabase import AsyncClient
+from supabase._async.client import AsyncClient
 
 router = APIRouter(prefix="/admin", tags=["admin"])
 

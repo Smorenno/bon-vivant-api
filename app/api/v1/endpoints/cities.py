@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends
 from app.api.deps import get_current_user, get_db
 from app.models.city import CityGuide, CityGuidePreview, CityListItem, ErrorResponse
 from app.services import guide_service
-from supabase import AsyncClient
+from supabase._async.client import AsyncClient
 
 router = APIRouter(prefix="/cities", tags=["cities"])
 

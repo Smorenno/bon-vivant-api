@@ -19,6 +19,10 @@ import json
 import sys
 from pathlib import Path
 
+# Ensure the repo root is on the path so `app` is importable when the script
+# is run directly (e.g. `python scripts/import_guide.py ...`).
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
 from pydantic import ValidationError
 
 
