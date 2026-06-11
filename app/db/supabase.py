@@ -1,12 +1,12 @@
 from app.config import settings
-from supabase import AsyncClient, acreate_client
+from supabase._async.client import AsyncClient, create_client
 
 _client: AsyncClient | None = None
 
 
 async def init_supabase() -> None:
     global _client
-    _client = await acreate_client(
+    _client = await create_client(
         settings.supabase_url,
         settings.supabase_service_role_key,
     )
