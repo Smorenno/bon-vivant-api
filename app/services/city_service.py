@@ -3,7 +3,7 @@ from __future__ import annotations
 from app.models.city import CityStatus
 from app.schemas.import_guide import CityUpdate, SpotUpdate
 from app.services.exceptions import CityNotFoundError, SpotNotFoundError
-from supabase import AsyncClient
+from supabase._async.client import AsyncClient
 
 
 def _serialize_patch(raw: dict) -> dict:
@@ -21,6 +21,9 @@ def _serialize_patch(raw: dict) -> dict:
             result[key] = [
                 item.to_jsonb() if hasattr(item, "to_jsonb") else item for item in value
             ]
+        elif key == "last_verified" and isinstance(value, str) and len(value) == 7:
+            # JSON format is YYYY-MM; Postgres date column requires YYYY-MM-DD
+            result[key] = f"{value}-01"
         else:
             result[key] = value
     return result

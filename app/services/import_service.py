@@ -151,7 +151,7 @@ async def _insert_city(db: AsyncClient, guide: CityGuideImport, geo: _GeoResult)
         "port_lat": geo.port_lat,
         "port_lng": geo.port_lng,
         "status": "draft",
-        "last_verified": meta.last_verified,
+        "last_verified": f"{meta.last_verified}-01" if meta.last_verified else None,
     }
 
     response = await db.table("cities").insert(row).execute()
@@ -252,7 +252,7 @@ async def _insert_itineraries_with_steps(
                 "title": step.title.to_jsonb() if step.title else None,
                 "address": step.address,
                 "description": step.description.to_jsonb(),
-                "bon_vivant_notes": step.bon_vivant_notes.to_jsonb(),
+                "bon_vivant_notes": step.bon_vivant_notes.to_jsonb() if step.bon_vivant_notes else None,
                 "must_try": step.must_try.to_jsonb() if step.must_try else None,
                 "reservation": (
                     step.reservation.to_jsonb() if step.reservation else None
