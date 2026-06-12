@@ -108,8 +108,8 @@ class Spot(BaseModel):
     category: SpotCategory | None = None
     name: str
     address: str
-    latitude: float
-    longitude: float
+    latitude: float | None = None
+    longitude: float | None = None
     distance_from_port_km: float | None = None
     rank_order: int
     website: str | None = None
@@ -136,6 +136,7 @@ class ItineraryStep(BaseModel):
     itinerary_id: UUID
     rank_order: int
     spot_id: UUID | None = None
+    name: str | None = None  # Resolved from linked spot when spot_id is set
     title: LocalizedText | None = None  # Only when step has no linked spot
     address: str | None = None
     description: LocalizedText
@@ -209,8 +210,8 @@ class CityGuide(BaseModel):
     distance_to_center: LocalizedText
     port_facilities: LocalizedText
     port_recommendation: LocalizedText
-    port_lat: float
-    port_lng: float
+    port_lat: float | None = None
+    port_lng: float | None = None
     highlights: list[Highlight]
     transport_options: list[TransportOption]
     what_to_know: list[Note]

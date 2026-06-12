@@ -59,17 +59,34 @@ async def _fetch_spots(client: AsyncClient, city_id: str) -> list[dict]:
     return response.data
 
 
-async def _fetch_itineraries_with_steps(
-    client: AsyncClient, city_id: str
-) -> list[dict]:
+async def _fetch_itineraries(client: AsyncClient, city_id: str) -> list[dict]:
     response = (
         await client.table("itineraries")
-        .select("*, itinerary_steps(*)")
+        .select("*")
         .eq("city_id", city_id)
         .order("rank_order")
         .execute()
     )
     return response.data
+
+
+async def _fetch_steps_for_itineraries(
+    client: AsyncClient, itinerary_ids: list[str]
+) -> dict[str, list[dict]]:
+    """Return steps keyed by itinerary_id, each list ordered by rank_order."""
+    if not itinerary_ids:
+        return {}
+    response = (
+        await client.table("itinerary_steps")
+        .select("*")
+        .in_("itinerary_id", itinerary_ids)
+        .order("rank_order")
+        .execute()
+    )
+    grouped: dict[str, list[dict]] = {}
+    for step in response.data:
+        grouped.setdefault(str(step["itinerary_id"]), []).append(step)
+    return grouped
 
 
 async def _fetch_city_tips(client: AsyncClient, city_id: str) -> list[dict]:
@@ -106,8 +123,8 @@ def _parse_spot(row: dict) -> Spot:
         category=row.get("category"),
         name=row["name"],
         address=row["address"],
-        latitude=row["latitude"],
-        longitude=row["longitude"],
+        latitude=row.get("latitude"),
+        longitude=row.get("longitude"),
         distance_from_port_km=row.get("distance_from_port_km"),
         rank_order=row["rank_order"],
         website=row.get("website"),
@@ -123,28 +140,36 @@ def _parse_spot(row: dict) -> Spot:
     )
 
 
-def _parse_step(row: dict) -> ItineraryStep:
+def _parse_step(row: dict, spot_map: dict[str, dict]) -> ItineraryStep:
+    # If the step links to a spot, name/address/website are resolved from the spot row.
+    spot = spot_map.get(str(row["spot_id"])) if row.get("spot_id") else None
     return ItineraryStep(
         id=row["id"],
         itinerary_id=row["itinerary_id"],
         rank_order=row["rank_order"],
         spot_id=row.get("spot_id"),
+        name=spot["name"] if spot else None,
         title=_parse_localized(row["title"]) if row.get("title") else None,
-        address=row.get("address"),
+        address=spot["address"] if spot else row.get("address"),
         description=_parse_localized(row["description"]),
-        bon_vivant_notes=_parse_localized(row["bon_vivant_notes"]),
+        bon_vivant_notes=_opt(row, "bon_vivant_notes"),
         must_try=_opt(row, "must_try"),
         reservation=_opt(row, "reservation"),
-        website=row.get("website"),
+        website=spot.get("website") if spot else row.get("website"),
         distance_from_prev_km=row.get("distance_from_prev_km"),
         travel_mode=row.get("travel_mode"),
-        time_on_site_min=row["time_on_site_min"],
-        time_on_site_max=row["time_on_site_max"],
+        time_on_site_min=row.get("time_on_site_min"),
+        time_on_site_max=row.get("time_on_site_max"),
     )
 
 
-def _parse_itinerary(row: dict, is_locked: bool) -> Itinerary:
-    steps = sorted(row.get("itinerary_steps", []), key=lambda s: s["rank_order"])
+def _parse_itinerary(
+    row: dict,
+    steps: list[dict],
+    is_locked: bool,
+    spot_map: dict[str, dict],
+) -> Itinerary:
+    sorted_steps = sorted(steps, key=lambda s: s["rank_order"])
     return Itinerary(
         id=row["id"],
         city_id=row["city_id"],
@@ -161,7 +186,7 @@ def _parse_itinerary(row: dict, is_locked: bool) -> Itinerary:
         is_recommended=row["is_recommended"],
         is_premium=row["is_premium"],
         rank_order=row["rank_order"],
-        steps=[_parse_step(s) for s in steps],
+        steps=[_parse_step(s, spot_map) for s in sorted_steps],
         is_locked=is_locked,
     )
 
@@ -237,9 +262,10 @@ async def get_city_guide(
     user_id: str,
     require_access: bool = True,
 ) -> CityGuide:
-    """Assemble a full CityGuide.
+    """Assemble a full CityGuide from DB rows.
 
-    Raises CityLockedError when require_access=True and the user lacks a purchase.
+    Raises CityLockedError (403) when require_access=True and the user lacks a purchase.
+    Raises CityNotFoundError (404) when the city does not exist or is not published.
     """
     city_row = await _fetch_city_row(client, slug)
     city_id = str(city_row["id"])
@@ -248,16 +274,21 @@ async def get_city_guide(
     if require_access and not unlocked:
         raise CityLockedError(slug)
 
-    spots_rows, itinerary_rows, tip_rows = (
-        await _fetch_spots(client, city_id),
-        await _fetch_itineraries_with_steps(client, city_id),
-        await _fetch_city_tips(client, city_id),
-    )
+    spots_rows = await _fetch_spots(client, city_id)
+    itin_rows = await _fetch_itineraries(client, city_id)
+    itin_ids = [str(row["id"]) for row in itin_rows]
+    steps_by_itin = await _fetch_steps_for_itineraries(client, itin_ids)
+    tip_rows = await _fetch_city_tips(client, city_id)
+
+    spot_map = {str(row["id"]): row for row in spots_rows}
 
     itineraries: list[Itinerary] = []
-    for row in itinerary_rows:
+    for row in itin_rows:
+        steps = steps_by_itin.get(str(row["id"]), [])
         locked = await is_itinerary_locked(client, user_id, row["is_premium"])
-        itineraries.append(_parse_itinerary(row, is_locked=locked))
+        itineraries.append(
+            _parse_itinerary(row, steps, is_locked=locked, spot_map=spot_map)
+        )
 
     return CityGuide(
         id=city_row["id"],
@@ -271,11 +302,13 @@ async def get_city_guide(
         distance_to_center=_parse_localized(city_row["distance_to_center"]),
         port_facilities=_parse_localized(city_row["port_facilities"]),
         port_recommendation=_parse_localized(city_row["port_recommendation"]),
-        port_lat=city_row["port_lat"],
-        port_lng=city_row["port_lng"],
-        highlights=_parse_highlights(city_row["highlights"]),
-        transport_options=_parse_transport_options(city_row["transport_options"]),
-        what_to_know=_parse_what_to_know(city_row["what_to_know"]),
+        port_lat=city_row.get("port_lat"),
+        port_lng=city_row.get("port_lng"),
+        highlights=_parse_highlights(city_row.get("highlights") or []),
+        transport_options=_parse_transport_options(
+            city_row.get("transport_options") or []
+        ),
+        what_to_know=_parse_what_to_know(city_row.get("what_to_know") or []),
         status=CityStatus(city_row["status"]),
         last_verified=city_row.get("last_verified"),
         spots=[_parse_spot(r) for r in spots_rows],
@@ -303,7 +336,7 @@ async def get_city_preview(
         country_code=city_row["country_code"],
         tagline=_parse_localized(city_row["tagline"]),
         intro=_parse_localized(city_row["intro"]),
-        highlights=_parse_highlights(city_row["highlights"]),
+        highlights=_parse_highlights(city_row.get("highlights") or []),
         tips=first_tip,
         is_unlocked=unlocked,
     )
