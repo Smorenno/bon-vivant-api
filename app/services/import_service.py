@@ -252,7 +252,9 @@ async def _insert_itineraries_with_steps(
                 "title": step.title.to_jsonb() if step.title else None,
                 "address": step.address,
                 "description": step.description.to_jsonb(),
-                "bon_vivant_notes": step.bon_vivant_notes.to_jsonb() if step.bon_vivant_notes else None,
+                "bon_vivant_notes": (
+                    step.bon_vivant_notes.to_jsonb() if step.bon_vivant_notes else None
+                ),
                 "must_try": step.must_try.to_jsonb() if step.must_try else None,
                 "reservation": (
                     step.reservation.to_jsonb() if step.reservation else None

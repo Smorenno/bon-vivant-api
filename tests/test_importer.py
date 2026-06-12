@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import copy
 import uuid
 
 import pytest
@@ -23,7 +22,6 @@ from app.services.exceptions import (
 )
 from app.services.import_service import import_city_guide
 from tests.fake_supabase import FakeSupabaseClient
-
 
 # ============================================================
 # Helpers
@@ -154,9 +152,7 @@ async def test_replace_published_city_fails(
     fake_db.seed("cities", [{**cities[0], "status": "published"}])
 
     with pytest.raises(PublishedCityReplaceError) as exc_info:
-        await import_city_guide(
-            minimal_guide, null_geocoder, fake_db, replace=True
-        )
+        await import_city_guide(minimal_guide, null_geocoder, fake_db, replace=True)
 
     assert exc_info.value.slug == "test-city"
     # Published city is untouched
