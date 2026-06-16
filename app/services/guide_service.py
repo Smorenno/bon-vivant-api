@@ -4,6 +4,7 @@ from app.exceptions import CityLockedError, CityNotFoundError
 from app.models.city import (
     CityGuide,
     CityGuidePreview,
+    CityImages,
     CityListItem,
     CityStatus,
     Highlight,
@@ -16,6 +17,7 @@ from app.models.city import (
     TransportOption,
 )
 from app.services.access_service import is_city_unlocked, is_itinerary_locked
+from app.services.image_service import resolve_gallery, resolve_single
 from supabase._async.client import AsyncClient
 
 # ============================================================
@@ -232,6 +234,43 @@ def _parse_what_to_know(raw: list[dict]) -> list[Note]:
     ]
 
 
+async def _resolve_city_images(
+    client: AsyncClient,
+    slug: str,
+    spots_rows: list[dict],
+    highlights: list[Highlight],
+    transport_options: list[TransportOption],
+) -> CityImages:
+    attraction_count = sum(1 for r in spots_rows if r["kind"] == "attraction")
+    gourmet_count = sum(1 for r in spots_rows if r["kind"] == "food")
+
+    return CityImages(
+        cover=await resolve_single(client, slug, "cover"),
+        preview=await resolve_single(client, slug, "preview"),
+        overview=await resolve_single(client, slug, "overview"),
+        key_historical_context=await resolve_single(
+            client, slug, "key_historical_context"
+        ),
+        overview_highlights=await resolve_gallery(
+            client, slug, "overview_highlight", count=len(highlights)
+        ),
+        attraction_cover=await resolve_single(client, slug, "attraction_cover"),
+        attraction_gallery=await resolve_gallery(
+            client, slug, "attraction", count=attraction_count
+        ),
+        gourmet_cover=await resolve_single(client, slug, "gourmet_cover"),
+        gourmet_gallery=await resolve_gallery(
+            client, slug, "gourmet", count=gourmet_count
+        ),
+        port_cover=await resolve_single(client, slug, "port_cover"),
+        port_gallery=await resolve_gallery(
+            client, slug, "port", count=len(transport_options) or 1
+        ),
+        itineraries_cover=await resolve_single(client, slug, "itineraries_cover"),
+        tips_cover=await resolve_single(client, slug, "tips_cover"),
+    )
+
+
 # ============================================================
 # Public service functions
 # ============================================================
@@ -242,6 +281,7 @@ async def list_cities(client: AsyncClient, user_id: str) -> list[CityListItem]:
     items: list[CityListItem] = []
     for row in rows:
         unlocked = await is_city_unlocked(client, user_id, str(row["id"]))
+        cover = await resolve_single(client, row["slug"], "cover")
         items.append(
             CityListItem(
                 id=row["id"],
@@ -251,6 +291,7 @@ async def list_cities(client: AsyncClient, user_id: str) -> list[CityListItem]:
                 tagline=_parse_localized(row["tagline"]),
                 status=CityStatus(row["status"]),
                 is_unlocked=unlocked,
+                cover=cover,
             )
         )
     return items
@@ -290,6 +331,14 @@ async def get_city_guide(
             _parse_itinerary(row, steps, is_locked=locked, spot_map=spot_map)
         )
 
+    highlights = _parse_highlights(city_row.get("highlights") or [])
+    transport_options = _parse_transport_options(
+        city_row.get("transport_options") or []
+    )
+    images = await _resolve_city_images(
+        client, slug, spots_rows, highlights, transport_options
+    )
+
     return CityGuide(
         id=city_row["id"],
         slug=city_row["slug"],
@@ -304,16 +353,15 @@ async def get_city_guide(
         port_recommendation=_parse_localized(city_row["port_recommendation"]),
         port_lat=city_row.get("port_lat"),
         port_lng=city_row.get("port_lng"),
-        highlights=_parse_highlights(city_row.get("highlights") or []),
-        transport_options=_parse_transport_options(
-            city_row.get("transport_options") or []
-        ),
+        highlights=highlights,
+        transport_options=transport_options,
         what_to_know=_parse_what_to_know(city_row.get("what_to_know") or []),
         status=CityStatus(city_row["status"]),
         last_verified=city_row.get("last_verified"),
         spots=[_parse_spot(r) for r in spots_rows],
         itineraries=itineraries,
         tips=[_parse_tip(r) for r in tip_rows],
+        images=images,
         is_unlocked=unlocked,
     )
 

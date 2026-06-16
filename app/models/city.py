@@ -188,6 +188,22 @@ class Tip(BaseModel):
 # ============================================================
 
 
+class CityImages(BaseModel):
+    cover: str | None = None
+    preview: str | None = None
+    overview: str | None = None
+    key_historical_context: str | None = None
+    overview_highlights: list[str]
+    attraction_cover: str | None = None
+    attraction_gallery: list[str]
+    gourmet_cover: str | None = None
+    gourmet_gallery: list[str]
+    port_cover: str | None = None
+    port_gallery: list[str]
+    itineraries_cover: str | None = None
+    tips_cover: str | None = None
+
+
 class CityListItem(BaseModel):
     id: UUID
     slug: str
@@ -196,6 +212,7 @@ class CityListItem(BaseModel):
     tagline: LocalizedText
     status: CityStatus
     is_unlocked: bool
+    cover: str | None = None
 
 
 class CityGuide(BaseModel):
@@ -220,6 +237,7 @@ class CityGuide(BaseModel):
     spots: list[Spot]
     itineraries: list[Itinerary]
     tips: list[Tip]
+    images: CityImages
     is_unlocked: bool
 
 
