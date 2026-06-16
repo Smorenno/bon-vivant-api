@@ -17,6 +17,34 @@ import uuid
 from types import SimpleNamespace
 from typing import Any
 
+from storage3.exceptions import StorageApiError
+
+
+class FakeStorageBucket:
+    """In-memory stand-in for a Supabase Storage bucket handle."""
+
+    def __init__(self, existing_paths: set[str]) -> None:
+        self._existing_paths = existing_paths
+
+    async def create_signed_url(self, path: str, _expires_in: int) -> dict[str, str]:
+        if path not in self._existing_paths:
+            raise StorageApiError(message="Object not found", code="404", status=404)
+        return {"signedURL": f"https://signed.example.com/{path}"}
+
+
+class FakeStorageClient:
+    """In-memory stand-in for `AsyncClient.storage`.
+
+    Tests register which storage paths "exist" via `existing_paths`; any
+    other path raises StorageApiError, matching real Storage 404 behaviour.
+    """
+
+    def __init__(self) -> None:
+        self.existing_paths: set[str] = set()
+
+    def from_(self, _bucket: str) -> FakeStorageBucket:
+        return FakeStorageBucket(self.existing_paths)
+
 
 class FakeQueryBuilder:
     def __init__(self, store: dict[str, list[dict]], table: str) -> None:
@@ -157,6 +185,7 @@ class FakeSupabaseClient:
 
     def __init__(self) -> None:
         self._store: dict[str, list[dict]] = {}
+        self.storage = FakeStorageClient()
 
     def table(self, name: str) -> FakeQueryBuilder:
         return FakeQueryBuilder(self._store, name)
