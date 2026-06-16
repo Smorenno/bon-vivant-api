@@ -1,9 +1,10 @@
 from __future__ import annotations
 
-from fastapi import APIRouter, Depends, Query
+from fastapi import APIRouter, Depends, File, Query, UploadFile
 
 from app.api.deps import get_db, require_admin
 from app.models.city import CityStatus, ErrorResponse
+from app.schemas.image_upload import PhotoUploadResult
 from app.schemas.import_guide import (
     CityAdminDetail,
     CityGuideImport,
@@ -20,6 +21,7 @@ from app.services.exceptions import (
     SpotRefNotFoundError,
 )
 from app.services.geocoding_service import get_geocoder
+from app.services.image_upload_service import UploadedPhoto, upload_guide_photos
 from supabase._async.client import AsyncClient
 
 router = APIRouter(prefix="/admin", tags=["admin"])
@@ -129,3 +131,28 @@ async def unpublish_city(
     db: AsyncClient = Depends(get_db),
 ) -> dict:
     return await city_service.set_city_status(city_id, CityStatus.draft, db)
+
+
+# ============================================================
+# Photo upload — compresses originals and uploads to private Storage
+# ============================================================
+
+
+@router.post(
+    "/cities/{slug}/photos/upload",
+    response_model=PhotoUploadResult,
+    responses=_ERR,
+)
+async def upload_city_photos(
+    slug: str,
+    files: list[UploadFile] = File(...),
+    _admin: dict = Depends(require_admin),
+    db: AsyncClient = Depends(get_db),
+) -> PhotoUploadResult:
+    await city_service.get_city_id_by_slug(slug, db)
+
+    photos = [
+        UploadedPhoto(filename=upload.filename or "", content=await upload.read())
+        for upload in files
+    ]
+    return await upload_guide_photos(db, slug, photos)
