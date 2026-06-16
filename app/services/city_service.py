@@ -29,6 +29,17 @@ def _serialize_patch(raw: dict) -> dict:
     return result
 
 
+async def get_city_id_by_slug(slug: str, db: AsyncClient) -> str:
+    """Return the city id for a slug regardless of publication status.
+
+    Raises CityNotFoundError if no city with that slug exists at all.
+    """
+    response = await db.table("cities").select("id").eq("slug", slug).limit(1).execute()
+    if not response.data:
+        raise CityNotFoundError(slug)
+    return str(response.data[0]["id"])
+
+
 async def update_city(city_id: str, patch: CityUpdate, db: AsyncClient) -> dict:
     """Apply a partial update to a city; return the updated row.
 

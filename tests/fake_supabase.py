@@ -23,13 +23,22 @@ from storage3.exceptions import StorageApiError
 class FakeStorageBucket:
     """In-memory stand-in for a Supabase Storage bucket handle."""
 
-    def __init__(self, existing_paths: set[str]) -> None:
-        self._existing_paths = existing_paths
+    def __init__(self, client: FakeStorageClient) -> None:
+        self._client = client
 
     async def create_signed_url(self, path: str, _expires_in: int) -> dict[str, str]:
-        if path not in self._existing_paths:
+        if path not in self._client.existing_paths:
             raise StorageApiError(message="Object not found", code="404", status=404)
         return {"signedURL": f"https://signed.example.com/{path}"}
+
+    async def upload(
+        self, path: str, content: bytes, _file_options: dict[str, str] | None = None
+    ) -> dict[str, str]:
+        if path in self._client.fail_upload_paths:
+            raise StorageApiError(message="Upload failed", code="500", status=500)
+        self._client.uploaded[path] = content
+        self._client.existing_paths.add(path)
+        return {"path": path}
 
 
 class FakeStorageClient:
@@ -37,13 +46,17 @@ class FakeStorageClient:
 
     Tests register which storage paths "exist" via `existing_paths`; any
     other path raises StorageApiError, matching real Storage 404 behaviour.
+    Paths added to `fail_upload_paths` simulate an upload failure (network,
+    permissions) without affecting the rest of the batch.
     """
 
     def __init__(self) -> None:
+        self.fail_upload_paths: set[str] = set()
+        self.uploaded: dict[str, bytes] = {}
         self.existing_paths: set[str] = set()
 
     def from_(self, _bucket: str) -> FakeStorageBucket:
-        return FakeStorageBucket(self.existing_paths)
+        return FakeStorageBucket(self)
 
 
 class FakeQueryBuilder:
