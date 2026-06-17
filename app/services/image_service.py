@@ -4,7 +4,7 @@ from storage3.exceptions import StorageApiError
 
 from supabase._async.client import AsyncClient
 
-BUCKET_NAME = "guias"
+BUCKET_NAME = "guides"
 BASE_PREFIX = "media/media-guias"
 
 # Slots with a single photo per city (no numeric suffix).
