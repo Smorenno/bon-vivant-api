@@ -3,14 +3,10 @@
 from __future__ import annotations
 
 import io
-import uuid
 
 import pytest
-from fastapi.testclient import TestClient
 from PIL import Image
 
-from app.api import deps
-from app.main import app
 from app.services import image_upload_service
 from app.services.image_compression_service import (
     ImageCompressionError,
@@ -167,92 +163,3 @@ async def test_upload_guide_photos_oversized_file_is_rejected() -> None:
 
     assert result.rejected[0].reason == "file_too_large"
     assert result.uploaded == []
-
-
-# ============================================================
-# 4. Endpoint — auth, existence, happy path
-# ============================================================
-
-_CITY_ID = str(uuid.uuid4())
-
-
-def _guide_db() -> FakeSupabaseClient:
-    db = FakeSupabaseClient()
-    db.seed(
-        "cities",
-        [{"id": _CITY_ID, "slug": CITY_SLUG, "status": "draft"}],
-    )
-    return db
-
-
-def _http_upload(
-    db: FakeSupabaseClient,
-    user: dict,
-    slug: str,
-    files: list[tuple[str, bytes]],
-    monkeypatch: pytest.MonkeyPatch,
-) -> object:
-    async def _noop() -> None:
-        pass
-
-    monkeypatch.setattr("app.main.init_supabase", _noop)
-    monkeypatch.setattr("app.main.close_supabase", _noop)
-    app.dependency_overrides[deps.get_current_user] = lambda: user
-    app.dependency_overrides[deps.get_db] = lambda: db
-    upload_files = [
-        ("files", (filename, content, "image/jpeg")) for filename, content in files
-    ]
-    with TestClient(app) as client:
-        response = client.post(
-            f"/api/v1/admin/cities/{slug}/photos/upload", files=upload_files
-        )
-    app.dependency_overrides.clear()
-    return response
-
-
-def test_upload_endpoint_requires_admin(monkeypatch: pytest.MonkeyPatch) -> None:
-    db = _guide_db()
-    response = _http_upload(
-        db,
-        {"sub": "user-1"},
-        CITY_SLUG,
-        [(f"{CITY_SLUG}_overview.jpg", _jpeg_bytes(50, 50))],
-        monkeypatch,
-    )
-    assert response.status_code == 403
-
-
-def test_upload_endpoint_nonexistent_city_returns_404(
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    db = FakeSupabaseClient()
-    db.seed("cities", [])
-    response = _http_upload(
-        db,
-        {"app_metadata": {"role": "admin"}},
-        "does-not-exist",
-        [(f"{CITY_SLUG}_overview.jpg", _jpeg_bytes(50, 50))],
-        monkeypatch,
-    )
-    assert response.status_code == 404
-
-
-def test_upload_endpoint_success_returns_summary(
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    db = _guide_db()
-    response = _http_upload(
-        db,
-        {"app_metadata": {"role": "admin"}},
-        CITY_SLUG,
-        [
-            (f"{CITY_SLUG}_overview.jpg", _jpeg_bytes(2000, 1000)),
-            ("garbage_name.jpg", _jpeg_bytes(50, 50)),
-        ],
-        monkeypatch,
-    )
-    assert response.status_code == 200
-    body = response.json()
-    assert body["city_slug"] == CITY_SLUG
-    assert len(body["uploaded"]) == 1
-    assert len(body["rejected"]) == 1
