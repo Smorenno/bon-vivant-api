@@ -6,12 +6,16 @@ from app.db.supabase import get_supabase_client
 from app.exceptions import AppError
 from supabase._async.client import AsyncClient
 
-_bearer = HTTPBearer(auto_error=True)
+# auto_error=False so we can raise 401 (not the default 403) when the header
+# is absent — HTTP spec: 401 = unauthenticated, 403 = authenticated but forbidden.
+_bearer = HTTPBearer(auto_error=False)
 
 
 async def get_current_user(
-    credentials: HTTPAuthorizationCredentials = Depends(_bearer),
+    credentials: HTTPAuthorizationCredentials | None = Depends(_bearer),
 ) -> dict:
+    if credentials is None:
+        raise AppError(401, "Authentication required", "unauthenticated")
     try:
         return decode_jwt(credentials.credentials)
     except ValueError as exc:

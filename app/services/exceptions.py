@@ -66,3 +66,11 @@ class SpotNotFoundError(AppError):
     def __init__(self, spot_id: str) -> None:
         super().__init__(404, f"Spot '{spot_id}' not found.", "spot_not_found")
         self.spot_id = spot_id
+
+
+class UserNotFoundError(AppError):
+    def __init__(self, user_id: str) -> None:
+        super().__init__(
+            404, f"Profile for user '{user_id}' not found.", "user_not_found"
+        )
+        self.user_id = user_id
