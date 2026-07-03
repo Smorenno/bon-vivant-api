@@ -17,7 +17,14 @@ import uuid
 from types import SimpleNamespace
 from typing import Any
 
+from postgrest.exceptions import APIError
 from storage3.exceptions import StorageApiError
+
+# UNIQUE indexes mirrored from the migrations so inserts fail like the
+# real database. 006: uq_user_purchases_store_txn (partial — NULL exempt).
+_UNIQUE_COLUMNS: dict[str, list[str]] = {
+    "user_purchases": ["store_transaction_id"],
+}
 
 
 class FakeStorageBucket:
@@ -113,6 +120,25 @@ class FakeQueryBuilder:
 
     # ---- execution ---------------------------------------------------------
 
+    def _check_unique(self, rows: list[dict], item: dict) -> None:
+        """Raise the same APIError PostgREST produces on unique_violation."""
+        for column in _UNIQUE_COLUMNS.get(self._table, []):
+            value = item.get(column)
+            if value is None:  # partial index: NULLs are not deduplicated
+                continue
+            if any(r.get(column) == value for r in rows):
+                raise APIError(
+                    {
+                        "message": (
+                            f"duplicate key value violates unique constraint on "
+                            f'"{self._table}.{column}"'
+                        ),
+                        "code": "23505",
+                        "hint": None,
+                        "details": None,
+                    }
+                )
+
     def _matches(self, row: dict) -> bool:
         for field, value in self._filters.items():
             if row.get(field) != value:
@@ -139,6 +165,7 @@ class FakeQueryBuilder:
             )
             inserted: list[dict] = []
             for item in items:
+                self._check_unique(rows, item)
                 row = {"id": str(uuid.uuid4()), **item}
                 rows.append(row)
                 inserted.append(row)
