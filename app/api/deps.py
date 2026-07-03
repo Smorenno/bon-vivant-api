@@ -25,8 +25,8 @@ async def get_current_user(
 async def require_admin(user: dict = Depends(get_current_user)) -> dict:
     """Dependency that enforces the admin role.
 
-    The authoritative source is app_metadata.role, which is set server-side
-    via the Supabase Admin API and cannot be forged by the client:
+    The ONLY authoritative source is app_metadata.role, which is set
+    server-side via the Supabase Admin API and cannot be forged by the client:
 
         PATCH https://<project>.supabase.co/auth/v1/admin/users/<user_id>
         Authorization: Bearer <service_role_key>
@@ -35,12 +35,12 @@ async def require_admin(user: dict = Depends(get_current_user)) -> dict:
     Until at least one user has that claim, /admin/* endpoints are inaccessible
     to everyone — which is the correct secure default.
 
-    The top-level `role` claim is also checked as a fallback, but in Supabase
-    JWTs it normally carries the Postgres role ("authenticated"), not an app role.
+    The top-level `role` claim is deliberately NOT trusted: in Supabase JWTs it
+    carries the Postgres role ("authenticated"), which is not an application role
+    and must never grant admin access.
     """
     app_role = (user.get("app_metadata") or {}).get("role")
-    direct_role = user.get("role")
-    if app_role != "admin" and direct_role != "admin":
+    if app_role != "admin":
         raise AppError(403, "Admin access required", "admin_required")
     return user
 

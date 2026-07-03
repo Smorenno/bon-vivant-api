@@ -18,7 +18,6 @@ from app.api.deps import require_admin
 from app.core.security import decode_jwt
 from app.exceptions import AppError
 
-
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
@@ -152,7 +151,6 @@ def test_unsupported_algorithm_raises():
     # Build a token with `alg: none` by hand (pyjwt refuses to sign with none,
     # so we craft the header manually)
     import base64
-    import json
 
     def b64(data: str) -> str:
         return base64.urlsafe_b64encode(data.encode()).rstrip(b"=").decode()
