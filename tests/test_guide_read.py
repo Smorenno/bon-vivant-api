@@ -255,6 +255,27 @@ async def test_list_cities_is_unlocked_reflects_purchases(
     assert unlocked[0].is_unlocked is True
 
 
+async def test_list_cities_port_cover_url_resolves(
+    guide_db: FakeSupabaseClient,
+) -> None:
+    port_cover_path = f"media/media-guias/{CITY_SLUG}/{CITY_SLUG}_port_cover.jpg"
+    guide_db.storage.existing_paths.add(port_cover_path)
+
+    result = await guide_service.list_cities(guide_db, LOCKED_USER)
+    item = next(c for c in result if c.slug == CITY_SLUG)
+
+    assert item.port_cover_url == f"https://signed.example.com/{port_cover_path}"
+
+
+async def test_list_cities_port_cover_url_null_when_missing(
+    guide_db: FakeSupabaseClient,
+) -> None:
+    result = await guide_service.list_cities(guide_db, LOCKED_USER)
+    item = next(c for c in result if c.slug == CITY_SLUG)
+
+    assert item.port_cover_url is None
+
+
 # ============================================================
 # 2. get_city_guide — full guide for unlocked user
 # ============================================================

@@ -281,17 +281,20 @@ async def list_cities(client: AsyncClient, user_id: str) -> list[CityListItem]:
     items: list[CityListItem] = []
     for row in rows:
         unlocked = await is_city_unlocked(client, user_id, str(row["id"]))
-        cover = await resolve_single(client, row["slug"], "cover")
+        slug = row["slug"]
+        cover = await resolve_single(client, slug, "cover")
+        port_cover_url = await resolve_single(client, slug, "port_cover")
         items.append(
             CityListItem(
                 id=row["id"],
-                slug=row["slug"],
+                slug=slug,
                 name=row["name"],
                 country_code=row["country_code"],
                 tagline=_parse_localized(row["tagline"]),
                 status=CityStatus(row["status"]),
                 is_unlocked=unlocked,
                 cover=cover,
+                port_cover_url=port_cover_url,
             )
         )
     return items

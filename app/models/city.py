@@ -213,6 +213,7 @@ class CityListItem(BaseModel):
     status: CityStatus
     is_unlocked: bool
     cover: str | None = None
+    port_cover_url: str | None = None
 
 
 class CityGuide(BaseModel):
