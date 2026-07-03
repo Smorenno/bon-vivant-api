@@ -24,7 +24,7 @@ async def is_city_unlocked(client: AsyncClient, user_id: str, city_id: str) -> b
     return len(mapping.data) > 0
 
 
-async def _user_has_pass(client: AsyncClient, user_id: str) -> bool:
+async def has_active_pass(client: AsyncClient, user_id: str) -> bool:
     """Return True if the user holds a valid unlimited (Pass) pack."""
     unlimited = (
         await client.table("packs").select("id").eq("is_unlimited", True).execute()
@@ -52,4 +52,4 @@ async def is_itinerary_locked(
     """Return True when a premium (night) itinerary requires the Pass the user lacks."""
     if not itinerary_is_premium:
         return False
-    return not await _user_has_pass(client, user_id)
+    return not await has_active_pass(client, user_id)
