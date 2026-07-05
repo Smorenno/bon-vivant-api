@@ -31,6 +31,12 @@ class Settings(BaseSettings):
     apple_issuer_id: str | None = None
     apple_key_id: str | None = None
     apple_private_key: str | None = None
+    # Defence-in-depth: verify the x5c certificate chain of Apple's signed
+    # transactions against the pinned Apple Root CA - G3. Off by default so
+    # the current trust-TLS behaviour is unchanged; flip to true after
+    # exercising it against sandbox transactions.
+    # TODO(iap): enable in sandbox first, then in production.
+    verify_apple_cert_chain: bool = False
     # TODO(iap): fill once the Google Play Console account exists —
     # create a service account with the "View financial data" permission,
     # link it in Play Console → API access. Accepts either the raw JSON

@@ -12,17 +12,25 @@ Android → Google Play Developer API purchases.products.get, authenticated
 
 from __future__ import annotations
 
+import base64
+import binascii
 import json
 import logging
 import re
 import time
 from dataclasses import dataclass
+from datetime import datetime, timezone
 from typing import Any
 
 import httpx
 import jwt
+from cryptography import x509
+from cryptography.exceptions import InvalidSignature
+from cryptography.hazmat.primitives.asymmetric.types import PublicKeyTypes
+from cryptography.hazmat.primitives.serialization import Encoding
 
 from app.config import settings
+from app.core.apple_certs import load_apple_root_ca
 
 logger = logging.getLogger(__name__)
 
@@ -113,6 +121,105 @@ def _build_apple_api_token() -> str:
         raise StoreNotConfiguredError("Apple private key is not usable") from exc
 
 
+def _extract_x5c_chain(signed_info: str) -> list[x509.Certificate]:
+    """Parse the x5c certificate chain from the JWS header.
+
+    Only the (unverified) header is touched here — the payload is not
+    trusted until the chain and signature checks pass.
+    """
+    try:
+        header = jwt.get_unverified_header(signed_info)
+        x5c: list[str] = header["x5c"]
+        certs = [
+            x509.load_der_x509_certificate(base64.b64decode(entry)) for entry in x5c
+        ]
+    except (KeyError, TypeError, ValueError, binascii.Error, jwt.PyJWTError) as exc:
+        raise ReceiptInvalidError("malformed x5c header") from exc
+    if len(certs) < 2:
+        # Apple always ships leaf → WWDR intermediate (→ root). A bare
+        # leaf cannot chain to anything and is rejected outright.
+        raise ReceiptInvalidError("x5c chain too short")
+    return certs
+
+
+def _verify_x5c_chain(signed_info: str) -> PublicKeyTypes:
+    """Verify the x5c chain against the pinned Apple Root CA - G3 and
+    return the leaf's public key for JWS signature verification.
+
+    Chain layout (x5c order per RFC 7515): [leaf, intermediate, ..., root?].
+    Each link is checked with verify_directly_issued_by (signature +
+    issuer/subject match); the anchor must BE the pinned root byte-for-byte,
+    or be directly issued by it when Apple omits the root from the chain.
+    """
+    certs = _extract_x5c_chain(signed_info)
+    pinned_root = load_apple_root_ca()
+
+    now = datetime.now(timezone.utc)
+    for cert in certs:
+        if not (cert.not_valid_before_utc <= now <= cert.not_valid_after_utc):
+            raise ReceiptInvalidError("certificate outside validity window")
+
+    try:
+        for child, issuer in zip(certs, certs[1:]):
+            child.verify_directly_issued_by(issuer)
+        anchor = certs[-1]
+        if anchor.public_bytes(Encoding.DER) != pinned_root.public_bytes(Encoding.DER):
+            anchor.verify_directly_issued_by(pinned_root)
+    except (ValueError, TypeError, InvalidSignature) as exc:
+        raise ReceiptInvalidError("x5c chain does not anchor to Apple root") from exc
+
+    return certs[0].public_key()
+
+
+def _decode_transaction_payload(signed_info: str) -> dict[str, Any]:
+    """Decode Apple's signed transaction JWS.
+
+    Two modes, switched by VERIFY_APPLE_CERT_CHAIN:
+    - off (default): trust-TLS mode. The JWS was just fetched from Apple's
+      host over TLS, so authenticity is anchored in that connection and the
+      payload is decoded without local signature verification.
+    - on: defence-in-depth. The x5c chain must anchor to the pinned
+      Apple Root CA - G3 and the JWS signature must verify against the
+      leaf's public key. Any failure rejects the receipt with the same
+      generic error as an invalid receipt — an attacker probing this
+      endpoint cannot tell the extra layer exists.
+    """
+    if not settings.verify_apple_cert_chain:
+        # TODO(iap): flip VERIFY_APPLE_CERT_CHAIN=true after exercising the
+        # chain verification against real sandbox transactions.
+        try:
+            return jwt.decode(signed_info, options={"verify_signature": False})
+        except jwt.PyJWTError as exc:
+            raise ReceiptInvalidError("unparseable transaction payload") from exc
+
+    try:
+        leaf_public_key = _verify_x5c_chain(signed_info)
+        return jwt.decode(signed_info, key=leaf_public_key, algorithms=["ES256"])
+    except (ReceiptInvalidError, jwt.PyJWTError) as exc:
+        # The response came from Apple over TLS, so a chain/signature
+        # failure here is an anomaly worth alerting on — likely tampering
+        # (MITM, corporate TLS interception, or a forged response), not a
+        # user error. If the payload itself still parses, that suspicion
+        # hardens: someone built a well-formed transaction we cannot trust.
+        payload_parses = _payload_parses_unverified(signed_info)
+        logger.error(
+            "apple JWS x5c verification failed (%s, payload_parses=%s) — "
+            "possible tampering; transaction rejected",
+            type(exc).__name__,
+            payload_parses,
+        )
+        raise ReceiptInvalidError("x5c verification failed") from exc
+
+
+def _payload_parses_unverified(signed_info: str) -> bool:
+    """Best-effort classification for the tampering log — never trusted."""
+    try:
+        jwt.decode(signed_info, options={"verify_signature": False})
+        return True
+    except jwt.PyJWTError:
+        return False
+
+
 async def verify_ios(transaction_id: str, expected_product_id: str) -> VerifiedReceipt:
     """Verify a StoreKit 2 transaction id against the App Store Server API.
 
@@ -150,17 +257,13 @@ async def verify_ios(transaction_id: str, expected_product_id: str) -> VerifiedR
 
     try:
         signed_info: str = response.json()["signedTransactionInfo"]
-        # The JWS payload is decoded without local signature verification:
-        # we just received it from Apple over TLS, so authenticity is
-        # anchored in the pinned connection to Apple's host.
-        # TODO(iap): as defence-in-depth, verify the JWS x5c certificate
-        # chain against the Apple Root CA once real transactions are
-        # available to test with (sandbox first).
-        payload: dict[str, Any] = jwt.decode(
-            signed_info, options={"verify_signature": False}
-        )
-    except (json.JSONDecodeError, KeyError, jwt.PyJWTError) as exc:
-        raise ReceiptInvalidError("unparseable transaction payload") from exc
+    except (json.JSONDecodeError, KeyError) as exc:
+        raise ReceiptInvalidError("unparseable transaction response") from exc
+
+    # Trust-TLS mode by default; with VERIFY_APPLE_CERT_CHAIN=true the x5c
+    # chain is verified against the pinned Apple Root CA - G3 and the JWS
+    # signature against the leaf key (see _decode_transaction_payload).
+    payload = _decode_transaction_payload(signed_info)
 
     if payload.get("bundleId") != settings.app_bundle_id:
         # Receipt from another app. Reject without detailing why.
