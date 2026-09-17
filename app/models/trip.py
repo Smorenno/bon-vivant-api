@@ -3,10 +3,18 @@ from __future__ import annotations
 from datetime import date, time
 from uuid import UUID
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
+from pydantic.alias_generators import to_camel
 
 
-class TripDayResponse(BaseModel):
+class CamelModel(BaseModel):
+    """Base model matching the mobile contract: camelCase on the wire,
+    snake_case in Python. FastAPI serializes responses by_alias by default."""
+
+    model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
+
+
+class TripDayResponse(CamelModel):
     id: UUID
     day_number: int
     date: date
@@ -17,7 +25,7 @@ class TripDayResponse(BaseModel):
     has_guide: bool  # derived: city_slug is not None
 
 
-class TripResponse(BaseModel):
+class TripResponse(CamelModel):
     id: UUID
     title: str
     cruise_line: str
@@ -29,11 +37,11 @@ class TripResponse(BaseModel):
     days: list[TripDayResponse]
 
 
-class TripsListResponse(BaseModel):
+class TripsListResponse(CamelModel):
     trips: list[TripResponse]
 
 
-class TripDayInput(BaseModel):
+class TripDayInput(CamelModel):
     day_number: int
     date: date
     city_slug: str | None = None
@@ -42,7 +50,7 @@ class TripDayInput(BaseModel):
     departure_next_day: bool = False
 
 
-class CreateTripInput(BaseModel):
+class CreateTripInput(CamelModel):
     title: str
     cruise_line: str
     ship_name: str

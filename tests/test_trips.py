@@ -221,11 +221,58 @@ async def test_create_trip_nonexistent_city_slug_returns_400() -> None:
 
 
 # ============================================================
-# 7. create_trip — non-consecutive day_numbers returns 400
+# 7. create_trip — partial days: missing dates auto-filled as at-sea days
 # ============================================================
 
 
-async def test_create_trip_non_consecutive_days_returns_400() -> None:
+async def test_create_trip_partial_days_autofills_sea_days() -> None:
+    db = _make_db()
+    # 3-day trip but the client only sends the single port call (day 2).
+    result = await trips_service.create_trip(
+        db,
+        CreateTripInput(
+            title="Mediterranean Cruise",
+            cruise_line="MSC",
+            ship_name="Bellissima",
+            start_date=_START,
+            end_date=_END,
+            days=[
+                TripDayInput(day_number=1, date=date(2026, 7, 2), city_slug=_CITY_SLUG)
+            ],
+        ),
+        _USER_A,
+    )
+
+    assert result.total_days == 3
+    assert result.total_ports == 1
+    assert len(result.days) == 3
+
+    # day_number is derived from the date, not from the client
+    assert [d.day_number for d in result.days] == [1, 2, 3]
+    assert [d.date for d in result.days] == [
+        date(2026, 7, 1),
+        date(2026, 7, 2),
+        date(2026, 7, 3),
+    ]
+
+    port_day = result.days[1]
+    assert port_day.city_slug == _CITY_SLUG
+    assert port_day.has_guide is True
+
+    for sea_day in (result.days[0], result.days[2]):
+        assert sea_day.city_slug is None
+        assert sea_day.has_guide is False
+        assert sea_day.time_arrival is None
+        assert sea_day.time_departure is None
+        assert sea_day.departure_next_day is False
+
+
+# ============================================================
+# 7b. create_trip — day date outside trip range returns 400
+# ============================================================
+
+
+async def test_create_trip_day_outside_range_returns_400() -> None:
     db = _make_db()
 
     with pytest.raises(AppError) as exc_info:
@@ -238,16 +285,45 @@ async def test_create_trip_non_consecutive_days_returns_400() -> None:
                 start_date=_START,
                 end_date=_END,
                 days=[
-                    TripDayInput(day_number=1, date=date(2026, 7, 1)),
-                    TripDayInput(day_number=3, date=date(2026, 7, 2)),
-                    TripDayInput(day_number=4, date=date(2026, 7, 3)),
+                    TripDayInput(
+                        day_number=1, date=date(2026, 7, 9), city_slug=_CITY_SLUG
+                    )
                 ],
             ),
             _USER_A,
         )
 
     assert exc_info.value.status_code == 400
-    assert exc_info.value.code == "invalid_day_numbers"
+    assert exc_info.value.code == "invalid_day_date"
+
+
+# ============================================================
+# 7c. create_trip — duplicate dates in sent days returns 400
+# ============================================================
+
+
+async def test_create_trip_duplicate_day_date_returns_400() -> None:
+    db = _make_db()
+
+    with pytest.raises(AppError) as exc_info:
+        await trips_service.create_trip(
+            db,
+            CreateTripInput(
+                title="Bad Trip",
+                cruise_line="MSC",
+                ship_name="Bellissima",
+                start_date=_START,
+                end_date=_END,
+                days=[
+                    TripDayInput(day_number=1, date=date(2026, 7, 2)),
+                    TripDayInput(day_number=2, date=date(2026, 7, 2)),
+                ],
+            ),
+            _USER_A,
+        )
+
+    assert exc_info.value.status_code == 400
+    assert exc_info.value.code == "duplicate_day_date"
 
 
 # ============================================================

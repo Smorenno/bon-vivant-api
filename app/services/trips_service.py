@@ -1,10 +1,11 @@
 from __future__ import annotations
 
-from datetime import date
+from datetime import date, timedelta
 
 from app.exceptions import AppError
 from app.models.trip import (
     CreateTripInput,
+    TripDayInput,
     TripDayResponse,
     TripResponse,
     TripsListResponse,
@@ -120,37 +121,29 @@ async def create_trip(
     if data.end_date <= data.start_date:
         raise AppError(400, "end_date must be after start_date", "invalid_dates")
 
-    # Validate day count matches the date range
-    expected_days = (data.end_date - data.start_date).days + 1
-    if len(data.days) != expected_days:
-        raise AppError(
-            400,
-            f"Expected {expected_days} days for this date range, got {len(data.days)}",
-            "invalid_days_count",
-        )
-
-    # Validate day_numbers are consecutive starting at 1
-    sorted_days = sorted(data.days, key=lambda d: d.day_number)
-    for expected_num, day in enumerate(sorted_days, start=1):
-        if day.day_number != expected_num:
-            raise AppError(
-                400,
-                "day_number values must be consecutive starting at 1",
-                "invalid_day_numbers",
-            )
-
-    # Validate each day's date falls within the trip range
-    for day in sorted_days:
+    # The mobile client only sends the days configured as port calls; sea days
+    # are implicit. Index sent days by date, rejecting duplicates and dates
+    # outside the trip range. day_number from the client is ignored — it is
+    # derived from the date below.
+    days_by_date: dict[date, TripDayInput] = {}
+    for day in data.days:
         if day.date < data.start_date or day.date > data.end_date:
             raise AppError(
                 400,
-                f"Day {day.day_number} date {day.date} is outside the trip range",
+                f"Day date {day.date} is outside the trip range",
                 "invalid_day_date",
             )
+        if day.date in days_by_date:
+            raise AppError(
+                400,
+                f"Duplicate day for date {day.date}",
+                "duplicate_day_date",
+            )
+        days_by_date[day.date] = day
 
     # Validate any non-null city_slugs exist in the cities table
     seen_slugs: set[str] = set()
-    for day in sorted_days:
+    for day in data.days:
         if day.city_slug is not None and day.city_slug not in seen_slugs:
             await _assert_city_slug_exists(client, day.city_slug)
             seen_slugs.add(day.city_slug)
@@ -173,21 +166,32 @@ async def create_trip(
     trip_row = trip_insert.data[0]
     trip_id = str(trip_row["id"])
 
-    # Batch-insert trip_days
-    days_payload = [
-        {
-            "trip_id": trip_id,
-            "day_number": day.day_number,
-            "date": day.date.isoformat(),
-            "city_slug": day.city_slug,
-            "time_arrival": day.time_arrival.isoformat() if day.time_arrival else None,
-            "time_departure": (
-                day.time_departure.isoformat() if day.time_departure else None
-            ),
-            "departure_next_day": day.departure_next_day,
-        }
-        for day in sorted_days
-    ]
+    # Batch-insert trip_days: one row per calendar day. Dates the client sent
+    # keep their port-call data; the rest are auto-filled as at-sea days.
+    total_days = (data.end_date - data.start_date).days + 1
+    days_payload = []
+    for offset in range(total_days):
+        current = data.start_date + timedelta(days=offset)
+        sent = days_by_date.get(current)
+        days_payload.append(
+            {
+                "trip_id": trip_id,
+                "day_number": offset + 1,
+                "date": current.isoformat(),
+                "city_slug": sent.city_slug if sent else None,
+                "time_arrival": (
+                    sent.time_arrival.isoformat()
+                    if sent and sent.time_arrival
+                    else None
+                ),
+                "time_departure": (
+                    sent.time_departure.isoformat()
+                    if sent and sent.time_departure
+                    else None
+                ),
+                "departure_next_day": sent.departure_next_day if sent else False,
+            }
+        )
     days_insert = await client.table("trip_days").insert(days_payload).execute()
     day_rows = sorted(days_insert.data, key=lambda r: r["day_number"])
 

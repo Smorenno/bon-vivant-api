@@ -52,6 +52,10 @@ el repo mobile (ver `../../CLAUDE.md`).
 ## Git y workflow
 
 - Conventional Commits: `feat:` / `fix:` / `chore:` / `docs:` / `refactor:`.
+- **Un commit por feature completa.** No commitees por archivos individuales.
+  Agrupa todos los ficheros de una feature (endpoint + service + models + tests)
+  en un único commit. Si es una corrección de bug sobre una feature existente,
+  también un único commit.
 - Nunca commitear `.env`, `__pycache__`, `.venv`.
 - Una responsabilidad por función — si hace dos cosas, divídela.
 
