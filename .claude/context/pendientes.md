@@ -23,7 +23,11 @@ El código y la migración están hechos; falta contenido y decisiones.
 ## Rendimiento de la guía
 
 Hecho el 2026-10-04 (`a2a8494`): firma de URLs en lote y queries en paralelo
-en `guide_service.py`. Lo que queda:
+en `guide_service.py`. Sergio lo probó en local con el móvil y va rápido
+("va como un tiro"); **no hay cifras de antes/después** — no se midió con
+`curl` ni contra producción. En el front: bundle offline con
+stale-while-revalidate y `cacheKey` en imágenes (ver contexto del móvil,
+`city-guides/README.md`). Lo que queda:
 
 - [ ] **Bucket `guides` público para las fotos** (`media/media-guias/`). Son
       fotos de marketing, no hay datos sensibles; el acceso a la guía lo sigue
@@ -35,6 +39,26 @@ en `guide_service.py`. Lo que queda:
 - [ ] Si tras medir sigue lenta: caché en memoria (TTL de minutos) del
       contenido de cada ciudad en `guide_service.py`, con el acceso calculado
       por usuario.
+
+## Infra / deploy — sin verificar (2026-10-04)
+
+- [ ] **Confirmar que el deploy en Railway existe de verdad.** El repo tiene
+      `railway.toml` y el `CLAUDE.md` dice "auto-deploy en merge a `main`",
+      pero Sergio no tiene claro si llegó a montarlo ("hay cosas automáticas
+      que no he verificado"). Mirar en railway.app si hay proyecto
+      `bon-vivant-api` conectado al repo y cuál es su URL pública. Si no
+      existe, los push a `main` solo suben a GitHub.
+- [ ] La URL de producción no está apuntada en ningún sitio. El móvil
+      (`.env` → `EXPO_PUBLIC_API_BASE_URL`) apunta a `http://localhost:8000`,
+      así que hoy la app solo funciona contra el backend local.
+
+## Observabilidad — aplazado (2026-10-04)
+
+- [ ] Propuesto **Sentry** (plan gratuito) para tiempos por endpoint, cascada
+      de llamadas a Supabase y errores, en back (`sentry-sdk` + `SENTRY_DSN`,
+      `send_default_pii=False`, filtrar `Authorization`) y móvil. Sergio
+      decidió **"de momento no"**. Mientras tanto: Supabase → Reports →
+      Query Performance / API, y Railway → Metrics/Logs si existe.
 
 ## Herramientas
 
