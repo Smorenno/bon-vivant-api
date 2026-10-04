@@ -1,7 +1,9 @@
 from __future__ import annotations
 
+import asyncio
+
 from app.models.city import CityFonts, FontFile, FontFormat, FontStyle, GuideFont
-from app.services.image_service import get_signed_url
+from app.services.image_service import sign_paths
 from supabase._async.client import AsyncClient
 
 
@@ -29,22 +31,18 @@ async def _fetch_files(
     return grouped
 
 
-async def _sign_files(client: AsyncClient, rows: list[dict]) -> list[FontFile]:
-    """Sign each file's Storage path, skipping files missing from Storage."""
-    files: list[FontFile] = []
-    for row in sorted(rows, key=lambda r: (r["weight"], r["style"])):
-        url = await get_signed_url(client, row["storage_path"])
-        if url is None:
-            continue
-        files.append(
-            FontFile(
-                weight=row["weight"],
-                style=FontStyle(row["style"]),
-                format=FontFormat(row["format"]),
-                url=url,
-            )
+def _build_files(rows: list[dict], signed: dict[str, str]) -> list[FontFile]:
+    """FontFiles for the rows whose Storage path was signed (missing files skipped)."""
+    return [
+        FontFile(
+            weight=row["weight"],
+            style=FontStyle(row["style"]),
+            format=FontFormat(row["format"]),
+            url=signed[row["storage_path"]],
         )
-    return files
+        for row in sorted(rows, key=lambda r: (r["weight"], r["style"]))
+        if row["storage_path"] in signed
+    ]
 
 
 async def resolve_city_fonts(
@@ -56,12 +54,15 @@ async def resolve_city_fonts(
     if not font_ids:
         return CityFonts()
 
-    families = await _fetch_families(client, font_ids)
-    files_by_font = await _fetch_files(client, font_ids)
+    families, files_by_font = await asyncio.gather(
+        _fetch_families(client, font_ids), _fetch_files(client, font_ids)
+    )
+    all_paths = [row["storage_path"] for rows in files_by_font.values() for row in rows]
+    signed = await sign_paths(client, all_paths)
 
     resolved: dict[str, GuideFont] = {}
     for font_id, family in families.items():
-        files = await _sign_files(client, files_by_font.get(font_id, []))
+        files = _build_files(files_by_font.get(font_id, []), signed)
         if files:
             resolved[font_id] = GuideFont(family=family, files=files)
 

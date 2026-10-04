@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import uuid
 
+from storage3.exceptions import StorageApiError
+
 from app.services import guide_service, image_service
 from tests.fake_supabase import FakeSupabaseClient
 
@@ -195,3 +197,58 @@ async def test_get_city_guide_missing_photos_leave_fields_none() -> None:
     assert result.images.cover is None
     assert result.images.overview is None
     assert result.images.attraction_gallery == []
+
+
+# ============================================================
+# 5. Batching — every photo of a guide is signed in one request
+# ============================================================
+
+
+async def test_sign_paths_skips_request_for_empty_list() -> None:
+    db = FakeSupabaseClient()
+
+    assert await image_service.sign_paths(db, []) == {}
+    assert db.storage.sign_requests == 0
+
+
+async def test_sign_paths_returns_empty_when_storage_fails(monkeypatch) -> None:
+    db = FakeSupabaseClient()
+
+    async def _boom(_paths: list[str], _expires_in: int) -> list[dict]:
+        raise StorageApiError(message="down", code="500", status=500)
+
+    bucket = db.storage.from_(image_service.BUCKET_NAME)
+    monkeypatch.setattr(bucket, "create_signed_urls", _boom)
+    monkeypatch.setattr(db.storage, "from_", lambda _bucket: bucket)
+
+    assert await image_service.sign_paths(db, ["a.jpg"]) == {}
+
+
+async def test_get_city_guide_signs_all_photos_in_one_request() -> None:
+    db = FakeSupabaseClient()
+    db.seed("cities", [_city_row()])
+    db.seed(
+        "spots",
+        [
+            _spot_row(_SPOT1_ID, "attraction", 1),
+            _spot_row(_SPOT2_ID, "food", 2),
+        ],
+    )
+    for table in ("itineraries", "itinerary_steps", "tips"):
+        db.seed(table, [])
+    for table in ("user_purchases", "pack_cities", "packs"):
+        db.seed(table, [])
+    db.storage.existing_paths.update(
+        {
+            image_service.build_storage_path(CITY_SLUG, "cover"),
+            image_service.build_storage_path(CITY_SLUG, "gourmet", 1),
+        }
+    )
+
+    result = await guide_service.get_city_guide(
+        db, CITY_SLUG, USER_ID, require_access=False
+    )
+
+    assert db.storage.sign_requests == 1
+    assert result.images.cover is not None
+    assert len(result.images.gourmet_gallery) == 1

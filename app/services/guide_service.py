@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import asyncio
+
 from app.exceptions import CityLockedError, CityNotFoundError
 from app.models.city import (
     CityGuide,
@@ -16,9 +18,20 @@ from app.models.city import (
     Tip,
     TransportOption,
 )
-from app.services.access_service import is_city_unlocked, is_itinerary_locked
+from app.services.access_service import (
+    has_active_pass,
+    is_city_unlocked,
+    unlocked_city_ids,
+)
 from app.services.font_service import resolve_city_fonts
-from app.services.image_service import resolve_gallery, resolve_single
+from app.services.image_service import (
+    SINGLE_SLOTS,
+    build_storage_path,
+    gallery_paths,
+    pick_gallery,
+    pick_single,
+    sign_paths,
+)
 from supabase._async.client import AsyncClient
 
 # ============================================================
@@ -90,6 +103,15 @@ async def _fetch_steps_for_itineraries(
     for step in response.data:
         grouped.setdefault(str(step["itinerary_id"]), []).append(step)
     return grouped
+
+
+async def _fetch_itineraries_with_steps(
+    client: AsyncClient, city_id: str
+) -> tuple[list[dict], dict[str, list[dict]]]:
+    """Itinerary rows plus their steps keyed by itinerary_id (2 chained queries)."""
+    itin_rows = await _fetch_itineraries(client, city_id)
+    itin_ids = [str(row["id"]) for row in itin_rows]
+    return itin_rows, await _fetch_steps_for_itineraries(client, itin_ids)
 
 
 async def _fetch_city_tips(client: AsyncClient, city_id: str) -> list[dict]:
@@ -242,33 +264,38 @@ async def _resolve_city_images(
     highlights: list[Highlight],
     transport_options: list[TransportOption],
 ) -> CityImages:
-    attraction_count = sum(1 for r in spots_rows if r["kind"] == "attraction")
-    gourmet_count = sum(1 for r in spots_rows if r["kind"] == "food")
+    """Sign every guide photo in a single Storage request."""
+    gallery_counts = {
+        "overview_highlight": len(highlights),
+        "attraction": sum(1 for r in spots_rows if r["kind"] == "attraction"),
+        "gourmet": sum(1 for r in spots_rows if r["kind"] == "food"),
+        "port": len(transport_options) or 1,
+    }
+    paths = [build_storage_path(slug, slot) for slot in SINGLE_SLOTS]
+    for slot, count in gallery_counts.items():
+        paths.extend(gallery_paths(slug, slot, count))
+    signed = await sign_paths(client, paths)
+
+    def single(slot: str) -> str | None:
+        return pick_single(signed, slug, slot)
+
+    def gallery(slot: str) -> list[str]:
+        return pick_gallery(signed, slug, slot, gallery_counts[slot])
 
     return CityImages(
-        cover=await resolve_single(client, slug, "cover"),
-        preview=await resolve_single(client, slug, "preview"),
-        overview=await resolve_single(client, slug, "overview"),
-        key_historical_context=await resolve_single(
-            client, slug, "key_historical_context"
-        ),
-        overview_highlights=await resolve_gallery(
-            client, slug, "overview_highlight", count=len(highlights)
-        ),
-        attraction_cover=await resolve_single(client, slug, "attraction_cover"),
-        attraction_gallery=await resolve_gallery(
-            client, slug, "attraction", count=attraction_count
-        ),
-        gourmet_cover=await resolve_single(client, slug, "gourmet_cover"),
-        gourmet_gallery=await resolve_gallery(
-            client, slug, "gourmet", count=gourmet_count
-        ),
-        port_cover=await resolve_single(client, slug, "port_cover"),
-        port_gallery=await resolve_gallery(
-            client, slug, "port", count=len(transport_options) or 1
-        ),
-        itineraries_cover=await resolve_single(client, slug, "itineraries_cover"),
-        tips_cover=await resolve_single(client, slug, "tips_cover"),
+        cover=single("cover"),
+        preview=single("preview"),
+        overview=single("overview"),
+        key_historical_context=single("key_historical_context"),
+        overview_highlights=gallery("overview_highlight"),
+        attraction_cover=single("attraction_cover"),
+        attraction_gallery=gallery("attraction"),
+        gourmet_cover=single("gourmet_cover"),
+        gourmet_gallery=gallery("gourmet"),
+        port_cover=single("port_cover"),
+        port_gallery=gallery("port"),
+        itineraries_cover=single("itineraries_cover"),
+        tips_cover=single("tips_cover"),
     )
 
 
@@ -278,27 +305,28 @@ async def _resolve_city_images(
 
 
 async def list_cities(client: AsyncClient, user_id: str) -> list[CityListItem]:
-    rows = await _fetch_all_published_cities(client)
-    items: list[CityListItem] = []
-    for row in rows:
-        unlocked = await is_city_unlocked(client, user_id, str(row["id"]))
-        slug = row["slug"]
-        cover = await resolve_single(client, slug, "cover")
-        port_cover_url = await resolve_single(client, slug, "port_cover")
-        items.append(
-            CityListItem(
-                id=row["id"],
-                slug=slug,
-                name=row["name"],
-                country_code=row["country_code"],
-                tagline=_parse_localized(row["tagline"]),
-                status=CityStatus(row["status"]),
-                is_unlocked=unlocked,
-                cover=cover,
-                port_cover_url=port_cover_url,
-            )
+    rows, unlocked_ids = await asyncio.gather(
+        _fetch_all_published_cities(client), unlocked_city_ids(client, user_id)
+    )
+    cover_slots = ("cover", "port_cover")
+    signed = await sign_paths(
+        client,
+        [build_storage_path(r["slug"], slot) for r in rows for slot in cover_slots],
+    )
+    return [
+        CityListItem(
+            id=row["id"],
+            slug=row["slug"],
+            name=row["name"],
+            country_code=row["country_code"],
+            tagline=_parse_localized(row["tagline"]),
+            status=CityStatus(row["status"]),
+            is_unlocked=str(row["id"]) in unlocked_ids,
+            cover=pick_single(signed, row["slug"], "cover"),
+            port_cover_url=pick_single(signed, row["slug"], "port_cover"),
         )
-    return items
+        for row in rows
+    ]
 
 
 async def get_city_guide(
@@ -315,25 +343,34 @@ async def get_city_guide(
     city_row = await _fetch_city_row(client, slug)
     city_id = str(city_row["id"])
 
-    unlocked = await is_city_unlocked(client, user_id, city_id)
+    unlocked, has_pass = await asyncio.gather(
+        is_city_unlocked(client, user_id, city_id), has_active_pass(client, user_id)
+    )
     if require_access and not unlocked:
         raise CityLockedError(slug)
 
-    spots_rows = await _fetch_spots(client, city_id)
-    itin_rows = await _fetch_itineraries(client, city_id)
-    itin_ids = [str(row["id"]) for row in itin_rows]
-    steps_by_itin = await _fetch_steps_for_itineraries(client, itin_ids)
-    tip_rows = await _fetch_city_tips(client, city_id)
+    # Independent reads run concurrently: one round trip instead of one each.
+    spots_rows, (itin_rows, steps_by_itin), tip_rows, fonts = await asyncio.gather(
+        _fetch_spots(client, city_id),
+        _fetch_itineraries_with_steps(client, city_id),
+        _fetch_city_tips(client, city_id),
+        resolve_city_fonts(
+            client, city_row.get("title_font_id"), city_row.get("body_font_id")
+        ),
+    )
 
     spot_map = {str(row["id"]): row for row in spots_rows}
 
-    itineraries: list[Itinerary] = []
-    for row in itin_rows:
-        steps = steps_by_itin.get(str(row["id"]), [])
-        locked = await is_itinerary_locked(client, user_id, row["is_premium"])
-        itineraries.append(
-            _parse_itinerary(row, steps, is_locked=locked, spot_map=spot_map)
+    # Premium (night) itineraries require the Pass.
+    itineraries = [
+        _parse_itinerary(
+            row,
+            steps_by_itin.get(str(row["id"]), []),
+            is_locked=bool(row["is_premium"]) and not has_pass,
+            spot_map=spot_map,
         )
+        for row in itin_rows
+    ]
 
     highlights = _parse_highlights(city_row.get("highlights") or [])
     transport_options = _parse_transport_options(
@@ -341,9 +378,6 @@ async def get_city_guide(
     )
     images = await _resolve_city_images(
         client, slug, spots_rows, highlights, transport_options
-    )
-    fonts = await resolve_city_fonts(
-        client, city_row.get("title_font_id"), city_row.get("body_font_id")
     )
 
     return CityGuide(
@@ -381,8 +415,9 @@ async def get_city_preview(
     city_row = await _fetch_city_row(client, slug)
     city_id = str(city_row["id"])
 
-    unlocked = await is_city_unlocked(client, user_id, city_id)
-    tip_rows = await _fetch_city_tips(client, city_id)
+    unlocked, tip_rows = await asyncio.gather(
+        is_city_unlocked(client, user_id, city_id), _fetch_city_tips(client, city_id)
+    )
     first_tip = [_parse_tip(tip_rows[0])] if tip_rows else []
 
     return CityGuidePreview(

@@ -41,35 +41,60 @@ def build_storage_path(city_slug: str, slot: str, index: int | None = None) -> s
     return f"{BASE_PREFIX}/{city_slug}/{filename}"
 
 
-async def get_signed_url(
-    db: AsyncClient, storage_path: str, expires_in: int = 86400
-) -> str | None:
-    """Return a signed URL for the given Storage path, or None if it doesn't exist.
+# Guide photos are non-sensitive marketing content; a week-long expiry keeps
+# the URLs inside a cached offline bundle usable between refreshes.
+SIGNED_URL_TTL_SECONDS = 7 * 24 * 3600
 
-    A missing photo must never break the rest of the guide.
+
+async def sign_paths(
+    db: AsyncClient, paths: list[str], expires_in: int = SIGNED_URL_TTL_SECONDS
+) -> dict[str, str]:
+    """Sign many Storage paths in ONE request; return {path: url} for those that exist.
+
+    Missing files are simply absent from the result — a missing photo must never
+    break the rest of the guide. A failed request yields no URLs at all.
     """
+    unique_paths = list(dict.fromkeys(paths))
+    if not unique_paths:
+        return {}
     try:
-        response = await db.storage.from_(BUCKET_NAME).create_signed_url(
-            storage_path, expires_in
+        items = await db.storage.from_(BUCKET_NAME).create_signed_urls(
+            unique_paths, expires_in
         )
     except StorageApiError:
-        return None
-    return response.get("signedURL")
+        return {}
+    return {
+        item["path"]: item["signedURL"]
+        for item in items
+        if item.get("signedURL") and not item.get("error")
+    }
+
+
+def gallery_paths(city_slug: str, slot: str, count: int) -> list[str]:
+    """Storage paths for photos 1..count of a gallery slot."""
+    return [build_storage_path(city_slug, slot, i) for i in range(1, count + 1)]
+
+
+def pick_single(signed: dict[str, str], city_slug: str, slot: str) -> str | None:
+    return signed.get(build_storage_path(city_slug, slot))
+
+
+def pick_gallery(
+    signed: dict[str, str], city_slug: str, slot: str, count: int
+) -> list[str]:
+    """Signed URLs of a gallery in order, skipping photos that don't exist."""
+    paths = gallery_paths(city_slug, slot, count)
+    return [signed[path] for path in paths if path in signed]
 
 
 async def resolve_single(db: AsyncClient, city_slug: str, slot: str) -> str | None:
-    path = build_storage_path(city_slug, slot)
-    return await get_signed_url(db, path)
+    signed = await sign_paths(db, [build_storage_path(city_slug, slot)])
+    return pick_single(signed, city_slug, slot)
 
 
 async def resolve_gallery(
     db: AsyncClient, city_slug: str, slot: str, count: int
 ) -> list[str]:
     """Resolve up to `count` gallery photos, skipping any that don't exist."""
-    urls: list[str] = []
-    for index in range(1, count + 1):
-        path = build_storage_path(city_slug, slot, index)
-        url = await get_signed_url(db, path)
-        if url is not None:
-            urls.append(url)
-    return urls
+    signed = await sign_paths(db, gallery_paths(city_slug, slot, count))
+    return pick_gallery(signed, city_slug, slot, count)

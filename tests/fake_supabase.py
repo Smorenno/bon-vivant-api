@@ -34,9 +34,29 @@ class FakeStorageBucket:
         self._client = client
 
     async def create_signed_url(self, path: str, _expires_in: int) -> dict[str, str]:
+        self._client.sign_requests += 1
         if path not in self._client.existing_paths:
             raise StorageApiError(message="Object not found", code="404", status=404)
         return {"signedURL": f"https://signed.example.com/{path}"}
+
+    async def create_signed_urls(
+        self, paths: list[str], _expires_in: int
+    ) -> list[dict[str, str | None]]:
+        # Mirrors Storage's batch endpoint: missing objects come back with an
+        # error and a null URL instead of failing the whole request.
+        self._client.sign_requests += 1
+        return [
+            (
+                {
+                    "path": p,
+                    "error": None,
+                    "signedURL": f"https://signed.example.com/{p}",
+                }
+                if p in self._client.existing_paths
+                else {"path": p, "error": "Object not found", "signedURL": None}
+            )
+            for p in paths
+        ]
 
     async def upload(
         self, path: str, content: bytes, _file_options: dict[str, str] | None = None
@@ -61,6 +81,8 @@ class FakeStorageClient:
         self.fail_upload_paths: set[str] = set()
         self.uploaded: dict[str, bytes] = {}
         self.existing_paths: set[str] = set()
+        # Round trips to Storage signing — lets tests assert batching.
+        self.sign_requests = 0
 
     def from_(self, _bucket: str) -> FakeStorageBucket:
         return FakeStorageBucket(self)

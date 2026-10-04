@@ -276,6 +276,14 @@ async def test_list_cities_port_cover_url_null_when_missing(
     assert item.port_cover_url is None
 
 
+async def test_list_cities_signs_covers_in_one_request(
+    guide_db: FakeSupabaseClient,
+) -> None:
+    await guide_service.list_cities(guide_db, UNLOCKED_USER)
+
+    assert guide_db.storage.sign_requests == 1
+
+
 # ============================================================
 # 2. get_city_guide — full guide for unlocked user
 # ============================================================
