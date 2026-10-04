@@ -18,7 +18,7 @@ en el momento — no dejes que el rastro mienta.
 
 | Carpeta | Contenido |
 |---|---|
-| [`security/`](security/) | Auditoría de seguridad 2026-07-03 y hardening aplicado (RLS, rate limiting, admin role) |
+| [`security/`](security/) | Auditoría de seguridad 2026-07-03 y hardening aplicado (RLS, rate limiting, admin role) · Auditoría 2026-10-04 (`2026-10-audit.md`): pasos premium sin Pass y dependencias |
 | [`payments/`](payments/) | Validación de compras IAP (Apple/Google): qué está implementado, qué falta configurar |
 | [`features/`](features/) | Trip planner: gating por Pass, modelo de días · Tipografía por guía (`guide-fonts.md`, migración 007) |
 

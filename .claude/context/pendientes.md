@@ -40,6 +40,28 @@ stale-while-revalidate y `cacheKey` en imágenes (ver contexto del móvil,
       contenido de cada ciudad en `guide_service.py`, con el acceso calculado
       por usuario.
 
+## Seguridad (auditoría 2026-10-04)
+
+Detalle en [`security/2026-10-audit.md`](security/2026-10-audit.md) y en
+`../SEGURIDAD.md` (carpeta paraguas).
+
+- [ ] **Reembolsos.** No hay endpoint para App Store Server Notifications V2
+      ni Google RTDN: una compra devuelta sigue con `is_valid=true`. Al tener
+      las cuentas: `POST /webhooks/apple` (verificar el JWS con la cadena de
+      `store_verifier`) y `POST /webhooks/google`, poniendo `is_valid=false`
+      por `store_transaction_id`.
+- [ ] **Rate limit.** `core/rate_limit.py` usa el primer valor de
+      `X-Forwarded-For`, que controla el cliente. Comprobar qué cabecera fija
+      pone Railway y usarla (o el último valor).
+- [ ] Activar `VERIFY_APPLE_CERT_CHAIN` en sandbox y luego en producción.
+- [ ] Ligar compras al usuario: `appAccountToken` (iOS) y
+      `obfuscatedAccountId` (Android).
+- [ ] `profiles`: limitar el `update` a `full_name` y `cruise_departure_date`
+      con grants por columna (migración nueva).
+- [ ] Fijar por SHA las acciones de `.github/workflows/ci.yml`.
+- [ ] Comprobar en el Supabase de producción que la migración 006 está
+      aplicada y que el bucket `guides` es privado.
+
 ## Infra / deploy — sin verificar (2026-10-04)
 
 - [ ] **Confirmar que el deploy en Railway existe de verdad.** El repo tiene
