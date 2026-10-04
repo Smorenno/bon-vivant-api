@@ -211,7 +211,10 @@ def _parse_itinerary(
         is_recommended=row["is_recommended"],
         is_premium=row["is_premium"],
         rank_order=row["rank_order"],
-        steps=[_parse_step(s, spot_map) for s in sorted_steps],
+        # Locked → no steps in the payload; hiding them only in the client
+        # would leave the premium route readable in the raw response.
+        steps=[] if is_locked else [_parse_step(s, spot_map) for s in sorted_steps],
+        step_count=len(sorted_steps),
         is_locked=is_locked,
     )
 

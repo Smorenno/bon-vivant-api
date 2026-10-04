@@ -211,6 +211,24 @@ def guide_db() -> FakeSupabaseClient:
     return db
 
 
+def _grant_pass(db: FakeSupabaseClient, user_id: str) -> None:
+    """Give user_id a valid unlimited (Pass) pack on top of the seeded data."""
+    pass_id = str(uuid.uuid4())
+    db.seed("packs", [{"id": pass_id, "is_unlimited": True}])
+    db.seed(
+        "user_purchases",
+        db.get_table("user_purchases")
+        + [
+            {
+                "id": str(uuid.uuid4()),
+                "user_id": user_id,
+                "pack_id": pass_id,
+                "is_valid": True,
+            }
+        ],
+    )
+
+
 # ============================================================
 # Helper for HTTP tests (overrides deps, skips lifespan)
 # ============================================================
@@ -317,6 +335,8 @@ async def test_get_city_guide_step_resolves_spot_data(
 async def test_get_city_guide_generic_step_has_no_name(
     guide_db: FakeSupabaseClient,
 ) -> None:
+    # The generic step lives in the premium itinerary, which needs the Pass.
+    _grant_pass(guide_db, UNLOCKED_USER)
     result = await guide_service.get_city_guide(guide_db, CITY_SLUG, UNLOCKED_USER)
     premium = next(i for i in result.itineraries if i.is_premium)
     step = premium.steps[0]
@@ -388,6 +408,30 @@ async def test_premium_itinerary_locked_without_pass(
     # No unlimited pack seeded → premium is locked; regular is not.
     assert premium.is_locked is True
     assert regular.is_locked is False
+
+
+async def test_locked_premium_itinerary_carries_no_steps(
+    guide_db: FakeSupabaseClient,
+) -> None:
+    """Premium steps must not travel to a user without the Pass, even if the
+    client would hide them: only the count is exposed for the card."""
+    result = await guide_service.get_city_guide(guide_db, CITY_SLUG, UNLOCKED_USER)
+    premium = next(i for i in result.itineraries if i.is_premium)
+
+    assert premium.is_locked is True
+    assert premium.steps == []
+    assert premium.step_count == 1
+
+
+async def test_premium_itinerary_has_steps_with_pass(
+    guide_db: FakeSupabaseClient,
+) -> None:
+    _grant_pass(guide_db, UNLOCKED_USER)
+    result = await guide_service.get_city_guide(guide_db, CITY_SLUG, UNLOCKED_USER)
+    premium = next(i for i in result.itineraries if i.is_premium)
+
+    assert premium.is_locked is False
+    assert len(premium.steps) == premium.step_count == 1
 
 
 async def test_premium_itinerary_present_in_response_even_when_locked(

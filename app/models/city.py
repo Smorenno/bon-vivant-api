@@ -176,7 +176,10 @@ class Itinerary(BaseModel):
     is_recommended: bool
     is_premium: bool
     rank_order: int
+    # Empty when is_locked: premium steps never leave the server.
     steps: list[ItineraryStep]
+    # Real number of steps, so a locked card can still show "N stops".
+    step_count: int
     is_locked: bool  # Computed by access_service; never stored in DB
 
 
