@@ -1,6 +1,7 @@
 # Tipografía por guía
 
-**Fecha:** 2026-10-04 · **Schema:** `supabase/migrations/007_guide_fonts.sql`
+**Fecha:** 2026-10-04 · **Schema:** `supabase/migrations/007_guide_fonts.sql` ·
+**Commits:** `4ea4f78` (back), `38f776a` (móvil) · migración aplicada 2026-10-04
 
 ## Por qué
 
@@ -25,8 +26,9 @@ UI) sí van empaquetadas en el móvil.
 
 - `app/models/city.py` — `FontFile`, `GuideFont`, `CityFonts`; `CityGuide.fonts`.
 - `app/services/font_service.py` — `resolve_city_fonts()`: lee familias y
-  ficheros, firma cada `storage_path` (24 h, reutiliza
-  `image_service.get_signed_url`). Ficheros que faltan en Storage se omiten;
+  ficheros en paralelo y firma todos los `storage_path` en lote con
+  `image_service.sign_paths` (24 h; desde `a2a8494`, antes uno a uno).
+  Ficheros que faltan en Storage se omiten;
   familia sin ficheros → `None`.
 - `guide_service.get_city_guide()` lo llama → sale en `GET /cities/{slug}` y
   en `/offline` (misma forma).
