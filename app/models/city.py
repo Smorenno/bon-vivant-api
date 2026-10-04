@@ -47,6 +47,16 @@ class TransportMethod(str, Enum):
     ferry = "ferry"
 
 
+class FontStyle(str, Enum):
+    normal = "normal"
+    italic = "italic"
+
+
+class FontFormat(str, Enum):
+    ttf = "ttf"
+    otf = "otf"
+
+
 class ImageSlot(str, Enum):
     cover = "cover"
     overview_1 = "overview_1"
@@ -204,6 +214,25 @@ class CityImages(BaseModel):
     tips_cover: str | None = None
 
 
+class FontFile(BaseModel):
+    weight: int
+    style: FontStyle
+    format: FontFormat
+    url: str  # signed, expires — the client must download and cache it
+
+
+class GuideFont(BaseModel):
+    family: str
+    files: list[FontFile]
+
+
+class CityFonts(BaseModel):
+    """Typography of a guide. None means "use the app default font"."""
+
+    title: GuideFont | None = None
+    body: GuideFont | None = None
+
+
 class CityListItem(BaseModel):
     id: UUID
     slug: str
@@ -239,6 +268,7 @@ class CityGuide(BaseModel):
     itineraries: list[Itinerary]
     tips: list[Tip]
     images: CityImages
+    fonts: CityFonts
     is_unlocked: bool
 
 

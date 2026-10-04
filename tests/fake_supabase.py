@@ -198,6 +198,7 @@ _CASCADE: dict[str, list[tuple[str, str]]] = {
     "tips": [("city_id", "cities")],
     "images": [("city_id", "cities"), ("spot_id", "spots")],
     "pack_cities": [("city_id", "cities")],
+    "font_files": [("font_id", "fonts")],
     "itinerary_steps": [("itinerary_id", "itineraries"), ("spot_id", "spots")],
 }
 

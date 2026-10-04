@@ -17,6 +17,7 @@ from app.models.city import (
     TransportOption,
 )
 from app.services.access_service import is_city_unlocked, is_itinerary_locked
+from app.services.font_service import resolve_city_fonts
 from app.services.image_service import resolve_gallery, resolve_single
 from supabase._async.client import AsyncClient
 
@@ -341,6 +342,9 @@ async def get_city_guide(
     images = await _resolve_city_images(
         client, slug, spots_rows, highlights, transport_options
     )
+    fonts = await resolve_city_fonts(
+        client, city_row.get("title_font_id"), city_row.get("body_font_id")
+    )
 
     return CityGuide(
         id=city_row["id"],
@@ -365,6 +369,7 @@ async def get_city_guide(
         itineraries=itineraries,
         tips=[_parse_tip(r) for r in tip_rows],
         images=images,
+        fonts=fonts,
         is_unlocked=unlocked,
     )
 
