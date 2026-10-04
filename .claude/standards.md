@@ -56,6 +56,11 @@ el repo mobile (ver `../../CLAUDE.md`).
   Agrupa todos los ficheros de una feature (endpoint + service + models + tests)
   en un único commit. Si es una corrección de bug sobre una feature existente,
   también un único commit.
+- **Commit al cerrar cada tema.** Cuando una funcionalidad o tema queda
+  terminado y se pasa a otro, Claude lo commitea en ese momento, sin esperar
+  a que se lo pidan, antes de tocar lo siguiente: solo los ficheros de ese
+  tema, con tests + ruff + black limpios. Commit local, **nunca push** sin
+  pedirlo. Si el tema toca también el móvil, commit en cada repo.
 - Nunca commitear `.env`, `__pycache__`, `.venv`.
 - Una responsabilidad por función — si hace dos cosas, divídela.
 
